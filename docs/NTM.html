@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 The Numbered-Ticket Model | A Gentle Introduction to Inference</title>
+  <meta name="description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 The Numbered-Ticket Model | A Gentle Introduction to Inference" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 The Numbered-Ticket Model | A Gentle Introduction to Inference" />
+  
+  <meta name="twitter:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+<meta name="author" content="Carlisle Rainey" />
+
+
+<meta name="date" content="2025-11-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-basics-of-probability.html"/>
+<link rel="next" href="sample-surveys.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        process_solutions();
+    });
+    function process_solutions() {
+        $("div.section[id^='solution']").each(function(i) {
+        var soln_wrapper_id = "cvxr_ex_" + i;
+        var solution_id = $(this).attr('id');
+        var button = $("<button onclick=\"toggle_solution('" + soln_wrapper_id + "')\">Show/Hide</button>");
+        var new_div = $("<div id='" + soln_wrapper_id + "' class='solution' style='display: none;'></div>");
+        var h = $(this).first();
+        var others = $(this).children().slice(1);
+        $(others).each(function() {
+            $(this).appendTo($(new_div));
+        });
+        $(button).insertAfter($(h));
+        $(new_div).insertAfter($(button));
+        })
+    }
+    function toggle_solution(el_id) {
+      $("#" + el_id).toggle();
+    } 
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Concepts and Computation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>1</b> The Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>1.1</b> Review</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>1.1.1</b> Proportions</a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>1.1.2</b> The Indicator Trick</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>1.1.3</b> Percents</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>1.2</b> Chance Processes</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>1.2.1</b> The Numbered-Ticket Model</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>1.3</b> Defining Probability</a></li>
+<li class="chapter" data-level="1.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>1.4</b> Computing Probabilities</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.4.1</b> Counting the Equally-Likely Outcomes</a></li>
+<li class="chapter" data-level="1.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>1.4.2</b> The Probability of the Opposite</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>1.5</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="1.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>1.6</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="1.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>1.7</b> Independence</a></li>
+<li class="chapter" data-level="1.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary"><i class="fa fa-check"></i><b>1.8</b> Summary</a></li>
+<li class="chapter" data-level="1.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>1.9</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>2</b> The Numbered-Ticket Model</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>2.1</b> The Generic Form</a></li>
+<li class="chapter" data-level="2.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>2.2</b> “Is Like”</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>2.2.1</b> Key Example 1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>2.2.2</b> Key Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>2.3</b> Summarizing the NTM Process</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>2.3.1</b> Letting a Computer Do Some Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>2.4</b> Expected Value and Standard Error</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>2.4.1</b> Tricks for 0-1 Boxes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>2.5</b> The Long-Run Histogram</a></li>
+<li class="chapter" data-level="2.6" data-path="NTM.html"><a href="NTM.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
+<li class="chapter" data-level="2.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>2.7</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>3</b> Sample Surveys</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>3.1</b> A Conceptual Framework</a></li>
+<li class="chapter" data-level="3.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>3.2</b> The Simple Random Sample</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.1</b> The Accuracy of the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.2</b> The Importance of the Simple Random Sample</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>3.3</b> The Three Hurdles</a></li>
+<li class="chapter" data-level="3.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>3.4</b> Good Alternatives to the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>3.5</b> Poor Alternatives to the Simple Random Samples</a></li>
+<li class="chapter" data-level="3.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>3.6</b> An Infamous Sample Survey</a></li>
+<li class="chapter" data-level="3.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>3.7</b> Modern Polling</a></li>
+<li class="chapter" data-level="3.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-2"><i class="fa fa-check"></i><b>3.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>4.1</b> Review</a></li>
+<li class="chapter" data-level="4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>4.2</b> The Motivating Question</a></li>
+<li class="chapter" data-level="4.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>4.3</b> Reversing the Logic</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>4.3.1</b> Replace NTM Terms with Sample Survey Terms</a></li>
+<li class="chapter" data-level="4.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>4.3.2</b> The Symmetry of Distance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>4.3.3</b> Tense</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>4.4</b> Using the Logic</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>4.4.1</b> A Big Problem</a></li>
+<li class="chapter" data-level="4.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>4.4.2</b> A Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>4.5</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.1</b> Understanding a Confidence Interval</a></li>
+<li class="chapter" data-level="4.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.2</b> Interpreting a Confidence Interval</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>4.6</b> Miscellaneous</a></li>
+<li class="chapter" data-level="4.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-3"><i class="fa fa-check"></i><b>4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>5</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>5.1</b> The Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>5.2</b> <em>p</em>-Values</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>5.2.1</b> Focusing the Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>5.3</b> A Summary of the Hypothesis Testing Framework</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>6</b> Extensions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>6.1</b> Review</a></li>
+<li class="chapter" data-level="6.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>6.2</b> Sources of Randomness</a></li>
+<li class="chapter" data-level="6.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>6.3</b> Confidence Intervals in General</a></li>
+<li class="chapter" data-level="6.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>6.4</b> Hypothesis Tests in General</a></li>
+<li class="chapter" data-level="6.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>6.5</b> Statistical Significance</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-a-normal-table.html"><a href="appendix-a-normal-table.html"><i class="fa fa-check"></i><b>A</b> Appendix: A Normal Table</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Gentle Introduction to Inference</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="NTM" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> The Numbered-Ticket Model<a href="NTM.html#NTM" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The numbered-ticket model (NTM) is a familiar model that we can use to understand other, unfamiliar chance processes. If we can figure out what particular NTM “is like” an unfamiliar process, then we can quickly (and almost completely) understand that unfamiliar process. The only hard part is to figure out what numbered-ticket model is like the unfamiliar process.</p>
+<p>Here’s the key: We can use the NTM to understand (or “predict”) the likely values from a chance process (e.g., the average of the spots shown across 100 rolls of a die) <em>without ever experimenting with either.</em></p>
+<p>Creating the analogy, though, is not trivial.</p>
+<div id="the-generic-form" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Generic Form<a href="NTM.html#the-generic-form" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here’s the generic form of the NTM:</p>
+<p><strong>Numbered-Ticket Model</strong>: Fill a box with <span class="math inline">\(k\)</span> tickets numbered with <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>. Draw <span class="math inline">\(N\)</span> times with replacement from the box. Record the average of the draws.</p>
+<p>As you can see, to create a particular NTM, we need to choose:</p>
+<ol style="list-style-type: decimal">
+<li>The number of tickets that go into the box.</li>
+<li>The numbers that are written on the tickets.</li>
+<li>The number of times to draw from the box.</li>
+</ol>
+<p>Remember that we always draw with replacement and then average the draws.</p>
+<p>And here are three particular NTMs with the details filled in:</p>
+<ul>
+<li>Fill a box with 6 tickets numbered with 1, 2, 3, 4, 5, 6. Draw 10 times with replacement from the box. Record the average of the draws.</li>
+<li>Fill a box with 6 tickets, five numbered with 0 and one numbered with 1. Draw 10 times with replacement from the box. Record the average of the draws.</li>
+<li>Fill a box with 2 tickets numbered with 0 and 1. Draw 100 times with replacement from the box. Record the average of the draws.</li>
+<li>Fill a box with 50 million tickets, 22 million numbered with 0 and 28 million numbered with 1. Draw 900 times with replacement from the box. Record the average of the draws.</li>
+</ul>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 2.1  </strong></span>Write down three particular versions of the numbered-ticket model. Try to be creative. Push the boundaries of allowable numbers of tickets, numbers on the tickets, and numbers of draws.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Your solution will vary, but here’s an example:</p>
+<p>A particular numbered-ticket model: Fill a box with 3 tickets numbered 4, -17, and 100. Draw 9 times with replacement from the box. Record the average of the draws.</p>
+<ul>
+<li>You can choose any finite, positive integer (1, 2, 3, …) for the number of tickets in the box.</li>
+<li>You can number a ticket with any finite, real number (e.g., 0, -1.1, 1222, /3, <span class="math inline">\(\pi\)</span>).</li>
+<li>You can choose any finite, positive integer (1, 2, 3, …) for the number of draws.</li>
+</ul>
+Remember that we always draw with replacement and we always average the draws.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-22" class="exercise"><strong>Exercise 2.2  </strong></span>A box has 100 tickets: 40 tickets numbered with 0 and 60 tickets numbered with 1. You make 100 draws with replacement from the box.</p>
+<p>First, does the average of the draws equal the proportion of the draws that are 1s? Why?</p>
+<p>Second, which best describes the average of the draws?</p>
+<ol style="list-style-type: decimal">
+<li>It will always equal exactly 0.6.</li>
+<li>It will usually equal exactly 0.6.</li>
+<li>It will not often equal exactly 0.6, but it will usually be close.</li>
+</ol>
+<p>What if you made the draws without replacement?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Because of the indicator trick, the average of the draws equals the proportion of the draws that are 1s.</p>
+<p>The best choice is: “It will not often equal exactly 0.6, but it will usually be close.” To be 100% sure, I repeated this exact process on my computer one million times. The average equaled exactly 0.6 in only 8% of those repetitions. For the average to equal 0.6, you need to draw exactly 60 1s. But 59 or 61 1s happens almost as often as 60. And 58 or 62 1s happens almost as often as 59 and 61. Indeed, you get 55 1s about 5% of the time (same for 65). As such, 0.6 is the most likely outcome, but you get that only about 8% of the time in the long run.</p>
+If you sampled without replacement, you would always get an average of exactly 0.6, because you sampled the entire box and the average of the box is 0.6.
+</details>
+</div>
+<div id="is-like" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> “Is Like”<a href="NTM.html#is-like" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The NTM is valuable because it’s very easy to summarize. If we can find an NTM that “is like” an unfamiliar chance process of interest, then we easily summarize that unfamiliar chance process.</p>
+<p>Below are two key examples that show how it works.</p>
+<div id="key-example-1" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Key Example 1<a href="NTM.html#key-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Rolling a die 10 times and averaging the dots shown across the 10 rolls <em>is like</em> drawing 10 times with replacement from a box with six tickets numbered with 1, 2, 3, 4, 5, 6 and averaging the draws.</strong></p>
+<p>Read that again and convince yourself that the two are equivalent.</p>
+<p>On each roll of the die, we have a 1/6 probability of getting a 1, and a 1/6 probability of getting a 2, and so on. These probabilities are identical for the NTM.</p>
+<p>Sampling with replacement from a box with tickets numbered 1, 2, 3, 4, 5, 6 is just like rolling a die.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-23" class="exercise"><strong>Exercise 2.3  </strong></span>Get the following materials:</p>
+<ol style="list-style-type: decimal">
+<li>A six-sided die. (If you don’t have one handy, <a href="https://www.google.com/search?q=dice+roller">here</a>’s a virtual substitute.)</li>
+<li>A box of six tickets numbered 1, 2, 3, 4, 5, 6. An Ace, 2, 3, 4, 5, and 6 from a deck of cards works great.</li>
+</ol>
+<p>Now do the following:</p>
+<ol style="list-style-type: decimal">
+<li>Roll the die ten times. Record each roll, then compute the average.</li>
+<li>Draw 10 times with replacement (mixing well after replacement) from the box of tickets. Record each draw, then compute the average.</li>
+</ol>
+<p>What are your results? You probably got a different average from each, but are these chance processes analogous? If I were going to pay you the average-of-the-rolls or the average-of-the-draws in dollars, would you care which of the two I used (before you saw the results)?</p>
+</div>
+</div>
+<div id="key-example-2" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Key Example 2<a href="NTM.html#key-example-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Rolling a die 10 times and computing the proportion of sixes <em>is like</em> drawing 10 times with replacement from a box with six tickets numbered with 0, 0, 0, 0, 0, 1 and averaging the draws.</strong></p>
+<p>Read that again and convince yourself that the two are equivalent.</p>
+<p>On each roll of the die, we have a 5/6 probability of getting a not-six and a 1/6 probability of getting a six. On each draw from the box, we have a 5/6 probability of drawing a 0 and a 1/6 probability of drawing a 1.</p>
+<p>Because of the indicator trick, getting a six and counting is just like drawing a 1 and summing it. Similarly, getting a not-six and not counting it is just like drawing a zero and summing it.</p>
+<p>Because of the <strong>indicator trick</strong>, sampling with replacement from a box with six tickets numbered with 0, 0, 0, 0, 0, 1 and summing the draws is just like rolling a die and counting the sixes. (Then we could convert the count/sum to a proportion/average by dividing by the number of rolls/draws.)</p>
+<p>Here’s a guideline: When the chance process involves a proportion (e.g., the proportion of sixes), your box of tickets needs to have only 0s and 1s. It needs 1s for the things that count and 0s for the things that don’t.<br />
+</p>
+<p>I refer to a box of tickets that contains only 0s and 1s as a <strong>0-1 box</strong> (read as “zero one box”).</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 2.4  </strong></span>Get the following materials:</p>
+<ol style="list-style-type: decimal">
+<li>A six-sided die. (If you don’t have one handy, <a href="https://www.google.com/search?q=dice+roller">here</a>’s a virtual substitute.)</li>
+<li>A box of six tickets numbered 0, 0, 0, 0, 0, 1.</li>
+</ol>
+<p>Now do the following:</p>
+<ol style="list-style-type: decimal">
+<li>Roll the die 10 times. Record each roll, then compute the proportion of the rolls that are six.</li>
+<li>Draw 10 times with replacement (mixing well after replacement) from the box of tickets. Record each draw, then compute the average.</li>
+</ol>
+<p>What are your results? Your proportion and average are probably not the same, but are these chance processes analogous? If I were going to pay you the proportion-of-sixes or the average-of-the-draws in dollars, would you care which of the two I used (before you saw the results)?</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercise 2.5  </strong></span>You can play either of the following games of chance:</p>
+<ol style="list-style-type: decimal">
+<li>Win $10 if you roll a six with a six-sided die.</li>
+<li>Draw once from a box of six tickets numbered with 0, 0, 0, 0, 0, 10 and win the amount on the ticket, in dollars.</li>
+</ol>
+<p>Which would you choose? Or are they the same?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+They are the same. With both options, you have a 1/6 chance of winning $10. The objects used aren’t relevant.
+</details>
+<!---
+::: {.exercise #unnamed-chunk-26}
+You can play either of the following games of chance:
+  
+1. Win a teddy bear if you roll an even number with a six-sided die.
+1. Draw once from a box of six tickets numbered with 0, 0, 0, 1, 1, 1. You win the number of teddy bears shown on the ticket.
+
+Which would you choose? Or are they the same?
+:::
+<details><summary>Solution</summary>
+They are the same. With both options, you have a 3/6 = 1/2 chance of winning the teddy bear. The objects used aren't relevant.
+</details>
+--->
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 2.6  </strong></span>You can play either of the following games of chance:</p>
+<ol style="list-style-type: decimal">
+<li>Draw once from a box of six tickets numbered with 0, 0, 0, 100, 100, 100. You win the amount shown on the ticket.</li>
+<li>Draw once from a box of two tickets numbered with 0 and 100. You win the amount shown on the ticket.</li>
+</ol>
+<p>Which would you choose? Or are they the same?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+They are the same. With both options, you have a 3/6 = 1/2 chance of winning $100. The first option has more tickets, but because we’re sampling with replacement, the two games are equivalent.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 2.7  </strong></span>Choose an NTM that “is like” the following unfamiliar chance processes.</p>
+<ol style="list-style-type: decimal">
+<li>Tossing a fair coin 100 times and computing the proportion of heads is just like drawing ______ times with replacement from a box with _____ tickets numbered with ________ and averaging the draws.</li>
+<li>Suppose you have a biased coin that comes up heads 60% of the time. Tossing this biased coin 100 times and computing the proportion of heads is just like drawing ______ times with replacement from a box with _____ tickets numbered with ________ and averaging the draws.</li>
+<li>Suppose you have a biased coin that comes up heads 50.1% of the time. Tossing this biased coin 100 times and computing the proportion of heads is just like drawing ______ times with replacement from a box with _____ tickets numbered with ________ and averaging the draws.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>100; 2; 0, 1.</li>
+<li>100; 10; 6 1s and 4 0s. (Alternatively, 100; 100; 60 1s and 40 0s. The key is to make 60% of the box 1s and the rest 0s.)</li>
+<li>100; 1000; 501 1s and 499 0s. The key is to make 50.1% of the box 1s and the rest 0s.</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 2.8  </strong></span>Suppose you have an urn with 6 red marbles, 3 blue marbles, and 1 yellow marble. Drawing 5 marbles with replacement and computing the proportion that are blue <em>is like</em> drawing ______ times with replacement from a box with _____ tickets numbered with ________ and averaging the draws.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>5; 10; 3 1s and 7 0s</p>
+The key is to make 30% of the box 1s, just like 30% of the marbles in the urn are blue.
+</details>
+</div>
+</div>
+<div id="summarizing-the-ntm-process" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Summarizing the NTM Process<a href="NTM.html#summarizing-the-ntm-process" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As an example, suppose that we draw 10 times with replacement from a box of six tickets numbered with 1, 2, 3, 4, 5, 6 and average the draws (Key Example #1). This is analogous to rolling a die 10 times and averaging the spots on each roll.</p>
+<p>Let’s think about how we can summarize (or “predict”) this chance process.</p>
+<p>For an NTM, the average-of-the-draws is random, just like a coin toss. You don’t know exactly what you’ll get. Sure, if you toss a coin, it might come up heads. But we can describe the coin toss <em>process</em> as having a 0.5 probability of heads. Similarly, we can describe the NTM <em>process</em>.</p>
+<p>It turns out that we can summarize the random average-of-the-draws from the NTM much like we summarize a list of numbers: <strong>The average-of-the-draws will be about __________ give or take __________ or so.</strong></p>
+<div id="letting-a-computer-do-some-work" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Letting a Computer Do Some Work<a href="NTM.html#letting-a-computer-do-some-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To better understand this chance process, let’s use a computer to execute the NTM above (draw 10 times with replacement from a box of six tickets numbered with 1, 2, 3, 4, 5, 6 and average the draws).</p>
+<p>First, create a box with six tickets numbered 1, 2, 3, 4, 5, 6.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="NTM.html#cb1-1" tabindex="-1"></a>box <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span></code></pre></div>
+<p>Now draw 10 times with replacement from that box (and print the draws).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="NTM.html#cb2-1" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fu">sample</span>(box, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-2"><a href="NTM.html#cb2-2" tabindex="-1"></a><span class="fu">print</span>(draws)</span></code></pre></div>
+<pre><code> [1] 6 3 2 4 2 5 3 2 6 3</code></pre>
+<p>Finally, compute (and print) the average-of-the-draws.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="NTM.html#cb4-1" tabindex="-1"></a>average_of_the_draws <span class="ot">&lt;-</span> <span class="fu">mean</span>(draws)</span>
+<span id="cb4-2"><a href="NTM.html#cb4-2" tabindex="-1"></a><span class="fu">print</span>(average_of_the_draws)</span></code></pre></div>
+<pre><code>[1] 3.6</code></pre>
+<p>For our 10 draws, we get 6, 3, 2, 4, 2, 5, 3, 2, 6, 3. The average-of-the-draws is 3.6.</p>
+<p>For giggles, I repeated the process and drew6, 6, 2, 1, 6, 6, 1, 4, 4, 2, so the second average-of-the-draws is 3.8—slightly different from the first.</p>
+<p>You see, <strong>each time we run the NTM, we get a slightly different average-of-the-draws</strong>.</p>
+<p>This raises an important question:</p>
+<blockquote>
+<p>If we ran the NTM again, and again, and again—a huge number of times—what would the average-of-the-draws look like?**</p>
+</blockquote>
+<p>I’d like to repeat it an infinite number of times, but that’s impossible. So let’s say that “huge number of times” is 10,000 (and assume that 10,000 is reasonably close to infinite). Let’s repeat this process 9,998 more times.</p>
+<p>I’m not showing the code, and I’m not printing all 10,000 repetitions, but here’s an abbreviated table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Repetion</th>
+<th align="left">Draws</th>
+<th align="left">Average-of-the-Draws</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">#1</td>
+<td align="left">6, 3, 2, 4, 2, 5, 3, 2, 6, 3</td>
+<td align="left">3.6</td>
+</tr>
+<tr class="even">
+<td align="left">#2</td>
+<td align="left">6, 6, 2, 1, 6, 6, 1, 4, 4, 2</td>
+<td align="left">3.8</td>
+</tr>
+<tr class="odd">
+<td align="left">#3</td>
+<td align="left">4, 3, 1, 6, 5, 4, 2, 6, 2, 4</td>
+<td align="left">3.7</td>
+</tr>
+<tr class="even">
+<td align="left">#4</td>
+<td align="left">3, 4, 1, 1, 4, 3, 6, 1, 5, 3</td>
+<td align="left">3.1</td>
+</tr>
+<tr class="odd">
+<td align="left">#5</td>
+<td align="left">1, 1, 5, 2, 2, 3, 3, 5, 3, 1</td>
+<td align="left">2.6</td>
+</tr>
+<tr class="even">
+<td align="left">#6</td>
+<td align="left">2, 3, 1, 3, 4, 2, 4, 3, 5, 6</td>
+<td align="left">3.3</td>
+</tr>
+<tr class="odd">
+<td align="left">#7</td>
+<td align="left">3, 2, 2, 5, 6, 4, 4, 2, 5, 4</td>
+<td align="left">3.7</td>
+</tr>
+<tr class="even">
+<td align="left">#8</td>
+<td align="left">3, 5, 3, 4, 1, 3, 1, 3, 2, 2</td>
+<td align="left">2.7</td>
+</tr>
+<tr class="odd">
+<td align="left">#9</td>
+<td align="left">2, 4, 4, 2, 4, 5, 1, 2, 2, 1</td>
+<td align="left">2.7</td>
+</tr>
+<tr class="even">
+<td align="left">#10</td>
+<td align="left">4, 1, 6, 1, 3, 2, 5, 2, 6, 1</td>
+<td align="left">3.1</td>
+</tr>
+<tr class="odd">
+<td align="left">…</td>
+<td align="left">…</td>
+<td align="left">…</td>
+</tr>
+<tr class="even">
+<td align="left">#9999</td>
+<td align="left">2, 4, 4, 2, 4, 3, 6, 4, 3, 6</td>
+<td align="left">3.8</td>
+</tr>
+<tr class="odd">
+<td align="left">#10000</td>
+<td align="left">2, 3, 5, 1, 1, 4, 4, 4, 4, 6</td>
+<td align="left">3.4</td>
+</tr>
+</tbody>
+</table>
+<p>Now look closely at the “Average-of-the-Draws” column in the table above.</p>
+<p>Imagine that we took the <em>average</em> of that column and <em>SD</em> of that column. We might think of those as the “long-run” average and SD of the average-of-the-draws.</p>
+<p>When I compute the average of our 10,000 averages-of-the-draws, I get 3.4932. When I compute the SD, I get 0.5400138. Those not exactly the long-run average and SD, because our “long run” is only 10,000 draws, but they should be very close.</p>
+<p>We can use these numbers to summarize the NTM with the following: <strong>The average-of-the-draws will be about __________ give or take __________ or so.</strong></p>
+<p>We refer to the first blank as the <strong>expected value</strong> and the second blank as the <strong>standard error (SE)</strong>.</p>
+</div>
+</div>
+<div id="expected-value-and-standard-error" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Expected Value and Standard Error<a href="NTM.html#expected-value-and-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The expected value is much like an average, except the expected value summarizes a <em>chance process</em> and the average summarizes an <em>observed list of numbers</em>.</p>
+<p>The SE is much like an SD, except the SE summarizes a <em>chance process</em> and the SD summarizes an <em>observed list of numbers</em>.</p>
+<p>The table below summarizes the relationship.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Observed List of Numbers</th>
+<th>Chance Process</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>typical value</td>
+<td>average</td>
+<td>expected value</td>
+</tr>
+<tr class="even">
+<td>give-or-take</td>
+<td>SD</td>
+<td>SD</td>
+</tr>
+</tbody>
+</table>
+<p>Much like causation requires us to <em>imagine</em> a hypothetical, counterfactual world, the expected value and SE require us to <em>imagine</em> repeating the NTM an infinite number of times. EAch repetition gives us one average-of-the-draws, so infinite repetitions gives us an imaginary, infinitely-long list of averages-of-the-draws. The the imaginary average of this imaginary, infinitely-long list gives us the expected value. The SD of this imaginary, infinitely-long list gives us the SD.</p>
+<p>While <em>understanding</em> the expected value and SE requires a lot of imagination, <em>computing</em> the expected value and SE only requires straightforward formulas.</p>
+<ul>
+<li>For a numbered-ticket model, the <strong>expected value</strong> is the long-run average of the average-of-the-draws and equals the average of tickets in the box.</li>
+<li>For a numbered-ticket model, the <strong>SE</strong> is the long-run SD of the average-of-the-draws and equals <span class="math inline">\(\dfrac{\text{SD of the tickets in the box}}{\sqrt{\text{number of draws}}}\)</span>.</li>
+</ul>
+<p>We know how to compute averages and SDs, so it’s really easy to compute the expected value and SE.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="NTM.html#cb6-1" tabindex="-1"></a><span class="fu">mean</span>(box)  <span class="co"># expected value</span></span></code></pre></div>
+<pre><code>[1] 3.5</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="NTM.html#cb8-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((box <span class="sc">-</span> <span class="fu">mean</span>(box))<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">10</span>)  <span class="co"># SE</span></span></code></pre></div>
+<pre><code>[1] 0.5400617</code></pre>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-38" class="exercise"><strong>Exercise 2.9  </strong></span>Compute the expected value and SE for the average-of-the-draws for an NTM that uses the following boxes of tickets and numbers of draws.</p>
+<ol style="list-style-type: decimal">
+<li>[1, 2, 3, 4, 5, 6]; 100 draws</li>
+<li>[1, 1, 1, 4, 5, 6]; 9 draws</li>
+<li>[-17, 4, 3, 6]; 400 draws (Hint: The SD of this box is 9.30.)</li>
+<li>[100, -14, 17, 3]; 16 draws (Hint: The SD of this box is 43.83.)</li>
+</ol>
+<p>For each NTM, fill in the blanks: The average-of-the-draws will be about __________ give or take __________ or so.</p>
+</div>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>3.5; 0.17</li>
+<li>3; 0.69</li>
+<li>-1; 0.47</li>
+<li>26.510.96</li>
+</ol>
+<p>The expected value belongs the first blank; the SE belongs in the second.</p>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-39" class="exercise"><strong>Exercise 2.10  </strong></span>Draw _______ times with replacement from a box with six tickets numbered with 1, 2, 3, 4, 5, 6 and averaging the draws. Find the SE for the average-of-the-draws for the following number of draws:</p>
+<ol style="list-style-type: decimal">
+<li>1</li>
+<li>9</li>
+<li>10</li>
+<li>400</li>
+<li>900</li>
+<li>2500</li>
+</ol>
+<p>Keep two digits in addition to the leading zeros.</p>
+<p>Do you notice any pattern? Was this pattern predictable by simply inspecting the formula for the SE?</p>
+</div>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>1.71</li>
+<li>0.57</li>
+<li>0.54</li>
+<li>0.085</li>
+<li>0.034</li>
+</ol>
+</details>
+<div id="tricks-for-0-1-boxes" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Tricks for 0-1 Boxes<a href="NTM.html#tricks-for-0-1-boxes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If your box of tickets has only 0s and 1s, then I refer to it as a “0-1 box” (read as “zero one box”).</p>
+<p>For a 0-1 box, we have a couple of rules for quickly computing the average and SD of the tickets in the box.:</p>
+<ul>
+<li>The average of the tickets in the box equals the proportion of the tickets numbered with 1. (This is just the indicator trick.)</li>
+<li>The SD of the tickets in the box equals <span class="math inline">\(\sqrt{(\text{avg. of the tickets in the box}) \times (1 - \text{avg. of the tickets in the box})}\)</span>. This is an incredibly helpful trick. As you know, computing the SD is tedious. But if you’re working with a 0-1 box, computing the SD of the box is easy.</li>
+</ul>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-40" class="exercise"><strong>Exercise 2.11  </strong></span>Compute the expected value, the SD of the box, and the SE for an NTM that uses the following boxes of tickets and numbers of draws. Notice that each box is a 0-1 box, so use the appropriate tricks.</p>
+<ol style="list-style-type: decimal">
+<li>[0, 1]; 9 draws</li>
+<li>[0, 0, 1]; 400 draws</li>
+<li>[0, 1, 1]; 16 draws</li>
+<li>[0, 0, 0, 0, 0, 1]; 900 draws</li>
+<li>a box with 400 0s and 200 1s; 100 draws</li>
+<li>a box with 120 million 0s and 180 million 1s; 900 draws</li>
+</ol>
+<p>For each NTM, fill in the blanks: The average-of-the-draws will be about __________ give or take __________ or so.</p>
+</div>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>EV = 1/2 = 0.50; SD of the box = sqrt[0.5 x (1 - 0.5)] = 0.5; SE = 0.5/sqrt(9) = 0.17</li>
+<li>EV = 1/3 = 0.33; SD of the box = sqrt[0.33 x (1 - 0.33)] = 0.47; SE = 0.47/sqrt(400) = 0.024</li>
+<li>EV = 2/3 = 0.67; SD of the box = sqrt[0.67 x (1 - 0.67)] = 0.47; SE = 0.47/sqrt(16) = 0.12</li>
+<li>EV = 1/6 = 0.17; ; SD of the box = sqrt[0.17 x (1 - 0.17)] = 0.38; SE = 0.38/sqrt(900) = 0.013</li>
+<li>EV = 200/600 = 1/3 = 0.33; SD of the box = sqrt[0.33 x (1 - 0.33)] = 0.47; SE = 0.47/sqrt(100) = 0.047</li>
+<li>EV = (180 million)/(300 million) = 180/300 = 3/5 = 0.60; SD of the box = sqrt[0.6 x (1 - 0.6)] = 0.49; SE = 0.49/sqrt(900) = 0.016</li>
+</ol>
+The expected value belongs in the first blank; the SE belongs in the second.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-41" class="exercise"><strong>Exercise 2.12  </strong></span>Define the expected value and SE. Choose a particular NTM (i.e., choose the number of tickets, the numbers on each ticket, and the number of draws) and use it as an example. What exactly does “long-run average of the average-of-the-draws” mean? What exactly does “long-run SD of the average-of-the-draws” mean?</p>
+<p>Compute the expected value of the average-of-the-draws for your NTM. Compute the SE of the average-of-the-draws for your NTM.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>For a numbered-ticket model, the <strong>expected value</strong> is the long-run average of the average-of-the-draws.</p>
+<p>The <strong>SE</strong> is the long-run average of the average-of-the-draws.</p>
+<p>An example helps illustrate what I mean by “long-run” average and SD. I’m going to use an NTM with and 5 draws and 3 tickets numbered 1, 2, and 3. To conceive of the expected value and SE, we need to imagine repeating this NTM a large number of times. Each repetition produces one average-of-the-(5)-draws. Suppose we repeated it one million times. Then we would have one million averages-of-the-(5)-draws. If we took the average of these one million averages-of-the-(5)-draws, then that’s a reasonable approximation to the expected value or “long-run average of the average-of-the-draws.” If we took the SD, then that’s a reasonable approximation to the SE or “long-run SD of the average-of-the-draws.”</p>
+<p>In short, to conceive of the expected value and SE, we need to imagine a hypothetical, infinitely long list of averages-of-the-draws that we would obtain by repeating the NTM over-and-over-and-over. The expected value is the average of this hypothetical, infinitely-long list. The SE is the SD of this same list.</p>
+<p>The expected value is always equal to the average of the tickets in the box. My box has tickets numbered 1, 2, and 3, so the expected value is 2.</p>
+The SE is always equal to the SD of the box divided by the square root of the number of draws. In my example, that’s 0.37.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-42" class="exercise"><strong>Exercise 2.13  </strong></span>Use the <a href="https://carlislerainey.shinyapps.io/box-model/">NTM app</a> to explore your own NTM. Vary the number of draws. Vary the tickets in the box. Be creative. Confirm that the app correctly computes the expected value and the SE.</p>
+<p>Notice that the app does two things. First, it computes the exact expected value and the SE. Second, it shows you the average-of-the-draws for five repetitions and the histogram of the average of the draws for 10,000 repetitions.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:ss-ev-se" class="exercise"><strong>Exercise 2.14  </strong></span>Suppose that of the roughly 300 million adults living in the US, 120 million approve of the job Donald Trump is doing as president, 180 disapprove, and 20 aren’t sure. Suppose I sample 400 at random. What’s expected value and SE of the proportion of people that approve.</p>
+<p>Fill in the blanks: The proportion that approve will be about __________ give or take __________ or so.</p>
+</div>
+<details>
+<summary>
+Hint
+</summary>
+<p>To find the expected value and SE for this proportion, you need to move from an unfamiliar context (sample survey) to a familiar context (numbered-ticket model).</p>
+This sample survey is just like drawing 400 times from a box of numbered tickets with 120 million 1s and 180 million 0s.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<p>After setting up an analogous NTM, you can easily see that the expected value of the proportion of the sample that approves is (120 million)/(300 million) = 0.4.</p>
+<p>To compute the SE, we first need the SD of the box. SD of the box = sqrt[0.4 x (1 - 0.4)] = 0.49.</p>
+<p>The SE = (SD of box)/sqrt(number of draws) = 0.49/sqrt(400) = 0.024.</p>
+The proportion of people that approve will be about 0.4 give or take 0.024 or so.
+</details>
+</div>
+</div>
+<div id="the-long-run-histogram" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> The Long-Run Histogram<a href="NTM.html#the-long-run-histogram" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We already know that the average-of-the-draws in the NTM is the [expected value] give or take the [SE]. This is a fairly complete summary of the process. Indeed, it’s almost <em>magical</em>.</p>
+<p>But we can describe the process even more completely. It turns out that, as long as the number of draws is large enough, the average-of-the draws follows the normal curve.</p>
+<p>What?! Let me say that again. No matter what tickets you put in the box, the average-of-the-draws follows the normal curve (as long as the number of draws is large enough).</p>
+<p>Again, imagine that we repeat the NTM over-and-over-and-over, say 10,000 times. If you take the 10,000 averages-of-the-draws and create a histogram, then that histogram follows the normal curve.</p>
+<p>This is an amazing, magical result.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-43" class="exercise"><strong>Exercise 2.15  </strong></span>We’re not going to prove this result (called the “central limit theorem”) mathematically. But you can explore a variety of NTMs to confirm that it works.</p>
+<p>Use the <a href="https://carlislerainey.shinyapps.io/box-model/">NTM app</a> to explore several NTMs. Try the following boxes. Start with 10 draws and increase the number of draws until the 10,000 averages-of-the-draws seems roughly normal. (The app can be a little slow when the number of draws gets bigger than about 50, so be patient–it’s repeating the process 10,000 times.)</p>
+<ol style="list-style-type: decimal">
+<li>1, 2, 3, 4, 5, 6</li>
+<li>0, 1</li>
+<li>0, 0, 0, 0, 0, 1</li>
+<li>1, 1, 2, 3, 4, 5, 6000</li>
+</ol>
+<p>For a large-enough number of draws, does the average-of-the-draws roughly form a normal curve for each box?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>10 draws is definitely large enough</li>
+<li>10 draws is definitely large enough</li>
+<li>about 30 draws is large enough</li>
+<li>With 10 draws, you get a definitely-not-normal distribution. Each “hump” is created by drawing different numbers of 60s. The left-most hump is no 60s. The second includes all the sets of draws with 1 60. And so on. With 100 draws, the humps are less prominent, but still present. With 400 draws, the average-of-the-draws follows a normal distribution.</li>
+</ol>
+</details>
+<p>Because the average-of-the-draws follows the normal curve, we can say the following (assuming the number of draws is large enough):</p>
+<ul>
+<li>There is a 68% chance (or 0.68 probability) that the average-of-the-draws falls within 1 SE of the expected value.</li>
+<li>There is a 95% chance (or a 0.95 probability) that the average-of-the-draws falls within 2 SEs of the expected value.</li>
+</ul>
+<p>We can also use the normal approximation to compute the probability that the average-of-the-draws falls into a particular interval. If the number of draws is large, this approximation is <em>extremely precise</em> (much more precise than for most lists of numbers).</p>
+<p>To do this, remember the steps for a normal approximation, but use the expected value in place of the average and the SE in place of the SD:</p>
+<ol style="list-style-type: decimal">
+<li>Draw a picture. <em>This is important</em>. If you can draw the correct picture, it’s really easy to find the correct normal approximation.
+<ol style="list-style-type: lower-alpha">
+<li>Draw the normal curve.</li>
+<li>Label the points of interest. I find it helpful to label the expected value as well.</li>
+<li>Shade the area of interest.</li>
+</ol></li>
+<li>Convert the points of interest to standard units or z-scores. I like to add the z-scores in parentheses underneath the points of interest. Remember that <span class="math inline">\(\text{std. unit} = z\text{-score} = \frac{\text{value } - \text{ expected value}}{\text{SE}}\)</span>.</li>
+<li>Use the Rules of the Normal Curve.
+<ol style="list-style-type: lower-alpha">
+<li>The normal table gives the area between <span class="math inline">\(z\)</span> and its opposite <span class="math inline">\(-z\)</span>. See Appendix A of this monograph. Usually, start here.</li>
+<li>The area under the entire curve is 100%.</li>
+<li>The curve is symmetric so that the area above a particular value <span class="math inline">\(z\)</span> equals the area below its opposite <span class="math inline">\(-z\)</span>.</li>
+</ol></li>
+</ol>
+<hr />
+<p><strong>Example</strong></p>
+<p>Suppose we draw 9 times with replacement from a box with two tickets numbered with 0 and 1 and average the draws.</p>
+<p>(Because this is a 0-1 box, remember to use the tricks to compute the average and SD of the box.)</p>
+<p><span class="math inline">\(\text{expected value} = \text{average of the box} = \frac{1}{2} = 0.50\)</span></p>
+<p><span class="math inline">\(SE = \dfrac{\text{SD of box}}{\sqrt{\text{number of draws}}} = \dfrac{\sqrt{0.50 \times (1 - 0.50)}}{\sqrt{9}} = \dfrac{0.5}{3} = \dfrac{1}{6} = 0.17\)</span></p>
+<p>The average-of-the-draws will fall between 0.33 and 0.67 with probability 0.68 (or 68% of the time). It will fall between 0.16 and 0.84 with o probability of 0.95 (or 95% of the time).</p>
+<p>We can also compute the probability of getting and average-of-the-draws greater than 0.7.</p>
+<p>Here’s my work:</p>
+<ol style="list-style-type: decimal">
+<li>The expected value is 0.5 and the SE is 0.17.</li>
+<li>The quantity of interest 0.7 is (0.7 - 0.5)/0.17 = 1.18 SEs above the average. That’s the <em>z</em>-score.</li>
+<li>If we look up z = 1.18 in the normal table (see Appendix A of this monograph), we see that it isn’t there. Instead, use the closest, which is 1.2. We see that 77% falls between -1.20 and 1.20.</li>
+<li>If 77% falls “in the middle,” then 23% falls in the two tails.</li>
+<li>If 23% falls in the two tails, then 11.5% or 12% falls in each tail.</li>
+<li>Therefore, the probability of obtaining an average-of-the-draws greater than 0.7 is 0.12. Or we might say “the average-of-the-draws will be larger than 0.7 12% of the time.”</li>
+</ol>
+<p><img src="notes_files/figure-html/unnamed-chunk-44-1.png" width="768" style="display: block; margin: auto;" /></p>
+<hr />
+<div class="exercise">
+<p><span id="exr:base" class="exercise"><strong>Exercise 2.16  </strong></span>Suppose an NTM where we’re drawing 100 times from a box with two tickets, one numbered with 0 and the other numbed with 1. There’s a 95% chance that the average-of the draws is between ____ and ____.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>The expected value is 0.5, the SD of the tickets in the box is 0.5, and the SE is 0.05. Remember that the average-of-the-draws follows the normal curve, the average-of-the-draws falls with in 2 SEs of the expected value 95% of the time. So we just hop 2 SEs below the expected value to find the lower-end of the range. We hop 2 SEs above the expected value to find the higher-end of the range.</p>
+<p>In this case, the interval is [0.5 - (2 x 0.05), 0.5 + (2 x 0.05)] = [0.4, 0.6].</p>
+There’s a 95% chance that the average of the draws is between 0.4 and 0.6.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-45" class="exercise"><strong>Exercise 2.17  </strong></span>Suppose and urn filled with 5 red marbles, 4 green marbles, and 1 yellow marble. Draw 100 marbles with replacement and compute the proportion that are red. There’s a 95% chance that the proportion is between ____ and ____.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+This is just like the Exercise <a href="NTM.html#exr:base">2.16</a>, because the NTM above “is like” this unfamiliar chance process.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-46" class="exercise"><strong>Exercise 2.18  </strong></span>Suppose and urn filled with 5 red marbles, 4 green marbles, and 1 yellow marble. Draw 100 marbles with replacement and compute the proportion that are red. There’s a ____% chance that the proportion is above 0.58.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>We can build on our work from Exercise <a href="NTM.html#exr:base">2.16</a>, because the NTM described in that question “is like” this unfamiliar chance process of drawing marbles from an urn.</p>
+<p>expected value of the proportion of draws that are red = 0.5
+SE of the proportion of draws that are red = 0.05</p>
+<p>Now following the normal approximation, we would draw a picture, convert to standard units and then use the rules.</p>
+<ol style="list-style-type: decimal">
+<li>The expected value is 0.5 and the SE is 0.05.</li>
+<li>The quantity of interest 0.58 is (0.58 - 0.5)/0.0 = 1.6 SEs above the average. That’s the <em>z</em>-score.</li>
+<li>If we look up z = 1.6 in the normal table (see Appendix A of this monograph), we see that 89% falls between -1.6 and 1.6 (i.e., “in the middle”).</li>
+<li>If 89% falls “in the middle,” then 11% falls in the two tails.</li>
+<li>If 11% falls in the two tails, then 6.5% or 7% falls in each tail.</li>
+<li>Therefore, the probability of obtaining a proportion-that-are-red greater than 0.58 is 0.07. Or we might say “the proportion of the draws that are red will be larger than 0.58 7% of the time.”</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-47" class="exercise"><strong>Exercise 2.19  </strong></span>Suppose and urn filled with 8 red marbles, 1 green marble, and 1 yellow marble. Draw 100 marbles with replacement and compute the proportion that are red. There’s a ____% chance that the proportion is less than 0.78.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Using the analogous NTM, we can see that:</p>
+<ul>
+<li>expected value of the proportion of draws that are red = 0.8</li>
+<li>the SD of the tickets in the box is sqrt(0.8*0.2) = 0.4</li>
+<li>SE of the proportion of draws that are red = 0.4/sqrt(100) = 0.4/10 = 0.04.</li>
+</ul>
+<p>Now following the normal approximation, we would draw a picture, convert to standard units and then use the rules.</p>
+<ol style="list-style-type: decimal">
+<li>The expected value is 0.8 and the SE is 0.04.</li>
+<li>The quantity of interest 0.78 is (0.78 - 0.80)/0.04 = 0.5 SEs below the average. That’s the <em>z</em>-score.</li>
+<li>If we look up z = 0.5 in the normal table (see Appendix A of this monograph), we see that 38% falls between -0.5 and 0.5 (i.e., “in the middle”).</li>
+<li>If 38% falls “in the middle,” then 62% falls in the two tails.</li>
+<li>If 62% falls in the two tails, then 31% falls in each tail.</li>
+<li>Therefore, the probability of obtaining a proportion-that-are-red less than 0.78 is 0.31. Or we might say “the proportion of the draws that are red will be lless than 0.78 31% of the time.”</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-48" class="exercise"><strong>Exercise 2.20  </strong></span>Suppose I draw five cards from a deck with replacement and compute the proportion that are hearts. There’s a 95% chance that the proportion will be between _____ and ____.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>We need to be careful, because the average-of-the-draws follows the normal curve only if the number of draws is “large enough.”</p>
+<p>We need to use an NTM with 5 draws and a box with 3 0s and a single 1.</p>
+<ul>
+<li>expected value = 0.25</li>
+<li>SD of the box = sqrt(.25*.75) = 0.43</li>
+<li>SE = 0.43/sqrt(5) = 0.19</li>
+</ul>
+<p>We’re familiar enough with the normal table to know that 95% of the normal curve is between -2 and 2, so we just hop two SEs to the left and two SEs to the right. That’s 0.25 - 2<em>0.19 and 0.25 + 2</em>0.19, or -0.13 and 0.63. Something seems to have gone wrong, because the proportion of hearts cannot be negative.</p>
+<p>This is not as big a problem as it seems, but it stems partly from the fact that we need the number of draws to be “large enough.” Five draws might not be large enough. To better understand, I plugged this NTM into <a href="https://carlislerainey.shinyapps.io/box-model/">the app</a>, and got the results below.</p>
+<p><img src="img/5-hearts.png" />
+but this isn’t as bad as it initially seems. On my computer, I simulatied this NTM 10,000 times and the average-of-the-draws fell between -0.13 and 0.63 98% of the time. That’s not too far off 95%, especially since we would usually consider 5 a “large” number of draws.</p>
+</details>
+</div>
+<div id="summary-1" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Summary<a href="NTM.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>The <strong>numbered-ticket model</strong> is a particularly useful chance process to understand well, because we can choose the number of tickets, the numbers on those tickets, and the number of draws to make it “like” many other chance processes.</li>
+<li>When using the familiar numbered-ticket model to understand an unfamiliar chance process, ask: How many tickets go in the box? What number goes on each ticket? How many draws should I take?</li>
+<li>The <strong>expected value</strong> is the long-run average of the average-of-the-draws. It’s exactly equal to the average of the tickets in the box.</li>
+<li>The <strong>standard error (SE)</strong> is the long-run SD of the average-of-the-draws. It’s exactly equal to <span class="math inline">\((\text{SD of the tickets in the box})/\sqrt{({\text{number of draws}})}\)</span>.</li>
+<li>The expected value and SE are a lot like the average and SD. The difference is key: the expected value and SE describe a chance process, while the average and SD describe observed lists of numbers.</li>
+<li>When using the numbered-ticket model to understand an unfamiliar chance process involving a proportion, remember to fill your box with 0s and 1s (i.e., use the indicator trick).</li>
+<li>When working with a 0-1 box (i.e., a box with only 0s and 1s), it’s helpful to remember two tricks: (1) the average of the tickets in the box equals the proportion of tickets that are 1s and (2) the SD of the tickets in the box equals <span class="math inline">\(\sqrt{(\text{avg. of tickets in the box}) \times (1 - \text{avg. of the tickets in the box})}\)</span>.</li>
+<li>If you have a large number of draws, then the long-run histogram of the average-of-the-draws follows the normal curve. Use this long-run histogram to compute the probability that the average-of-the-draws will fall into particular ranges (e.g., more than 2, between 1 and 2, less than -1, etc.).</li>
+</ol>
+<p>After reading this chapter and doing these exercises, you should be able to…</p>
+<ol style="list-style-type: decimal">
+<li>Describe the concepts of expected value and SE in a simplified manner.</li>
+<li>Connect a numbered-ticket model to an unfamiliar chance process and describe the (random) outcomes of that chance process as follows.
+<ol style="list-style-type: lower-alpha">
+<li>The [outcome of the chance process] will be about __________ give or take __________ or so.</li>
+<li>About 68% (or 95%) of the time, the [outcome of the chance process] will be between _________ and _________.</li>
+<li>The [outcome of the chance process] will fall above/below/between ___________ about ____ percent of the time.</li>
+</ol></li>
+</ol>
+</div>
+<div id="additional-exercises-1" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Additional Exercises<a href="NTM.html#additional-exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="exercise">
+<p><span id="exr:key-pop-to-samp" class="exercise"><strong>Exercise 2.21  </strong></span>250 million adults are living in the US. 100 million “approve” of the job Donald Trump is doing as president, 140 million “disapprove,” and 10 million “aren’t sure.” Suppose I sample 400 of these adults and compute the proportion of people that approve.</p>
+<p>Choose an NTM that “is like” this chance process and use it to answer the questions below.</p>
+<p>Because the SE is so small for this problem, round to three decimal places.</p>
+<ol style="list-style-type: decimal">
+<li>The proportion that approve will be about __________ give or take __________ or so.</li>
+<li>About 68% of the time, the proportion that approve will be between _________ and _________.</li>
+<li>About 95% of the time, the proportion that approve will be between _________ and _________.</li>
+<li>The proportion that approve will fall above 0.42 _________ percent of the time.</li>
+<li>The proportion that approve will fall below 0.39 _________ percent of the time.</li>
+<li>The proportion that approve will fall between 0.39 and 0.42 _________ percent of the time.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>The expected value is 0.4, the SD of the numbers in the box is <span class="math inline">\(\sqrt{0.4 \times 0.6} = 0.49\)</span>, and the SE is <span class="math inline">\(\frac{0.49}{\sqrt{400}} = \frac{0.49}{20} = 0.025\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>The proportion of people that approve will be about 0.4 give or take 0.025 or so.
+About 68% of the time, the proportion of people that approve will be between 0.375 and 0.425.</li>
+<li>About 95% of the time, the proportion of people that approve will be between 0.35 and 0.45.</li>
+<li>The proportion of people that approve will fall above 0.42 21% percent of the time.</li>
+<li>The proportion of people that approve will fall below 0.39 35% percent of the time.</li>
+<li>The proportion that approve will fall between 0.39 and 0.42 (100% - 21% - 35%) = 44% percent of the time. (Just using the previous two questions.)</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-49" class="exercise"><strong>Exercise 2.22  </strong></span>In your own words, explain the numbered-ticket model in a way that someone who hasn’t taken the class could understand. What can change across different versions? What stays the same? (Compare this answer to what you wrote at the beginning of the last chapter.)</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-50" class="exercise"><strong>Exercise 2.23  </strong></span>Suppose you have an urn with 6,000 red marbles, 3,000 blue marbles, and 1,000 yellow marbles. Drawing 100 marbles with replacement and computing the proportion of draws that are blue <em>is like</em> drawing ______ times with replacement from a box with _____ tickets numbered with ________ and averaging the draws.</p>
+<p>But suppose I sampled 100 times <strong>without</strong> replacement from the urn. Could I use the same NTM to analyze the draws from the urn? Or does the assumption of sampling with replacement completely invalidate the analogy?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>100; 10; 3 1s and 7 0s</p>
+<p>The key is to make 30% of the box 1s, just like 30% of the marbles in the urn are blue.</p>
+Sampling with and without replacement are a lot alike, so long as the number of draws are small relative to the number of marbles in the urn. In this case, 100 draws is a lot smaller than 10,000 marbles, so we can use the NTM that assumes drawing <strong>with</strong> replacement to analyze a change process that assumes drawing <strong>without</strong> replacement.
+</details>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-basics-of-probability.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sample-surveys.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["notes.pdf", "notes.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

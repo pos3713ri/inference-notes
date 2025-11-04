@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Confidence Intervals | A Gentle Introduction to Inference</title>
+  <meta name="description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Confidence Intervals | A Gentle Introduction to Inference" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Confidence Intervals | A Gentle Introduction to Inference" />
+  
+  <meta name="twitter:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+<meta name="author" content="Carlisle Rainey" />
+
+
+<meta name="date" content="2025-11-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sample-surveys.html"/>
+<link rel="next" href="hypothesis-testing.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        process_solutions();
+    });
+    function process_solutions() {
+        $("div.section[id^='solution']").each(function(i) {
+        var soln_wrapper_id = "cvxr_ex_" + i;
+        var solution_id = $(this).attr('id');
+        var button = $("<button onclick=\"toggle_solution('" + soln_wrapper_id + "')\">Show/Hide</button>");
+        var new_div = $("<div id='" + soln_wrapper_id + "' class='solution' style='display: none;'></div>");
+        var h = $(this).first();
+        var others = $(this).children().slice(1);
+        $(others).each(function() {
+            $(this).appendTo($(new_div));
+        });
+        $(button).insertAfter($(h));
+        $(new_div).insertAfter($(button));
+        })
+    }
+    function toggle_solution(el_id) {
+      $("#" + el_id).toggle();
+    } 
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Concepts and Computation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>1</b> The Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>1.1</b> Review</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>1.1.1</b> Proportions</a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>1.1.2</b> The Indicator Trick</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>1.1.3</b> Percents</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>1.2</b> Chance Processes</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>1.2.1</b> The Numbered-Ticket Model</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>1.3</b> Defining Probability</a></li>
+<li class="chapter" data-level="1.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>1.4</b> Computing Probabilities</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.4.1</b> Counting the Equally-Likely Outcomes</a></li>
+<li class="chapter" data-level="1.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>1.4.2</b> The Probability of the Opposite</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>1.5</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="1.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>1.6</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="1.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>1.7</b> Independence</a></li>
+<li class="chapter" data-level="1.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary"><i class="fa fa-check"></i><b>1.8</b> Summary</a></li>
+<li class="chapter" data-level="1.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>1.9</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>2</b> The Numbered-Ticket Model</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>2.1</b> The Generic Form</a></li>
+<li class="chapter" data-level="2.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>2.2</b> “Is Like”</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>2.2.1</b> Key Example 1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>2.2.2</b> Key Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>2.3</b> Summarizing the NTM Process</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>2.3.1</b> Letting a Computer Do Some Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>2.4</b> Expected Value and Standard Error</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>2.4.1</b> Tricks for 0-1 Boxes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>2.5</b> The Long-Run Histogram</a></li>
+<li class="chapter" data-level="2.6" data-path="NTM.html"><a href="NTM.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
+<li class="chapter" data-level="2.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>2.7</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>3</b> Sample Surveys</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>3.1</b> A Conceptual Framework</a></li>
+<li class="chapter" data-level="3.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>3.2</b> The Simple Random Sample</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.1</b> The Accuracy of the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.2</b> The Importance of the Simple Random Sample</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>3.3</b> The Three Hurdles</a></li>
+<li class="chapter" data-level="3.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>3.4</b> Good Alternatives to the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>3.5</b> Poor Alternatives to the Simple Random Samples</a></li>
+<li class="chapter" data-level="3.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>3.6</b> An Infamous Sample Survey</a></li>
+<li class="chapter" data-level="3.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>3.7</b> Modern Polling</a></li>
+<li class="chapter" data-level="3.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-2"><i class="fa fa-check"></i><b>3.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>4.1</b> Review</a></li>
+<li class="chapter" data-level="4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>4.2</b> The Motivating Question</a></li>
+<li class="chapter" data-level="4.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>4.3</b> Reversing the Logic</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>4.3.1</b> Replace NTM Terms with Sample Survey Terms</a></li>
+<li class="chapter" data-level="4.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>4.3.2</b> The Symmetry of Distance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>4.3.3</b> Tense</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>4.4</b> Using the Logic</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>4.4.1</b> A Big Problem</a></li>
+<li class="chapter" data-level="4.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>4.4.2</b> A Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>4.5</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.1</b> Understanding a Confidence Interval</a></li>
+<li class="chapter" data-level="4.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.2</b> Interpreting a Confidence Interval</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>4.6</b> Miscellaneous</a></li>
+<li class="chapter" data-level="4.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-3"><i class="fa fa-check"></i><b>4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>5</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>5.1</b> The Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>5.2</b> <em>p</em>-Values</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>5.2.1</b> Focusing the Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>5.3</b> A Summary of the Hypothesis Testing Framework</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>6</b> Extensions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>6.1</b> Review</a></li>
+<li class="chapter" data-level="6.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>6.2</b> Sources of Randomness</a></li>
+<li class="chapter" data-level="6.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>6.3</b> Confidence Intervals in General</a></li>
+<li class="chapter" data-level="6.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>6.4</b> Hypothesis Tests in General</a></li>
+<li class="chapter" data-level="6.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>6.5</b> Statistical Significance</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-a-normal-table.html"><a href="appendix-a-normal-table.html"><i class="fa fa-check"></i><b>A</b> Appendix: A Normal Table</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Gentle Introduction to Inference</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="confidence-intervals" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Confidence Intervals<a href="confidence-intervals.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="review-1" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Review<a href="confidence-intervals.html#review-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Remember, we can use the numbered-ticket model to understand simple random samples from a large population.</p>
+<p>From a couple of weeks ago, we learned the following:</p>
+<ol style="list-style-type: decimal">
+<li>The <strong>numbered-ticket model</strong> says: Fill a box with <span class="math inline">\(k\)</span> tickets numbered with <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>, draw <span class="math inline">\(N\)</span> times with replacement from the box, and record the average-of-the-draws. The NTM is a particularly useful chance process to understand well, because we can choose the number of tickets, the numbers on those tickets, and the number of draws to make it “like” many other chance processes, especially sample surveys!</li>
+<li>The <strong>expected value</strong> is the long-run average of the average-of-the-draws. It’s equal to the average of the tickets in the box.</li>
+<li>The <strong>standard error (SE)</strong> is the long-run SD of the average-of-the-draws. It’s equal to <span class="math inline">\((\text{SD of the tickets in the box})/\sqrt{({\text{number of draws}})}\)</span>.</li>
+<li>If you have a large number of draws, then the long-run histogram of the average-of-the-draws follows the normal curve. We convert to standard units or <em>z</em>-scores using the expected value in place of the average and the SE in place of the SD. We can use this long-run histogram to compute the chance that the average-of-the-draws will fall into particular ranges.</li>
+<li>When working with a 0-1 box (i.e., a box with only 0s and 1s), it’s helpful to remember two tricks: (1) the average of the tickets in the box equals the proportion of tickets that are 1s and (2) the SD of the tickets in the box equals <span class="math inline">\(\sqrt{(\text{avg. of tickets in the box}) \times (1 - \text{avg. of the tickets in the box})}\)</span>.</li>
+</ol>
+<div class="exercise">
+<p><span id="exr:key-pop-to-samp-small" class="exercise"><strong>Exercise 4.1  </strong></span>250 million adults are living in the US. 100 million “approve” of the job Donald Trump is doing as president, 140 million “disapprove,” and 10 million “aren’t sure.” Suppose I sample 400 of these adults and compute the proportion of people that approve.</p>
+<p>About 95% of the time, the proportion of the sample that approves will be between _________ and _________. (Round to three decimal places.)</p>
+<p>If you need a more thorough review of these ideas, see Chapter <a href="NTM.html#NTM">2</a> and especially Exercise <a href="NTM.html#exr:key-pop-to-samp">2.21</a>.</p>
+</div>
+<details>
+<summary>
+Hint
+</summary>
+Choose an NTM that “is like” this chance process.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+See Exercise <a href="NTM.html#exr:key-pop-to-samp">2.21</a>.
+</details>
+</div>
+<div id="the-motivating-question" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> The Motivating Question<a href="confidence-intervals.html#the-motivating-question" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Motivating Question</strong>: I randomly sample 400 adults living in the US and 184 of those approve of the job Donald Trump is doing as president. Based on this simple random sample, what can I say about the <em>entire population</em> of adults living in the US?</p>
+<p>We’ve been using the numbered-ticket model to study questions much like this–finding the expected values, standard error, etc. Exercises <a href="confidence-intervals.html#exr:key-pop-to-samp-small">4.1</a> and <a href="NTM.html#exr:key-pop-to-samp">2.21</a> seem similar to this question. But the motivating question for this chapter is different in an important way: it’s backward.</p>
+<p>In Exercises <a href="confidence-intervals.html#exr:key-pop-to-samp-small">4.1</a> and <a href="NTM.html#exr:key-pop-to-samp">2.21</a>, we reasoned <em>forward</em> from the population to the sample. Given the population, we used the numbered-ticket model to describe what the random samples would look like.</p>
+<p>In the motivating question above, I give you the sample and ask you what the population looks like.</p>
+<p>In short, we need to take the logic of Chapter <a href="NTM.html#NTM">2</a> and reverse it.</p>
+</div>
+<div id="reversing-the-logic" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Reversing the Logic<a href="confidence-intervals.html#reversing-the-logic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We start with this statement that we developed in Chapter <a href="NTM.html#NTM">2</a>:</p>
+<blockquote>
+<p>The average-of-the-draws will be about the expected value, give or take an SE or so.</p>
+</blockquote>
+<p>We also have this variation:</p>
+<blockquote>
+<p>The average-of-the-draws will be within two SEs of the expected value about 95% of the time.</p>
+</blockquote>
+<p>We know these are true, so let’s modify them in ways that leave them true, but make them more applicable.</p>
+<div id="replace-ntm-terms-with-sample-survey-terms" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Replace NTM Terms with Sample Survey Terms<a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, we already know that, because of the indicator trick, the average-of-the-draws in the NTM corresponds to the sample proportion in sample surveys. The average-of-the-draws is just the proportion of 1s drawn, and it’s just like the proportion of approvers in the sample survey.</p>
+<p>Second, we already know that the expected value is the population proportion.</p>
+<ol style="list-style-type: decimal">
+<li>Because we’re interested in a proportion, we use a 0-1 box and let the 1s represent the items that count (e.g., approvers).</li>
+<li>The expected value is simply the proportion of 1s in the box. Because we chose the proportion of 1s in the box to match the proportion of 1s in the population, the expected value is the proportion of 1s in the population.</li>
+</ol>
+<p>See Exercise <a href="NTM.html#exr:ss-ev-se">2.14</a> if you need a refresher.</p>
+<p>We can rewrite the two statements above replacing the phrase “average-of-the-draws” with “sample proportion” and the phrase “expected value” with “population proportion”</p>
+<blockquote>
+<p>The <strong>sample proportion</strong> will be about the <strong>population proportion</strong>, give or take an SE or so.</p>
+</blockquote>
+<blockquote>
+<p>The <strong>sample proportion</strong> will be within two SEs of the <strong>population proportion</strong> about 95% of the time.</p>
+</blockquote>
+</div>
+<div id="the-symmetry-of-distance" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> The Symmetry of Distance<a href="confidence-intervals.html#the-symmetry-of-distance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Imagine you are playing golf and figure out that you are 100 yards from the hole. How far is the hole from you? 100 yards.</p>
+<p>It works the same for the sample proportion and population proportion. If the sample proportion is, say, 1.5 SEs, away from the population proportion, then the population proportion is 1.5 SEs away from the sample proportion.</p>
+<p>This is because distance is symmetric. If the sample proportion is “close” to the population proportion, then the population proportion cannot be “far” from the sample proportion. They are both “close” to each other or not. Indeed, they must be the same distance apart.</p>
+<p>Since both statements we’re interested in address the distance between the sample proportion and the population proportion, we can just switch their positions.</p>
+<blockquote>
+<p>The <strong>population proportion</strong> will be about the <strong>sample proportion</strong>, give or take an SE or so.</p>
+</blockquote>
+<blockquote>
+<p>The <strong>population proportion</strong> will be within two SEs of the <strong>sample proportion</strong> about 95% of the time.</p>
+</blockquote>
+</div>
+<div id="tense" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Tense<a href="confidence-intervals.html#tense" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lastly, we need to address the tense of the statement.</p>
+<p>When we started, we wanted to predict a <em>future</em> sample (or samples) based on a population that exists in the present. Now, we want to learn about a population that exists in the present based on a sample that we already have. So let’s switch from the future tense “will be” to the present tense. “is.”</p>
+<blockquote>
+<p>The population proportion <strong>is</strong> about the sample proportion, give or take an SE or so.</p>
+</blockquote>
+<blockquote>
+<p>The population proportion <strong>is</strong> within two SEs of the sample proportion about 95% of the time.</p>
+</blockquote>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-58" class="exercise"><strong>Exercise 4.2  </strong></span>Start with the statement: “The average-of-the-draws will be within two SEs of the expected value about 95% of the time.”</p>
+<p>Get to the statement: “The population proportion is within two SEs of the sample proportion about 95% of the time.”</p>
+<p>Explain each of the following steps using your own language:</p>
+<ol style="list-style-type: decimal">
+<li>Go from the language of the numbered-ticket model (e.g., “average-of-the-draws”, “expected value”) to the language of sample surveys (e.g., “sample” and “population”).</li>
+<li>Use the symmetry of distance.</li>
+<li>Change the tense.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="using-the-logic" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Using the Logic<a href="confidence-intervals.html#using-the-logic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we have two powerful statements that allow us to reason “backward” (actually the only direction we ever <em>really</em> cared about) from the sample to the population.</p>
+<blockquote>
+<p>The population proportion is about the sample proportion, give or take an SE or so.</p>
+</blockquote>
+<blockquote>
+<p>The population proportion is within two SEs of the sample proportion about 95% of the time.</p>
+</blockquote>
+<p>We already know that the population proportion will be “close” to the sample proportion. But how close? These two statements allow us to say precisely–we just need to compute the SE…</p>
+<div id="a-big-problem" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> A Big Problem<a href="confidence-intervals.html#a-big-problem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Remember that when we represent the sample survey as an NTM, then</p>
+<p><span class="math inline">\(\text{SE} = \dfrac{\text{SD of tickets in the box}}{\sqrt{\text{number of draws}}}\)</span>.</p>
+<p>Remembering that we’re dealing with a 0-1 box (because this is a proportion), then</p>
+<p><span class="math inline">\(\text{SE} = \dfrac{\sqrt{\text{avg. of tickets in the box} \times (1 - \text{avg. of tickets in the box})}}{\sqrt{\text{number of draws}}}\)</span>.</p>
+<p>Now let’s convert the language from that of an NTM to that of a sample survey. First, the average of the tickets in the box is simply the population proportion (that’s how we chose the number of 0s and 1s for the box).</p>
+<p>Second, we might call the “number of draws” the “sample size.” Remember that the sample survey and the NTM are the same chance process (if we chose the correct NTM), so we’re not changing anything—these different words express the same ideas.</p>
+<p><span class="math inline">\(\text{SE} = \dfrac{\sqrt{\text{population proportion} \times (1 - \text{population proportion})}}{\sqrt{\text{sample size}}}\)</span>.</p>
+<p>All we have to do is calculate this.</p>
+<p>Do you see the problem?</p>
+<p><strong>There’s a big problem.</strong></p>
+<p>We don’t know the population proportion. And our ignorance is fundamental—it’s the whole reason we’re doing the sample survey.</p>
+<p>To use the two statements, we need to know the SE. To know the SE, we need to know the population proportion. We’re stuck.</p>
+</div>
+<div id="a-solution" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> A Solution<a href="confidence-intervals.html#a-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We don’t know the population proportion—I readily and fully admit that. But we’re backed into a corner. If I forced you to guess, what would you choose? Using the best information you have, what would you <em>guess</em> the population proportion to be?</p>
+<p>Well, our statement tells us that the “population proportion is about the sample proportion.” Can we just “plug-in” the sample proportion for the population proportion? Would that work in a pinch?</p>
+<p>It turns out that using the sample proportion instead of the population proportion works quite well. Methodologists sometimes refer to this approach as the “plug-in principle.” It turns out that this <strong>estimated SE</strong> is approximately the same as the <strong>actual SE</strong>.</p>
+<p>Notice now that we have two different SEs: the actual (that we can only know if we know the population proportion) and the estimated (that we use as a best-guess of the actual). We can indicate the estimated SE with a hat or refer to it as the “estimated SE.” (In practice, authors don’t do a good job of distinguishing between the actual and estimated SE. Usually, they are referring to the estimate, but you need to rely on context if the difference is important.)</p>
+<p><span class="math inline">\(\text{estimated SE} = \hat{\text{SE}} = \dfrac{\sqrt{\text{sample proportion} \times (1 - \text{sample proportion})}}{\sqrt{\text{sample size}}}\)</span>.</p>
+<p>It’s not immediately clear, though, how well the estimated SE will work. Is it a crude approximation? Or is it almost exact?</p>
+<p>Without going into the details, I’ll just state the important conclusion: except for <em>extremely</em> small sample sizes or extremely large or small proportions, it works very well. If your sample has four people, it won’t work well. If you’re estimating the proportion of adults that make more than $1 million per year with a sample of 1,000 people, it won’t work well.</p>
+<p>But for most sample surveys, the approximation works well.</p>
+<div class="exercise">
+<p><span id="exr:p-se" class="exercise"><strong>Exercise 4.3  </strong></span>Suppose I sampled 64 respondents and obtained a sample proportion of 0.297. Estimate the SE for the sample proportion. Round to three decimal places.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>estimated SE = sqrt(sample proportion x (1 - sample proportion))/sqrt(sample size)</p>
+<p>estimated SE = sqrt(0.297 x 0.703)/sqrt(64)</p>
+<p>estimated SE = sqrt(0.209)/8</p>
+<p>estimated SE = 0.457/8</p>
+<p>estimated SE = 0.057</p>
+</details>
+<div class="exercise">
+<p><span id="exr:se-p-many" class="exercise"><strong>Exercise 4.4  </strong></span>Suppose I sampled <em>N</em> respondents and obtained a sample proportion of <em>p</em>. Estimate the SE for the following values of <em>N</em> and <em>p</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><em>N</em></th>
+<th><em>p</em></th>
+<th>Estimated SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100</td>
+<td>0.5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>0.3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>0.2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>387</td>
+<td>0.345</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>See Exercise <a href="confidence-intervals.html#exr:p-se">4.3</a> for the process.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><em>N</em></th>
+<th align="left"><em>p</em></th>
+<th align="left">Estimated SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">100</td>
+<td align="left">0.5</td>
+<td align="left">0.05</td>
+</tr>
+<tr class="even">
+<td align="left">25</td>
+<td align="left">0.3</td>
+<td align="left">0.092</td>
+</tr>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.2</td>
+<td align="left">0.013</td>
+</tr>
+<tr class="even">
+<td align="left">387</td>
+<td align="left">0.345</td>
+<td align="left">0.024</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-60" class="exercise"><strong>Exercise 4.5  </strong></span>Suppose I sampled 64 respondents and 19 respondents had a quality of interest. Estimate the SE for the <em>proportion</em> of the respondents with the quality of interest. Round to three decimal places.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Begin by finding the sample proportion, which is 19/64 = 0.297. After this, the Exercise is just like Exercise <a href="confidence-intervals.html#exr:p-se">4.3</a>.</p>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-61" class="exercise"><strong>Exercise 4.6  </strong></span>Suppose I sampled <em>N</em> respondents and <em>k</em> respondents had a quality of interest. Estimate the SE for the <em>proportion</em> of the respondents with the quality of interest for the following values of <em>N</em> and <em>k</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><em>N</em></th>
+<th><em>k</em></th>
+<th>Estimated SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100</td>
+<td>50</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>16</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>750</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>387</td>
+<td>203</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Begin by finding the sample proportion. After this, this Exercise is just like Exercise <a href="confidence-intervals.html#exr:p-se">4.3</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><em>N</em></th>
+<th align="left"><em>k</em></th>
+<th align="left"><em>p</em></th>
+<th align="left">Estimated SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">100</td>
+<td align="left">50</td>
+<td align="left">0.5</td>
+<td align="left">0.05</td>
+</tr>
+<tr class="even">
+<td align="left">25</td>
+<td align="left">16</td>
+<td align="left">0.64</td>
+<td align="left">0.096</td>
+</tr>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">750</td>
+<td align="left">0.75</td>
+<td align="left">0.014</td>
+</tr>
+<tr class="even">
+<td align="left">387</td>
+<td align="left">203</td>
+<td align="left">0.525</td>
+<td align="left">0.025</td>
+</tr>
+</tbody>
+</table>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-63" class="exercise"><strong>Exercise 4.7  </strong></span>Imagine tossing a coin 25 times and computing the proportion of heads. What’s the expected value? What’s the (actual) SE?</p>
+<p>Now actually toss a coin 25 times and use the proportion of heads that you obtain to <em>estimate</em> the SE. Is the estimated SE close to the actual SE?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Tossing a coin 25 times and computing the proportion of heads is like…</p>
+<p>Drawing 25 times with replacement from a box with a single ticket numbered with 1 and a single ticket numbered with 0 and averaging the draws.</p>
+<p>expected value = 0.5 (i.e., the proportion of 1s in the box)</p>
+<p>SE = (SD of tickets in the box)/sqrt(number of draws) = sqrt(0.5 x 0.5)/sqrt(25) = 0.5/5 = 0.1</p>
+<p><strong>The actual SE is 0.5.</strong></p>
+<p>I tossed a coin 25 times and I got 10 heads. That’s a sample proportion of 10/25 = 0.4. The estimated SE is sqrt(0.4 x (1 - 0.4))/sqrt(25) = 0.4898979/5 = 0.09797958 (or 0.10 after rounding).</p>
+<p>The estimated and actual SEs are very close.</p>
+</details>
+</div>
+</div>
+<div id="confidence-intervals-1" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Confidence Intervals<a href="confidence-intervals.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider the second statement of interest:</p>
+<blockquote>
+<p>The population proportion is within two SEs of the sample proportion about 95% of the time.</p>
+</blockquote>
+<p>That gives us an interval:</p>
+<p><span class="math inline">\(\text{95% confidence interval} = \text{sample proportion} \pm 2 \times \hat{\text{SE}}\)</span>.</p>
+<p>That is, we start at the sample proportion and hop 2 SE-hats to the left and 2 SE-hats to the right.</p>
+<p>This interval will “cover” or “capture” the population proportion 95% of the time.</p>
+<p>We can write a confidence interval as “[0.4, 0.6]” or “0.5 +/- 0.1” (read as “0.5 plus-or-minus 0.1”).</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-64" class="exercise"><strong>Exercise 4.8  </strong></span>This continues Exercise <a href="confidence-intervals.html#exr:se-p-many">4.4</a>.Suppose I sampled <em>N</em> respondents and obtained a sample proportion of <em>p</em>. Compute the 95% confidence interval for the following values of <em>N</em> and <em>p</em>. Round to three decimal places. Write the confidence interval in both formats.</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="26%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><em>N</em> (sample size)</th>
+<th><em>p</em> (sample proportion)</th>
+<th>Estimated SE</th>
+<th>95% Confidence Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100</td>
+<td>0.5</td>
+<td></td>
+<td>__________ <strong>or</strong> 0.5 +/- ________</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>0.3</td>
+<td></td>
+<td>__________ <strong>or</strong> 0.3 +/- ________</td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>0.2</td>
+<td></td>
+<td>__________ <strong>or</strong> 0.2 +/- ________</td>
+</tr>
+<tr class="even">
+<td>387</td>
+<td>0.345</td>
+<td></td>
+<td>__________ <strong>or</strong> 0.345 +/- ________</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>See Exercise <a href="confidence-intervals.html#exr:p-se">4.3</a> for the process of estimating the SE. You compute the estimated SE for each combination in Exercises <a href="confidence-intervals.html#exr:se-p-many">4.4</a>. Simply add and subtract two estimated SEs to obtain the confidence interval.</p>
+<p>For the first combination, we have an estimated SE of 0.05, so the 95% confidence interval is [0.5 - 2 x 0.05, 0.5 + 2 x 0.05] = [0.5 - 0.1, 0.5 + 0.1] = [0.4, 0.6] or 0.5 +/- 0.1.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><em>N</em></th>
+<th align="left"><em>p</em></th>
+<th align="left">Estimated SE</th>
+<th align="left">95% Confidence Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">100</td>
+<td align="left">0.5</td>
+<td align="left">0.05</td>
+<td align="left">[0.4, 0.6] <strong>or</strong> 0.5 +/- 0.1</td>
+</tr>
+<tr class="even">
+<td align="left">25</td>
+<td align="left">0.3</td>
+<td align="left">0.092</td>
+<td align="left">[0.117, 0.483] <strong>or</strong> 0.3 +/- 0.183</td>
+</tr>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.2</td>
+<td align="left">0.013</td>
+<td align="left">[0.175, 0.225] <strong>or</strong> 0.2 +/- 0.025</td>
+</tr>
+<tr class="even">
+<td align="left">387</td>
+<td align="left">0.345</td>
+<td align="left">0.024</td>
+<td align="left">[0.297, 0.393] <strong>or</strong> 0.345 +/- 0.048</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div id="understanding-a-confidence-interval" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Understanding a Confidence Interval<a href="confidence-intervals.html#understanding-a-confidence-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To understand a confidence interval, you have to imagine repeating the study again-and-again a large number of times. Each study will give you a difference sample proportion, SE-hat, and confidence interval. Many of these confidence intervals will contain the population proportion, but some will not.</p>
+<p>In the long run, our method will capture the population proportion 95% of the time.</p>
+<p>To illustrate, I had my computer repeat a “study” 10,000 times. I repeatedly conduct a simple random sample on a population with 250 million people and 100 million approvers. For each “study,” I randomly sampled 400 “respondents” and computed the 95% confidence interval.</p>
+<p>The table below shows the results for the first 10 “studies.” In Study #6, 182 of the 400 respondents reported that they “approve.” This gives a sample proportion of 0.455. We use this 0.455 to estimate an SE of 0.025, which gives us a 95% confidence interval of [0.405, 0.505]. This confidence interval does <em>not</em> capture the population proportion, which is 0.40. But it’s the only one of the ten studies that does not.</p>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="16%" />
+<col width="27%" />
+<col width="13%" />
+<col width="9%" />
+<col width="18%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Study</th>
+<th align="right">Population Proportion</th>
+<th align="right">Number of Approvers in Sample of 400</th>
+<th align="right">Sample Proportion</th>
+<th align="right">Estimated SE</th>
+<th align="left">95% Confidence Interval</th>
+<th align="left">Capture?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Study #1</td>
+<td align="right">0.4</td>
+<td align="right">170</td>
+<td align="right">0.425</td>
+<td align="right">0.025</td>
+<td align="left">[0.376, 0.474]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">Study #2</td>
+<td align="right">0.4</td>
+<td align="right">150</td>
+<td align="right">0.375</td>
+<td align="right">0.024</td>
+<td align="left">[0.327, 0.423]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">Study #3</td>
+<td align="right">0.4</td>
+<td align="right">148</td>
+<td align="right">0.370</td>
+<td align="right">0.024</td>
+<td align="left">[0.322, 0.418]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">Study #4</td>
+<td align="right">0.4</td>
+<td align="right">161</td>
+<td align="right">0.402</td>
+<td align="right">0.025</td>
+<td align="left">[0.353, 0.452]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">Study #5</td>
+<td align="right">0.4</td>
+<td align="right">146</td>
+<td align="right">0.365</td>
+<td align="right">0.024</td>
+<td align="left">[0.317, 0.413]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">Study #6</td>
+<td align="right">0.4</td>
+<td align="right">182</td>
+<td align="right">0.455</td>
+<td align="right">0.025</td>
+<td align="left">[0.405, 0.505]</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">Study #7</td>
+<td align="right">0.4</td>
+<td align="right">148</td>
+<td align="right">0.370</td>
+<td align="right">0.024</td>
+<td align="left">[0.322, 0.418]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">Study #8</td>
+<td align="right">0.4</td>
+<td align="right">163</td>
+<td align="right">0.408</td>
+<td align="right">0.025</td>
+<td align="left">[0.358, 0.457]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">Study #9</td>
+<td align="right">0.4</td>
+<td align="right">179</td>
+<td align="right">0.448</td>
+<td align="right">0.025</td>
+<td align="left">[0.398, 0.497]</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">Study #10</td>
+<td align="right">0.4</td>
+<td align="right">165</td>
+<td align="right">0.412</td>
+<td align="right">0.025</td>
+<td align="left">[0.363, 0.462]</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>There isn’t room to show more than 10 studies in the table, but we can use a graph to show a lot more.</p>
+<p>The graph below shows the confidence intervals for the first 200 studies. The confidences intervals in red capture the population proportion, the confidence intervals in green miss high, and the confidence intervals in blue miss low. Three studies miss high, and four studies miss low. Thus, 193 of the 200 (96.5%) studies shown produce confidence intervals that capture the true value. In the long run, we expect about 95% of the studies to produce confidence intervals that capture the true value.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-67-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>Although I don’t show all 10,000 sample surveys that I conducted on my computer, I can tell you that 9,538 of those 10,000 studies produces confidence intervals that captured the true value. That’s 95.4%.</p>
+<p>Our method works very well.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-68" class="exercise"><strong>Exercise 4.9  </strong></span>Suppose you and I did identical surveys measuring the proportion of adults living in the US that approve of the job Donald Trump is doing as president. Suppose we both collect our own samples using the simple random sampling method. Which of the following will be different, and which will be the same?</p>
+<ol style="list-style-type: decimal">
+<li>number of adults living in the US that approve</li>
+<li>proportion of adults that approve</li>
+<li>sample size</li>
+<li>number of approvers in the sample</li>
+<li>proportion of approvers in the sample</li>
+<li>actual SE</li>
+<li>estimated SE</li>
+<li>95% confidence interval</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>We’re studying the same population, so all population parameters will be the same, including the number of approvers.</li>
+<li>We’re studying the same population, so all population parameters will be the same, including the proportion of approvers.</li>
+<li>We’re using identical methods, so our sample size will be the same.</li>
+<li>Because we’re using random samples, you and I will (almost certainly) have a different number of approvers in our samples.</li>
+<li>Because we’re using random samples, you and I will (almost certainly) have a different proportion of approvers in our samples.</li>
+<li>The actual SE only depends on the population proportion, which doesn’t change, so the actual SE is the same.</li>
+<li>Because the estimated SE uses the sample proportion, which will (almost certainly) be different, we will (almost certainly) have different estimated SEs. However, these will be quite close.</li>
+<li>Because we have different (but close) estimated SEs and different sample proportions, we will have different confidence intervals.</li>
+</ol>
+</details>
+</div>
+<div id="interpreting-a-confidence-interval" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Interpreting a Confidence Interval<a href="confidence-intervals.html#interpreting-a-confidence-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ve just seen that a confidence interval doesn’t always contain the population proportion. It only captures the population proportion about 95% of the time.</p>
+<p>Because it sometimes misses, it takes courage to interpret a confidence interval.</p>
+<p>You interpret a confidence interval by making a bold claim: “The population proportion is in the confidence interval.” Specifically, you might say: “The proportion of adults living in the US that approve of the job Donald Trump is doing as president is between 0.41 and 0.51.”</p>
+<p>In the long-run, you’ll be wrong about 5% of the time. Those are errors—you’ve made a claim that isn’t true. Confidence intervals require courage because you’ve made yourself vulnerable to being wrong.</p>
+<p>You are not allowed to hedge: you cannot say it’s “probably” in there. You must say it “is” in there.</p>
+<p>Why? Why must you be so bold?</p>
+<p>The nuances and subtleties are a little beyond this class, but our approach is sometimes called “error statistics.” In error statistic, one develops a method (e.g., a confidence interval) that guarantees an acceptable <em>error</em> rate (e.g., 5% of the time, the confidence interval misses). If you hedge, then you’re not making an error. You need to interpret a confidence interval so that if that confidence interval misses, you were wrong.</p>
+<p>If you say that the confidence interval “probably” contains the population proportion, and it turns out to not, then you’re not really wrong. You haven’t really made an “error,” because you hedged.</p>
+<p>So here’s how you interpret a confidence interval. Be bold. Say that the confidence interval contains the population parameter. Realize that you will be wrong 5% of the time in the long run. That’s an acceptable error rate, though.</p>
+<p><strong>Note</strong>: Many researchers still like to hedge—it’s just human nature—so they write something like: “<em>I’m 95% confidence that</em> the proportion of adults living in the US that approve of the job Donald Trump is doing as president is between 0.41 and 0.51.” I shrug a bit at this, but these researchers say that “95% confidence” has a technical meaning. It supposedly means that “I’m saying the parameter is <em>definitely</em> in there, but recognizing that I’m wrong about 95% of the time.” It doesn’t do anyone any good when the common understanding of 95% confidence differs from the technical meaning, so let’s be bold. Say what you mean: “It’s in there.” Accept that you’ll be wrong about 5% of the time in the long run.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-69" class="exercise"><strong>Exercise 4.10  </strong></span>You conduct a simple random sample to estimate the proportion of adults living in the US that identify as a Republican. You get a 95% confidence interval of [0.25, 0.35]. Which of the following is an acceptable way to interpret this interval?</p>
+<ol style="list-style-type: decimal">
+<li>The proportion of adults living in the US that identify as a Republican is between 0.25 and 0.35.</li>
+<li>There’s a 95% chance that the proportion of adults living in the US that identify as a Republican is between 0.25 and 0.35.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>Good. You’ll be wrong about 95% of the time in the long-run, but we’ve designed the method around this acceptable error rate.</li>
+<li>This is not how you interpret a confidence interval. This interpretation is appealing, but it’s wrong for technical reasons that I’m skimming over.</li>
+</ol>
+</details>
+</div>
+</div>
+<div id="miscellaneous" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Miscellaneous<a href="confidence-intervals.html#miscellaneous" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>There are confidence intervals besides a 95% confidence interval. You can also compute a 99% or a 90% confidence interval, for example. As a discipline, though, political science has decided that 5% is an acceptable error rate, so we use 95% confidence intervals. If you want a different interval, then find the <em>z</em> associated with the interval you want (2 for a 95% interval, 1.64 for a 90% interval, 2.5 for a 99% interval, etc.) and hop that many SEs left and right of the sample proportion.</li>
+<li>The method that we discussed works only for a simple random sample. Fortunately, the intuition generalizes to other scenarios. Unfortunately, the math does not. However, it works decently for most probability samples without any change, so it’s a good first approximation.</li>
+<li>The confidence interval only accounts for sampling error. Other sources of error, such as selection bias, response bias, and poorly worded survey questions are ignored. These other forms of error are perhaps more important, and the 95% confidence interval does not account for them.</li>
+</ul>
+</div>
+<div id="summary-3" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Summary<a href="confidence-intervals.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>In previous chapters, we learned how to use the numbered-ticket model to understand unfamiliar chance processes, including the sample proportion from sample surveys.</li>
+<li>In this chapter, we reverse the logic to understand how close our sample proportion is to the population proportion.</li>
+<li>The primary method of inference is a 95% confidence interval, which (by design) captures the population parameter 95% of the time in the long run. To make sense of this, you need to imagine conducting your study <em>repeatedly</em>.</li>
+<li>The 95% confidence interval that we learned only works for the simple random sample and does not account for selection bias, response bias, and poorly worded survey questions.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sample-surveys.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["notes.pdf", "notes.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

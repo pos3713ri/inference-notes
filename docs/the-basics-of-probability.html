@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Gentle Introduction to Inference</title>
+  <meta name="description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Gentle Introduction to Inference" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Gentle Introduction to Inference" />
+  
+  <meta name="twitter:description" content="These are my notes for giving undergraduate students the intuition of inference." />
+  
+
+<meta name="author" content="Carlisle Rainey" />
+
+
+<meta name="date" content="2025-11-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="NTM.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        process_solutions();
+    });
+    function process_solutions() {
+        $("div.section[id^='solution']").each(function(i) {
+        var soln_wrapper_id = "cvxr_ex_" + i;
+        var solution_id = $(this).attr('id');
+        var button = $("<button onclick=\"toggle_solution('" + soln_wrapper_id + "')\">Show/Hide</button>");
+        var new_div = $("<div id='" + soln_wrapper_id + "' class='solution' style='display: none;'></div>");
+        var h = $(this).first();
+        var others = $(this).children().slice(1);
+        $(others).each(function() {
+            $(this).appendTo($(new_div));
+        });
+        $(button).insertAfter($(h));
+        $(new_div).insertAfter($(button));
+        })
+    }
+    function toggle_solution(el_id) {
+      $("#" + el_id).toggle();
+    } 
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Concepts and Computation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>1</b> The Basics of Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>1.1</b> Review</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>1.1.1</b> Proportions</a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>1.1.2</b> The Indicator Trick</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>1.1.3</b> Percents</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>1.2</b> Chance Processes</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>1.2.1</b> The Numbered-Ticket Model</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>1.3</b> Defining Probability</a></li>
+<li class="chapter" data-level="1.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>1.4</b> Computing Probabilities</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.4.1</b> Counting the Equally-Likely Outcomes</a></li>
+<li class="chapter" data-level="1.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>1.4.2</b> The Probability of the Opposite</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>1.5</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="1.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>1.6</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="1.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>1.7</b> Independence</a></li>
+<li class="chapter" data-level="1.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary"><i class="fa fa-check"></i><b>1.8</b> Summary</a></li>
+<li class="chapter" data-level="1.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>1.9</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>2</b> The Numbered-Ticket Model</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>2.1</b> The Generic Form</a></li>
+<li class="chapter" data-level="2.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>2.2</b> “Is Like”</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>2.2.1</b> Key Example 1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>2.2.2</b> Key Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>2.3</b> Summarizing the NTM Process</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>2.3.1</b> Letting a Computer Do Some Work</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>2.4</b> Expected Value and Standard Error</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>2.4.1</b> Tricks for 0-1 Boxes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>2.5</b> The Long-Run Histogram</a></li>
+<li class="chapter" data-level="2.6" data-path="NTM.html"><a href="NTM.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
+<li class="chapter" data-level="2.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>2.7</b> Additional Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>3</b> Sample Surveys</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>3.1</b> A Conceptual Framework</a></li>
+<li class="chapter" data-level="3.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>3.2</b> The Simple Random Sample</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.1</b> The Accuracy of the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.2</b> The Importance of the Simple Random Sample</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>3.3</b> The Three Hurdles</a></li>
+<li class="chapter" data-level="3.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>3.4</b> Good Alternatives to the Simple Random Sample</a></li>
+<li class="chapter" data-level="3.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>3.5</b> Poor Alternatives to the Simple Random Samples</a></li>
+<li class="chapter" data-level="3.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>3.6</b> An Infamous Sample Survey</a></li>
+<li class="chapter" data-level="3.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>3.7</b> Modern Polling</a></li>
+<li class="chapter" data-level="3.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-2"><i class="fa fa-check"></i><b>3.8</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>4.1</b> Review</a></li>
+<li class="chapter" data-level="4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>4.2</b> The Motivating Question</a></li>
+<li class="chapter" data-level="4.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>4.3</b> Reversing the Logic</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>4.3.1</b> Replace NTM Terms with Sample Survey Terms</a></li>
+<li class="chapter" data-level="4.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>4.3.2</b> The Symmetry of Distance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>4.3.3</b> Tense</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>4.4</b> Using the Logic</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>4.4.1</b> A Big Problem</a></li>
+<li class="chapter" data-level="4.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>4.4.2</b> A Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>4.5</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.1</b> Understanding a Confidence Interval</a></li>
+<li class="chapter" data-level="4.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.2</b> Interpreting a Confidence Interval</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>4.6</b> Miscellaneous</a></li>
+<li class="chapter" data-level="4.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-3"><i class="fa fa-check"></i><b>4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>5</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>5.1</b> The Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>5.2</b> <em>p</em>-Values</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>5.2.1</b> Focusing the Null Hypothesis</a></li>
+<li class="chapter" data-level="5.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>5.3</b> A Summary of the Hypothesis Testing Framework</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>6</b> Extensions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>6.1</b> Review</a></li>
+<li class="chapter" data-level="6.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>6.2</b> Sources of Randomness</a></li>
+<li class="chapter" data-level="6.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>6.3</b> Confidence Intervals in General</a></li>
+<li class="chapter" data-level="6.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>6.4</b> Hypothesis Tests in General</a></li>
+<li class="chapter" data-level="6.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>6.5</b> Statistical Significance</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-a-normal-table.html"><a href="appendix-a-normal-table.html"><i class="fa fa-check"></i><b>A</b> Appendix: A Normal Table</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Gentle Introduction to Inference</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">A Gentle Introduction to Inference</h1>
+<p class="author"><em>Carlisle Rainey</em></p>
+<p class="date"><em>2025-11-04</em></p>
+</div>
+<div id="the-basics-of-probability" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> The Basics of Probability<a href="the-basics-of-probability.html#the-basics-of-probability" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="review" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Review<a href="the-basics-of-probability.html#review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we can develop a theory of probability, we need a good understanding of proportions and percents.</p>
+<div id="proportions" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Proportions<a href="the-basics-of-probability.html#proportions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To compute a proportion, we simply count the number of items that fall into a particular category and divide that by the total number of items.</p>
+<p>For example, if I toss a coin 10 times and got heads-tails-heads-heads-heads-tails-heads-tail-tails-heads, what proportion were heads? In this case, the proportion of heads is <span class="math inline">\(\dfrac{\text{number tosses that are heads}}{\text{total tosses}} = \dfrac{6}{10} = 0.6\)</span>.</p>
+<p>For another example, suppose I gave 10 As, 13 Bs, 16 Cs, 5 Ds, and 2 Fs in a class. What proportion of student did I give a B? In this example, the proportion of Bs is <span class="math inline">\(\dfrac{\text{number Bs}}{\text{total students}} = \dfrac{13}{10 + 13 + 16 + 5 + 2} = 0.28\)</span> (rounded to the two decimal-places).</p>
+<p>In most cases, it makes sense to round proportion to the nearest two decimal-places.</p>
+</div>
+<div id="the-indicator-trick" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> The Indicator Trick<a href="the-basics-of-probability.html#the-indicator-trick" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It turns out that we can easily connect a proportion to an average using the indicator trick. If we flag all outcomes in a category using the number 1 and all other events using the number 0, then the average of those indicators equals the proportion.</p>
+<p>In an example above, I tossed a coin 10 times and got heads-tails-heads-heads-heads-tails-heads-tail-tails-heads. We computed the proportion of heads as <span class="math inline">\(\dfrac{\text{number tosses that are heads}}{\text{total tosses}} = \dfrac{6}{10} = 0.6\)</span>. However, we could alternatively flag (or “indicate”) all heads with 1 and all not-heads with 0, giving us the indicators 1, 0, 1, 1, 1, 0, 1, 0, 0, 1. If we just find the average of this list, we get <span class="math inline">\(\dfrac{\text{sum of list}}{\text{number of entries in list}} = \dfrac{6}{10} = 0.6\)</span>.</p>
+<p>Notice that the indicator trick allows us to “count” by “summing” (or “adding”).</p>
+<p>The indicator variable is helpful, because we can think of a proportion as an average. Anything that we say about an average must then also be true for a proportion.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-2" class="exercise"><strong>Exercise 1.1  </strong></span>Suppose I asked 10 people whether they were Republican, Democrat, or Independent. I obtained the follwing: D, R, I, D, D, I, D, I, I, R.</p>
+<ol style="list-style-type: decimal">
+<li>Using the indicator trick, what proportion are Republican?</li>
+<li>Democrat?</li>
+<li>Independent?</li>
+</ol>
+<p>Without using the indicator trick (i.e., by counting the number of items that fall into a particular category and then dividing that by the total number of items), do you get the same answers as the exercise above? Explain.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.2</li>
+<li>0.4</li>
+<li>0.4</li>
+</ol>
+Yes, because noting that an item falls into a category and counting it is the same as assigning it the value 1 and summing it. Similarly, noting that an item does not fall into a category and not counting it is the same as assigning it the value 0 and summing it. Therefore, the indicator trick is the identical to computing the proportion using counting.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 1.2  </strong></span>Suppose I roll a die 10 times and recorded the results. I got 4-2-2-2-1-6-5-6-4-2. Use the indicator trick to compute the proportion of the 10 rolls that showed 6 dots.</p>
+<p>What if I got 6-3-6-6-6-4-6-6-2-3?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>To use the indicator trick here, you just need to change the 6s to 1s and the not-6s to 0s. Then average the indicators.</p>
+<p>0-0-0-0-0-1-0-1-0-0; avg = 2/10 = 0.2</p>
+<p>1-0-1-1-1-0-1-1-0-0; avg = 6/10 = 0.6</p>
+</details>
+</div>
+<div id="percents" class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Percents<a href="the-basics-of-probability.html#percents" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To convert a proportion to a percent, simply multiply the proportion (or the fraction) times 100%.</p>
+<p>If we convert 0.2 to a percent, we get <span class="math inline">\(0.6 \times 100\% = 60\%\)</span>. If we convert 0.28 to a percent, we get <span class="math inline">\(0.28 \times 100\% = 28\%\)</span>.</p>
+<p>Fractions, proportions, and percents are different way’s of talking about the same quantities. They have different strengths:</p>
+<ol style="list-style-type: decimal">
+<li>Fractions are the easiest to work with when doing math with a pencil.</li>
+<li>Proportions are the easiest to work with when doing math on a calculator.</li>
+<li>Percents are the easiest to talk and write about.</li>
+</ol>
+<p>Make a special note, though, that “%” means “per 100” or “/100.” Because of this, you cannot mindlessly multiply percents. Notice that <span class="math inline">\(10\% \times 20\%\)</span> does NOT equal <span class="math inline">\(200%\)</span>. Instead it equals <span class="math inline">\(10\% \times 20\% = 10/100 \times 20/100 = 200/10,000 = 2/100 = 2\%\)</span>. While you can safely <em>add</em> percents, a good rule is to do calculations until your final answer with fractions or proportions, and only convert to a percent once you have your final answer.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-4" class="exercise"><strong>Exercise 1.3  </strong></span>Compute the following proportions and percents:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I asked 10 people whether they were Republican, Democrat, or Independent. I obtained the follwing: D, R, I, D, D, I, D, I, I, R. What proportion are Republican? Democrat? Independent? What are the percents for each?</li>
+<li>Suppose I sample 400 adults living in the US. 180 respondents report they approve of the job Donald Trump is doing as president, 200 report they disapprove, 20 aren’t sure. What proportion approve? Disapprove? Aren’t sure? What are the percents for each?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.2, 0.4, 0.4; 20%, 40%, 40%.</li>
+<li>0.45, 0.50, 0.05; 45%, 50%, 5%.</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-5" class="exercise"><strong>Exercise 1.4  </strong></span>An urn has 5 red marbles, 3 white marbles, and 2 blue marbles.</p>
+<p>What proportion of the marbles in the urn are red? What fraction? What percent?</p>
+<p>Suppose I draw 5 marbles from the urn with replacement and recorded the results: R, B, R, W, R. Use the indicator trick to compute fraction, proportion, and percentage of the draws that are red.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>In the urn:</p>
+<p>There are 5 red marbles and 10 total marbles. Remember, “to compute a proportion, we simply count the number of items that fall into a particular category and divide that by the total number of items.”</p>
+<p><span class="math inline">\(\frac{\text{number of red marbles}}{\text{number of marbles, total}} = \frac{5}{10} = \frac{1}{2} = 0.5 = 50\%\)</span>.</p>
+<p>To convert a fraction or proportion to a percent, we just multiply it by 100%. In this case. <span class="math inline">\(\frac{1}{2} \times 100\% 0.2 \times 100\% = 50\%\)</span>.</p>
+<p>In the sample:</p>
+<p>Using the indicator trick, we would indicate the colors we want to count with a 1 and the others with a zero. This turns the draws R, B, R, W, R into 1, 0, 1, 0, 1. If we take the average of this list, we have <span class="math inline">\(\frac{3}{5} = 0.6 = 60%\)</span>.</p>
+</details>
+</div>
+</div>
+<div id="chance-processes" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Chance Processes<a href="the-basics-of-probability.html#chance-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Define a <strong>chance process</strong> as a process that one can repeat (independently and under the same conditions) to produce a result from defined set of possible outcomes.</p>
+<p>We could imagine rolling a die or tossing a coin. We could imagine drawing cards with or without replacement.</p>
+<p>When we draw <strong>with replacement</strong>, we draw multiple times, but replace the draws before continuing. This means that same cards can be drawn multiple times.</p>
+<p>When we draw <strong>without replacement</strong>, we draw multiple times, but <strong>do not</strong> replace the draws before continuing. This means that same card cannot be drawn again.</p>
+<p>Here are several chance processes:</p>
+<ol style="list-style-type: decimal">
+<li>Toss a coin and record the side showing. The possible outcomes are heads and tails.</li>
+<li>Roll a six-sided die and record the number of dots showing. The possible outcomes are 1, 2, 3, 4, 5, and 6.</li>
+<li>Draw five cards from a well-shuffled deck and record the cards in the order drawn. There are many, many possible outcomes (<span class="math inline">\(52 \times 51 \times 50 \times 49 \times 48 = 311,875,200\)</span>)</li>
+<li>Draw two-marbles without replacement from a well-mixed urn contain 5 red marbles, 3 blue marbles, and 2 green marbles. Record the colors of the first and second marbles. There are several possible outcomes.</li>
+<li>There are 250 million adults living in the US and 100 million approve of the job Donald Trump is doing as president. Select one person at random and record whether they approve of the job Donald Trump is doing as president. The possible outcomes are approve and not (“not” includes those those who “disapprove” and “aren’t sure”).</li>
+<li>Continue the previous chance process, but select 400 people at random. Record whether each approves of the job Donald Trump is doing as president. There are many possible outcomes.</li>
+</ol>
+<p>I’ll use the 52-card deck in a lot of my examples. It allows some variety, and many students are already familiar with it. If you are not, then you should learn about the cards that make up a <a href="https://en.wikipedia.org/wiki/Standard_52-card_deck">52-card deck</a>. I find the image below (from Wikipedia) especially helpful. Perhaps print this image and keep it handy.</p>
+<p><img src="img/deck.png" /></p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 1.5  </strong></span>Come up with your own chance process. What is the process? What are the possible outcomes?</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Here’s a few of examples:</p>
+<ol style="list-style-type: decimal">
+<li>Roll a four-sided die and record the number of dots showing. The possible outcomes are 1, 2, 3, and 4.</li>
+<li>Roll two-six sided die and record the sum of the dots showing. The possible outcomes are 2, 3, 4, …, 11, 12.</li>
+<li>Draw five cards from a well-shuffled deck without replacement. Record the number of red cards drawn. The possible outcomes are 0, 1, 2, 3, 4, and 5.</li>
+</ol>
+</details>
+<div id="the-numbered-ticket-model" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> The Numbered-Ticket Model<a href="the-basics-of-probability.html#the-numbered-ticket-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>And here’s a really important change process.</p>
+<p><strong>The numbered-ticket model</strong>: Fill a box with <span class="math inline">\(k\)</span> tickets numbered <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>. Draw <span class="math inline">\(N\)</span> times with replacement from the box. Record the average of the draws.</p>
+<p>For any particular numbered-ticket model, you choose (1) how many tickets go into the box, (3) what numbers go on those tickets, and (3) how many times to draw from the box. We always draw with replacement, and we always average the draws.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-7" class="exercise"><strong>Exercise 1.6  </strong></span>Write down a particular version of the numbered-ticket model. Do to this, choose how many tickets will go in the box (that’s <span class="math inline">\(k\)</span>), the numbers those tickets will have (that’s <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>; repeats allowed), and the number of times you will draw with replacement (that’s <span class="math inline">\(N\)</span>).</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>Your solution will vary, but here’s an example:</p>
+<p>A particular numbered-ticket model: Fill a box with 3 tickets numbered 4, -17, and 100. Draw 9 times with replacement from the box. Record the average of the draws.</p>
+Notice that we always draw with replacement and we always average the draws.
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 1.7  </strong></span>In your own words, explain the numbered-ticket model in a way that someone who hasn’t taken the class could understand. What can change across different versions? What stays the same?</p>
+</div>
+</div>
+</div>
+<div id="defining-probability" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Defining Probability<a href="the-basics-of-probability.html#defining-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we analyze chance processes using <strong>frequentist theory</strong>. Under frequentist theory, we’re interested in the probability that a chance process produces some event. For compactness, we sometimes write “the probability that <span class="math inline">\(A\)</span> happens” as <span class="math inline">\(\Pr(A)\)</span>.</p>
+<p>For example, if we’re tossing a coin, we might care about the probability of a head. We could write this as <span class="math inline">\(\Pr(\text{head})\)</span>.</p>
+<p>For another example, suppose we deal five cards from a 52-card deck. We might care about the probability of five hearts. We could write this as <span class="math inline">\(\Pr(\text{five hearts})\)</span>.</p>
+<p>In order to define probability in the frequentist theory, we must imagine repeating the chance process over-and-over an infinite number of times. Of course, this is totally hypothetical–we can’t actually do that.</p>
+<p>But if we did, we could simply compute the proportion of times an event occurred in those infinite repetitions–that’s the probability of that event.</p>
+<p>Define the <strong>probability</strong> of an event as the proportion of times the event occurs in the long-run.</p>
+</div>
+<div id="computing-probabilities" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Computing Probabilities<a href="the-basics-of-probability.html#computing-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="counting-the-equally-likely-outcomes" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Counting the Equally-Likely Outcomes<a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In order to compute the probability of an event, you first need to list all the equally-likely outcomes of the experiment. If you cannot list the equally-likely outcomes, then you cannot compute the probabilities.</p>
+<p>For example, if you roll a six-sided die, then the equally-likely outcomes are 1, 2, 3, 4, 5, and 6. If you toss a coin, then the equally-likely outcomes are heads and tails. If you draw from an urn of with 10 marbles, then each marble is equally likely. If you draw from a box of numbered tickets, the each ticket is equally likely.</p>
+<p>Once we list all the equally-likely outcomes, we simply compute the proportion of outcomes that fall into the category of interest.</p>
+<p>I refer to this method of computing probabilities as “<strong>counting</strong>”. You count the outcomes of interest, you count the total outcomes, and you compute the proportion.</p>
+<p>Examples:</p>
+<ol style="list-style-type: decimal">
+<li><em>Imagine rolling a six-sided die. Compute the probability of getting a 6.</em> First, list the equally-likely ways of 1, 2, 3, 4, 5, and 6. Then compute the proportion that are 6, which is 0.17. So the probability of getting a 6 is 0.17.</li>
+<li><em>Imagine rolling a six-sided die. Compute the probability of getting an odd number.</em> First, list the equally-likely ways of 1, 2, 3, 4, 5, and 6. Then compute the proportion that are odd numbers (1, 3, and 5), which is 0.5.. So the probability of getting an odd number is 0.5.</li>
+<li><em>Imagine drawing from an urn with 5 red marbles, 3 blue marbles, and 2 green marbles. Compute the probability of getting a red marble.</em> Each marble is equally-likely, so compute the proportion that are red, which is 0.5.</li>
+</ol>
+<p>Now for a tricky one:</p>
+<p><em>Imagine rolling two six-sided dice and summing the two rolls. Compute the probability of getting a 2.</em> At first, you might list the equally-likely outcomes as 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12. Indeed, these are all the outcomes, but they are <em>not equally-likely</em>. It’s more likely that you’ll get a sum of 7 than 2, for example.</p>
+<p>It’s hard to list the equally-likely ways here, so let me show you how it would work. You don’t need to know how to do this, but you do need to realize that listing the equally-likely ways isn’t always easy or even possible.</p>
+<p>If we roll two six-sided dice, then 1-then-1 and 3-then-2 are equally likely. In fact, there are 36 of these equally-likely combinations, which we can list in a little matrix below. The first number in each pair represents the first die; the second number represents the second die.</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(1, 1)
+</td>
+<td style="text-align:left;">
+(1, 2)
+</td>
+<td style="text-align:left;">
+(1, 3)
+</td>
+<td style="text-align:left;">
+(1, 4)
+</td>
+<td style="text-align:left;">
+(1, 5)
+</td>
+<td style="text-align:left;">
+(1, 6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(2, 1)
+</td>
+<td style="text-align:left;">
+(2, 2)
+</td>
+<td style="text-align:left;">
+(2, 3)
+</td>
+<td style="text-align:left;">
+(2, 4)
+</td>
+<td style="text-align:left;">
+(2, 5)
+</td>
+<td style="text-align:left;">
+(2, 6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(3, 1)
+</td>
+<td style="text-align:left;">
+(3, 2)
+</td>
+<td style="text-align:left;">
+(3, 3)
+</td>
+<td style="text-align:left;">
+(3, 4)
+</td>
+<td style="text-align:left;">
+(3, 5)
+</td>
+<td style="text-align:left;">
+(3, 6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(4, 1)
+</td>
+<td style="text-align:left;">
+(4, 2)
+</td>
+<td style="text-align:left;">
+(4, 3)
+</td>
+<td style="text-align:left;">
+(4, 4)
+</td>
+<td style="text-align:left;">
+(4, 5)
+</td>
+<td style="text-align:left;">
+(4, 6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(5, 1)
+</td>
+<td style="text-align:left;">
+(5, 2)
+</td>
+<td style="text-align:left;">
+(5, 3)
+</td>
+<td style="text-align:left;">
+(5, 4)
+</td>
+<td style="text-align:left;">
+(5, 5)
+</td>
+<td style="text-align:left;">
+(5, 6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(6, 1)
+</td>
+<td style="text-align:left;">
+(6, 2)
+</td>
+<td style="text-align:left;">
+(6, 3)
+</td>
+<td style="text-align:left;">
+(6, 4)
+</td>
+<td style="text-align:left;">
+(6, 5)
+</td>
+<td style="text-align:left;">
+(6, 6)
+</td>
+</tr>
+</tbody>
+</table>
+<p>These are the 36 equally likely outcomes of the chance process. Only (1, 1) has a sum of 2, so the probability that the sum equals 2 is <span class="math inline">\(\frac{1}{36} = 0.03\)</span>. On the other hand, 6 outcomes have a sum of 7 (can you find them?), so the probability that the sum equals 7 is <span class="math inline">\(\frac{6}{36} = 0.17\)</span>.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 1.8  </strong></span>Compute the probabilities below:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I draw one ticket at random from a box with four tickets numbered 1, 2, 3, and 3. What is the probability that I draw a 1? A 3?</li>
+<li>Suppose I draw a card from a 52-card deck. What is the probability that I draw a heart? A red card? A 4? The ace of spades?</li>
+<li>If I toss a coin twice, what’s the probability that the first toss is a head? What’s the probability that the second toss is a head?</li>
+<li>Suppose I draw once from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles. Compute the probability of getting a red marble? Blue? Green? What if there were 100 red marbles, 70 blue marbles, and 30 green marbles?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.25, 0.5.</li>
+<li>0.25, 0.5, 0.08, 0.02.</li>
+<li>0.5, 0.5.</li>
+<li>0.50, 0.35, 0.15; The answers don’t change because the ratios of the marbles don’t change.</li>
+</ol>
+</details>
+</div>
+<div id="the-probability-of-the-opposite" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> The Probability of the Opposite<a href="the-basics-of-probability.html#the-probability-of-the-opposite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Remember that we can compute probabilities by “counting”:</p>
+<ol style="list-style-type: decimal">
+<li>List all the equally-likely outcomes.</li>
+<li>Compute the proportion of outcomes that fall into the category of interest.</li>
+</ol>
+<p>This means that probabilities can be no smaller than zero and no larger than one. In turn, this implies that the probability that something does not happen equals one minus the probability it happens.</p>
+<p>Suppose an event <span class="math inline">\(A\)</span>. Then <span class="math inline">\(\Pr(\text{not }A) = 1 - \Pr(A)\)</span> and <span class="math inline">\(\Pr(A) = 1 - \Pr(\text{not }A)\)</span>.</p>
+<p>This is a handy rule. It turns out that it’s sometimes really tedious to compute the probability of <span class="math inline">\(A\)</span>, but easy to compute the probability of <span class="math inline">\(\text{not } A\)</span>.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-10" class="exercise"><strong>Exercise 1.9  </strong></span>Compute the probabilities below using the probability of the opposite:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I draw one ticket at random from a box with four tickets numbered 1, 2, 3, and 3. What’s the probability that the draw is not 1?</li>
+<li>Suppose I draw a card from a 52-card deck. What is the probability that the draw is not the ace of spades?</li>
+</ol>
+<p>In both of these examples, you could find the probability by counting without the probability of the opposite. But I think using the probability of the opposite makes the calculation somewhat easier. Later, we’ll see some examples where the probability of the opposite makes the problem <em>much</em> easier.</p>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.75</li>
+<li>0.98</li>
+</ol>
+</details>
+</div>
+</div>
+<div id="conditional-probabilities" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Conditional Probabilities<a href="the-basics-of-probability.html#conditional-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For some chance processes, probabilities can change depending on what’s happened before.</p>
+<p>Suppose that I draw two cards from a 52-card deck without replacement. The probability of an ace on the first draw is <span class="math inline">\(\frac{4}{52} = 0.08\)</span>. However, if I get an ace on the first draw, then chance of getting an ace on the second draw changes–it’s now lower. I do not get an ace on the first draw, then chance of getting an ace on the second draw still changes–it’s now higher.</p>
+<p>Here’s the key point: For some chances processes, probabilities can change depending on what’s happened before. If you suspect that the probabilities might have changed, you need to recount the outcomes. This is especially true when sampling without replacement.</p>
+<p>Let’s go back to the previous example. If I get an ace on the first draw, then the probability of also getting an ace on the second draw is <span class="math inline">\(\frac{\text{3 aces left}}{\text{51 cards left}} = 0.05\)</span>. I just removed one ace and recounted all the equally-likely outcomes.</p>
+<p>If I do not get an ace on the first draw, then the probability of getting an ace on the second draw is <span class="math inline">\(\frac{\text{4 aces left}}{\text{51 cards left}} = 0.08\)</span>. (This probability is the same due to rounding error.) I just removed one non-ace and recounted all the equally-likely outcomes.</p>
+<p>We refer to these new probabilities that depend on what’s happened before as <strong>conditional</strong> probabilities. We can compactly write the “probability of <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> has happened” as <span class="math inline">\(\Pr(A \mid B)\)</span>.</p>
+<p>Note that conditional probabilities are not difficult. They simply require you to recognize that things might have changed and recount everything. When we sample without replacement, things usually change.</p>
+<p>For clarity, I sometimes emphasize that a probability is <em>not</em> conditional by calling it an <strong>unconditional probability</strong>.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-11" class="exercise"><strong>Exercise 1.10  </strong></span>Compute the probabilities below:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I draw two tickets at random without replacement from a box with four tickets numbered 1, 2, 3, and 3. What is the probability that I draw a 1 on my second draw, given that I draw a 2 on the first draw? What if I draw a 1 on the first draw? What if you draw the two tickets with replacement?</li>
+<li>Suppose I draw two cards from a 52-card deck without replacement. If I draw a heart on my first draw, what is the probability that I draw a black card on my second draw?</li>
+<li>Suppose I draw five cards from a 52-card deck without replacement. If the first four cards are draw are red, what’s the probability that the fifth card is black?</li>
+<li>If I toss a coin five times, what’s the probability that the fifth toss is a head given that the first four tosses are also heads?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.33, 0, 0.25, 0.25.</li>
+<li>0.51.</li>
+<li>0.54</li>
+<li>0.5</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-12" class="exercise"><strong>Exercise 1.11  </strong></span>Suppose I draw five times without replacement from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles.</p>
+<ol style="list-style-type: decimal">
+<li>What’s the probability that the first draw is green? If the first four draws are red-red-green-green, what’s the probability that the fifth draw is green? How much did the probability change?</li>
+<li>What if, instead, you used an urn with 1,000 red marbles, 700 blue marbles, and 300 green marbles?</li>
+<li>What if, instead, you sampled with replacement from the orginal, small urn with 20 marbles?</li>
+<li>What if, instead, you sampled with replacement from the alternative, large urn with 2,000 marbles?</li>
+<li>Fill in the blanks with “large” and “small”: When the number of marbles in the urn is small relative to the number of draws, there is a ______ difference between sampling with and without replacement. But when the number of marbles in the urn is small relative to the number of draws, there is a ______ difference between sampling with and without replacement.</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.15, 0.06.</li>
+<li>0.15, 0.15. (These are exactly equal because of rounding error, but they are still really close.)</li>
+<li>0.15, 0.15. (These are exactly equal.)</li>
+<li>0.15, 0.15. (These are exactly equal.)</li>
+<li>“When the number of marbles in the urn is small relative to the number of draws, there is a <strong>large</strong> difference between sampling with and without replacement. But when the number of marbles in the urn is small relative to the number of draws, there is a <strong>small</strong> difference between sampling with and without replacement.”</li>
+</ol>
+</details>
+</div>
+<div id="multiplication-rule" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Multiplication Rule<a href="the-basics-of-probability.html#multiplication-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose I’m interested in the probability that two things both happen.</p>
+<ol style="list-style-type: decimal">
+<li>I draw a card that is red <strong>and</strong> a king.</li>
+<li>I toss a head <strong>and</strong> then another head.</li>
+<li>I draw a red marble <strong>and</strong> then another red marble.</li>
+</ol>
+<p>Notice the word “<strong>and</strong>”–this means there are two things and I’m interested in <strong>both</strong> happening.</p>
+<p>When you want to compute the probability that two things <em>both</em> happen, you simply multiply the probability of the first times the probability of the second, given the first. More compactly, <span class="math inline">\(\Pr(A \text{ and } B) = \Pr(A) \times \Pr(B \mid A)\)</span>.</p>
+<p>Remember these two things:</p>
+<ol style="list-style-type: decimal">
+<li>The word “and” is a big hint to use the multiplication rule.</li>
+<li>The multiplication rule is an unconditional probability times a conditional probability.</li>
+</ol>
+<p>The second point is key: any time you use the multiplication rule, you need to recount everything to make sure they probabilities have not changed. (Again, they most likely will change when sampling without replacement.)</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-13" class="exercise"><strong>Exercise 1.12  </strong></span></p>
+<ol style="list-style-type: decimal">
+<li>Suppose I draw twice without replacement from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles. What’s the probability of getting a red mable and then getting a agreen marble?</li>
+<li>Suppose I draw twice from a 52-card deck. What’s the probability of getting two aces? (Round this answer to four decimal-places.)</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.08</li>
+<li>0.0045</li>
+</ol>
+</details>
+<p>We can easily extent the logic of the multiplication rule to more than two events: The probability that three things all happen is the product of…</p>
+<ol style="list-style-type: decimal">
+<li>The probability of the first.</li>
+<li>The probability of the second, given the first.</li>
+<li>The probability of the the third, given the first and second.</li>
+</ol>
+<p>More compactly, we can say that for three events <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span>, <span class="math inline">\(\Pr(A \text{ and } B \text{ and } C) = \Pr(A) \times \Pr(B \mid A) \times \Pr(C \mid A \text{ and } B)\)</span>.</p>
+<p>You can see the pattern.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 1.13  </strong></span>Suppose I deal a series of cards off the top of a well-shuffled deck without replacement. Some of these probabilies get quite small, so keep around two non-zero digits.</p>
+<ol style="list-style-type: decimal">
+<li>If I deal one card, what’s the probability that it’s a heart?</li>
+<li>If I deal two cards, what’s the probability that both are hearts?</li>
+<li>If I deal three cards, what’s the probability that all three are hearts?</li>
+<li>If I deal four cards, what’s the probability that all four are hearts?</li>
+<li>If I deal five cards, what’s the probability of Ace-King-Queen-Jack-10 (in that order)?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.25</li>
+<li>0.059</li>
+<li>0.013</li>
+<li>0.0026</li>
+<li>0.0000041</li>
+</ol>
+</details>
+</div>
+<div id="independence" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Independence<a href="the-basics-of-probability.html#independence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We say that two events are <strong>independent</strong> if the probability of the second is the same, regardless of how the first turns out. Else, the two events are <strong>dependent</strong>.</p>
+<p>More compactly, we can say that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent if <span class="math inline">\(\Pr(A) = \Pr(A | B)\)</span>.</p>
+<p>Importantly for our purposes, we can say the following:</p>
+<ul>
+<li>When drawing without replacement, the draws are dependent.</li>
+<li>When drawing with replacement, the draws are independent.</li>
+</ul>
+<p>We assume that coin tosses are independent. Same for die rolls.</p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 1.14  </strong></span>In your own words, explain why without-replacement creates dependent draws, but with-replacement creates independent draws. Use an example with cards, marbles, or numbered tickets to illustrate.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 1.15  </strong></span>Suppose the following numbered-ticket model:</p>
+<blockquote>
+<p>Fill a box with 4 tickets numbered -5, -5, 10, and 10. Draw 3 times with replacement from the box. Record the average of the draws.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>What’s the probability that the average is 10?</li>
+<li>Would the question be harder or easier if you drew without replacement? Why?</li>
+<li>Can you state a simpler version of the multiplication rule that applies only to indepedent events?</li>
+</ol>
+</div>
+<details>
+<summary>
+Hint
+</summary>
+Notice that the only way for the average to equal 10 is for the three draws to all equal 10 (i.e., 10 and 10 and 10).
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>Because we want to know the probability of “10 and 10 and 10,” this requires the multiplication rule. <span class="math inline">\(\Pr(\text{10 on 1st draw}) \times \Pr(\text{10 on 2nd} \mid \text{10 on 1st}) \times \Pr(\text{10 on 3rd} \mid \text{10 on 1st and 10 on 2nd} ) =\)</span> <span class="math inline">\(0.5 \times 0.5 \times 0.5 = 0.13.\)</span></li>
+<li>Harder, because the probabilities would change at each step because they are dependent.</li>
+<li>If two events are independent, they you can simply multiply their unconditional probabilities–there is no need to recount to figure out the unconditional probability. In this example, that would be just <span class="math inline">\(\Pr(\text{10}) \times \Pr(\text{10}) \times \Pr(\text{10})\)</span>.</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 1.16  </strong></span>Suppose I toss a fair coin three times.</p>
+<ol style="list-style-type: decimal">
+<li>What’s the probability that I get H-H-H (heads, then heads, then heads)?</li>
+<li>What’s the probability that I get T-T-T?</li>
+</ol>
+</div>
+<details>
+<summary>
+Hint
+</summary>
+Because these three tosses are independent, you can use the simpler version of the multiplication rule.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.13</li>
+<li>0.13</li>
+</ol>
+</details>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 1.17  </strong></span>Suppose I toss a fair coin ten times.</p>
+<ol style="list-style-type: decimal">
+<li>What’s the probability that I get all heads?</li>
+<li>What’s the probability that I get all tails?</li>
+<li>What’s the probability that I get H-H-T-T-H-H-T-H-T-T?</li>
+</ol>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li>0.00098</li>
+<li>0.00098</li>
+<li>0.00098</li>
+</ol>
+</details>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Summary<a href="the-basics-of-probability.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>A <strong>chance process</strong> is a process that one can repeat (independently and under the same conditions) to produce a result from defined set of possible outcomes.</li>
+<li>We use the <strong>frequentist theory</strong> of probability to analyse change processes. The <strong>probability</strong> of an event is the proportion of time it occurs in the long-run.</li>
+<li>To compute a probability, we can list all equally-likely outcomes and compute the proportion of those equally-likely outcomes that fall into the category of interest.</li>
+<li>The probability of and event is at least zero and at most one. Alternatively, for some event <span class="math inline">\(A\)</span>, <span class="math inline">\(0 \leq \Pr(A) \leq 1\)</span>.</li>
+<li>The probability of an event not happening is one minus the chance it happens. Alternatively, for some event <span class="math inline">\(A\)</span>, <span class="math inline">\(\Pr(\text{not-}A) = 1 - \Pr(A)\)</span>.</li>
+<li>The probability that two events <em>both</em> happen is the probability of one times the conditional probability of the other. Suppose two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. To compute the probability that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> <em>both</em> happen, we multiply the probability that <span class="math inline">\(A\)</span> happens times the probability of that <span class="math inline">\(B\)</span> happens <em>given</em> that <span class="math inline">\(A\)</span> happens. Or simply <span class="math inline">\(\Pr(A \text{ and } B) = \Pr(A) \times \Pr(B | A)\)</span>.</li>
+<li>We say that two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if the probability of A does not depend on whether <span class="math inline">\(B\)</span> happens. Alternatively, two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>independent</strong> if <span class="math inline">\(\Pr(A \text{ and } B) = \Pr(A) \times \Pr(B)\)</span> (note that the second term on the right-hand side is <em>un</em>unconditional).</li>
+<li>When you sample <em>with replacement</em>, the draws are <em>independent</em>. When you sample <em>without replacement</em>, the draws are <em>dependent.</em></li>
+</ul>
+</div>
+<div id="additional-exercises" class="section level2 hasAnchor" number="1.9">
+<h2><span class="header-section-number">1.9</span> Additional Exercises<a href="the-basics-of-probability.html#additional-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-19" class="exercise"><strong>Exercise 1.18  </strong></span>I roll a die 10 times. Find the probability of…</p>
+<ol style="list-style-type: decimal">
+<li>getting 10 sixes.</li>
+<li>not getting 10 sixes.</li>
+<li>all the rolls showing five or less (i.e., getting 10 not-sixes)</li>
+</ol>
+<p>(You do not need to do the multiplication, but at least write it out.)</p>
+</div>
+<details>
+<summary>
+Hint
+</summary>
+Are options (2) and (3) identical? Suppose I got 4-3-3-2-4-6-3-1-1-3. Would that be “not 10 sixes” (2)? Would be “10 not-sixes” (3)?
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} \times \frac{1}{6} = \left( \frac{1}{6} \right) ^{10}\)</span></li>
+<li><span class="math inline">\(1 - \left( \frac{1}{6} \right) ^{10}\)</span>, i.e., this is the opposite of the previous event.</li>
+<li><span class="math inline">\(\frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} \times \frac{5}{6} = \left( \frac{5}{6} \right) ^{10}\)</span></li>
+</ol>
+</details>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="NTM.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["notes.pdf", "notes.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 The Scatterplot | Concepts and Computation: An Introduction to Political Methodology</title>
+  <meta name="description" content="These are my notes for my class introducing the fundamental conceptual and computational tools to first-year PhD students in politial science." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 The Scatterplot | Concepts and Computation: An Introduction to Political Methodology" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These are my notes for my class introducing the fundamental conceptual and computational tools to first-year PhD students in politial science." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 The Scatterplot | Concepts and Computation: An Introduction to Political Methodology" />
+  
+  <meta name="twitter:description" content="These are my notes for my class introducing the fundamental conceptual and computational tools to first-year PhD students in politial science." />
+  
+
+<meta name="author" content="Rob Lytle and Carlisle Rainey" />
+
+
+<meta name="date" content="2022-04-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-x-y-space.html"/>
+<link rel="next" href="correlation-coefficient.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script>
+    $(document).ready(function () {
+        process_solutions();
+    });
+    function process_solutions() {
+        $("div.section[id^='solution']").each(function(i) {
+        var soln_wrapper_id = "cvxr_ex_" + i;
+        var solution_id = $(this).attr('id');
+        var button = $("<button onclick=\"toggle_solution('" + soln_wrapper_id + "')\">Show/Hide</button>");
+        var new_div = $("<div id='" + soln_wrapper_id + "' class='solution' style='display: none;'></div>");
+        var h = $(this).first();
+        var others = $(this).children().slice(1);
+        $(others).each(function() {
+            $(this).appendTo($(new_div));
+        });
+        $(button).insertAfter($(h));
+        $(new_div).insertAfter($(button));
+        })
+    }
+    function toggle_solution(el_id) {
+      $("#" + el_id).toggle();
+    } 
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Concepts and Computation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview<span></span></a></li>
+<li class="part"><span><b>I Data Reduction<span></span></b></span></li>
+<li class="chapter" data-level="2" data-path="histograms.html"><a href="histograms.html"><i class="fa fa-check"></i><b>2</b> Histograms<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="histograms.html"><a href="histograms.html#density-and-bins"><i class="fa fa-check"></i><b>2.1</b> Density and Bins<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="histograms.html"><a href="histograms.html#defining-bins"><i class="fa fa-check"></i><b>2.1.1</b> Defining Bins<span></span></a></li>
+<li class="chapter" data-level="2.1.2" data-path="histograms.html"><a href="histograms.html#calculating-density"><i class="fa fa-check"></i><b>2.1.2</b> Calculating Density<span></span></a></li>
+<li class="chapter" data-level="2.1.3" data-path="histograms.html"><a href="histograms.html#a-note-on-bin-width"><i class="fa fa-check"></i><b>2.1.3</b> A Note on Bin Width<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="histograms.html"><a href="histograms.html#visualizing-data"><i class="fa fa-check"></i><b>2.2</b> Visualizing Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="histograms-in-r.html"><a href="histograms-in-r.html"><i class="fa fa-check"></i><b>3</b> Histograms in R<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="histograms-in-r.html"><a href="histograms-in-r.html#nominate-data"><i class="fa fa-check"></i><b>3.1</b> NOMINATE Data<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="histograms-in-r.html"><a href="histograms-in-r.html#histograms-geom_histogram"><i class="fa fa-check"></i><b>3.2</b> Histograms: <code>geom_histogram()</code><span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="histograms-in-r.html"><a href="histograms-in-r.html#the-three-critical-components"><i class="fa fa-check"></i><b>3.2.1</b> The Three Critical Components<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="histograms-in-r.html"><a href="histograms-in-r.html#drawing-a-histogram"><i class="fa fa-check"></i><b>3.2.2</b> Drawing a Histogram<span></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="histograms-in-r.html"><a href="histograms-in-r.html#counts-and-densities"><i class="fa fa-check"></i><b>3.2.3</b> Counts and Densities<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="histograms-in-r.html"><a href="histograms-in-r.html#filtering-filter"><i class="fa fa-check"></i><b>3.3</b> Filtering: <code>filter()</code><span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="histograms-in-r.html"><a href="histograms-in-r.html#faceting-facet_wrap"><i class="fa fa-check"></i><b>3.4</b> Faceting: <code>facet_wrap()</code><span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="histograms-in-r.html"><a href="histograms-in-r.html#density-plots-geom_density"><i class="fa fa-check"></i><b>3.5</b> Density Plots: <code>geom_density()</code><span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="histograms-in-r.html"><a href="histograms-in-r.html#color-fill-and-alpha"><i class="fa fa-check"></i><b>3.6</b> Color, Fill, and Alpha<span></span></a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="histograms-in-r.html"><a href="histograms-in-r.html#color"><i class="fa fa-check"></i><b>3.6.1</b> Color<span></span></a></li>
+<li class="chapter" data-level="3.6.2" data-path="histograms-in-r.html"><a href="histograms-in-r.html#fill"><i class="fa fa-check"></i><b>3.6.2</b> Fill<span></span></a></li>
+<li class="chapter" data-level="3.6.3" data-path="histograms-in-r.html"><a href="histograms-in-r.html#alpha"><i class="fa fa-check"></i><b>3.6.3</b> Alpha<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="histograms-in-r.html"><a href="histograms-in-r.html#labels-labs"><i class="fa fa-check"></i><b>3.7</b> Labels: <code>labs()</code><span></span></a></li>
+<li class="chapter" data-level="3.8" data-path="histograms-in-r.html"><a href="histograms-in-r.html#themes-theme_bw-and-others"><i class="fa fa-check"></i><b>3.8</b> Themes: <code>theme_bw()</code> and Others<span></span></a></li>
+<li class="chapter" data-level="3.9" data-path="histograms-in-r.html"><a href="histograms-in-r.html#exercises"><i class="fa fa-check"></i><b>3.9</b> Exercises<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="average-and-sd.html"><a href="average-and-sd.html"><i class="fa fa-check"></i><b>4</b> Average and SD<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="average-and-sd.html"><a href="average-and-sd.html#the-intuition"><i class="fa fa-check"></i><b>4.1</b> The Intuition<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="average-and-sd.html"><a href="average-and-sd.html#the-measures"><i class="fa fa-check"></i><b>4.2</b> The Measures<span></span></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="average-and-sd.html"><a href="average-and-sd.html#the-average"><i class="fa fa-check"></i><b>4.2.1</b> The Average<span></span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="average-and-sd.html"><a href="average-and-sd.html#the-median"><i class="fa fa-check"></i><b>4.2.2</b> The Median<span></span></a></li>
+<li class="chapter" data-level="4.2.3" data-path="average-and-sd.html"><a href="average-and-sd.html#the-standard-deviation"><i class="fa fa-check"></i><b>4.2.3</b> The Standard Deviation<span></span></a></li>
+<li class="chapter" data-level="4.2.4" data-path="average-and-sd.html"><a href="average-and-sd.html#other-summaries"><i class="fa fa-check"></i><b>4.2.4</b> Other Summaries<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html"><i class="fa fa-check"></i><b>5</b> Average and SD in R<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#mean-and-sd"><i class="fa fa-check"></i><b>5.1</b> <code>mean()</code> and <code>sd()</code><span></span></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#a-note-about-rs-sd-function"><i class="fa fa-check"></i><b>5.1.1</b> A Note About R’s <code>sd()</code> Function<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#other-summaries-1"><i class="fa fa-check"></i><b>5.2</b> Other Summaries<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#data-frame-nuance"><i class="fa fa-check"></i><b>5.3</b> Data Frame Nuance<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#the-group_bysummarize-workflow"><i class="fa fa-check"></i><b>5.4</b> The <code>group_by()</code>/<code>summarize()</code> Workflow<span></span></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#group_by"><i class="fa fa-check"></i><b>5.4.1</b> <code>group_by()</code><span></span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#summarize"><i class="fa fa-check"></i><b>5.4.2</b> <code>summarize()</code><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="average-and-sd-in-r.html"><a href="average-and-sd-in-r.html#geom_line"><i class="fa fa-check"></i><b>5.5</b> <code>geom_line()</code><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-normal-model.html"><a href="the-normal-model.html"><i class="fa fa-check"></i><b>6</b> The Normal Model<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-normal-model.html"><a href="the-normal-model.html#the-intuition-1"><i class="fa fa-check"></i><b>6.1</b> The Intuition<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="the-normal-model.html"><a href="the-normal-model.html#examples"><i class="fa fa-check"></i><b>6.2</b> Examples<span></span></a></li>
+<li class="chapter" data-level="6.3" data-path="the-normal-model.html"><a href="the-normal-model.html#the-empirical-rule"><i class="fa fa-check"></i><b>6.3</b> The Empirical Rule<span></span></a></li>
+<li class="chapter" data-level="6.4" data-path="the-normal-model.html"><a href="the-normal-model.html#the-normal-approximation"><i class="fa fa-check"></i><b>6.4</b> The Normal Approximation<span></span></a></li>
+<li class="chapter" data-level="6.5" data-path="the-normal-model.html"><a href="the-normal-model.html#the-normal-table"><i class="fa fa-check"></i><b>6.5</b> The Normal Table<span></span></a></li>
+<li class="chapter" data-level="6.6" data-path="the-normal-model.html"><a href="the-normal-model.html#using-a-normal-approximation"><i class="fa fa-check"></i><b>6.6</b> Using a Normal Approximation<span></span></a></li>
+<li class="chapter" data-level="6.7" data-path="the-normal-model.html"><a href="the-normal-model.html#example-the-extremity-of-party-leaders"><i class="fa fa-check"></i><b>6.7</b> Example: The Extremity of Party Leaders<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="the-x-y-space.html"><a href="the-x-y-space.html"><i class="fa fa-check"></i><b>7</b> The X-Y Space<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="the-x-y-space.html"><a href="the-x-y-space.html#points"><i class="fa fa-check"></i><b>7.1</b> Points<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="the-x-y-space.html"><a href="the-x-y-space.html#lines"><i class="fa fa-check"></i><b>7.2</b> Lines<span></span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="the-x-y-space.html"><a href="the-x-y-space.html#the-intercept"><i class="fa fa-check"></i><b>7.2.1</b> The Intercept<span></span></a></li>
+<li class="chapter" data-level="7.2.2" data-path="the-x-y-space.html"><a href="the-x-y-space.html#slope"><i class="fa fa-check"></i><b>7.2.2</b> Slope<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="the-scatterplot.html"><a href="the-scatterplot.html"><i class="fa fa-check"></i><b>8</b> The Scatterplot<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="the-scatterplot.html"><a href="the-scatterplot.html#geom_point"><i class="fa fa-check"></i><b>8.1</b> <code>geom_point()</code><span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="the-scatterplot.html"><a href="the-scatterplot.html#example-gamsons-law"><i class="fa fa-check"></i><b>8.2</b> Example: Gamson’s Law<span></span></a></li>
+<li class="chapter" data-level="8.3" data-path="the-scatterplot.html"><a href="the-scatterplot.html#example-gapminder"><i class="fa fa-check"></i><b>8.3</b> Example: Gapminder<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html"><i class="fa fa-check"></i><b>9</b> Correlation Coefficient<span></span></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#intuition"><i class="fa fa-check"></i><b>9.1</b> Intuition<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#computing"><i class="fa fa-check"></i><b>9.2</b> Computing<span></span></a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#by-hand"><i class="fa fa-check"></i><b>9.2.1</b> By Hand<span></span></a></li>
+<li class="chapter" data-level="9.2.2" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#with-r"><i class="fa fa-check"></i><b>9.2.2</b> With R<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#interpreting"><i class="fa fa-check"></i><b>9.3</b> Interpreting<span></span></a></li>
+<li class="chapter" data-level="9.4" data-path="correlation-coefficient.html"><a href="correlation-coefficient.html#example-clark-and-golder-2006"><i class="fa fa-check"></i><b>9.4</b> Example: Clark and Golder (2006)<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>10</b> The Basics of Probability<span></span></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>10.1</b> Review<span></span></a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>10.1.1</b> Proportions<span></span></a></li>
+<li class="chapter" data-level="10.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>10.1.2</b> The Indicator Trick<span></span></a></li>
+<li class="chapter" data-level="10.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>10.1.3</b> Percents<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>10.2</b> Chance Processes<span></span></a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>10.2.1</b> The Numbered-Ticket Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>10.3</b> Defining Probability<span></span></a></li>
+<li class="chapter" data-level="10.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>10.4</b> Computing Probabilities<span></span></a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>10.4.1</b> Counting the Equally-Likely Outcomes<span></span></a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>10.4.2</b> The Probability of the Opposite<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>10.5</b> Conditional Probabilities<span></span></a></li>
+<li class="chapter" data-level="10.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>10.6</b> Multiplication Rule<span></span></a></li>
+<li class="chapter" data-level="10.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>10.7</b> Independence<span></span></a></li>
+<li class="chapter" data-level="10.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary-1"><i class="fa fa-check"></i><b>10.8</b> Summary<span></span></a></li>
+<li class="chapter" data-level="10.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>10.9</b> Additional Exercises<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>11</b> The Numbered-Ticket Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>11.1</b> The Generic Form<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>11.2</b> “Is Like”<span></span></a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>11.2.1</b> Key Example 1<span></span></a></li>
+<li class="chapter" data-level="11.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>11.2.2</b> Key Example 2<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>11.3</b> Summarizing the NTM Process<span></span></a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>11.3.1</b> Letting a Computer Do Some Work<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>11.4</b> Expected Value and Standard Error<span></span></a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>11.4.1</b> Tricks for 0-1 Boxes<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>11.5</b> The Long-Run Histogram<span></span></a></li>
+<li class="chapter" data-level="11.6" data-path="NTM.html"><a href="NTM.html#summary-2"><i class="fa fa-check"></i><b>11.6</b> Summary<span></span></a></li>
+<li class="chapter" data-level="11.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>11.7</b> Additional Exercises<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>12</b> Sample Surveys<span></span></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>12.1</b> A Conceptual Framework<span></span></a></li>
+<li class="chapter" data-level="12.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>12.2</b> The Simple Random Sample<span></span></a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>12.2.1</b> The Accuracy of the Simple Random Sample<span></span></a></li>
+<li class="chapter" data-level="12.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>12.2.2</b> The Importance of the Simple Random Sample<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>12.3</b> The Three Hurdles<span></span></a></li>
+<li class="chapter" data-level="12.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>12.4</b> Good Alternatives to the Simple Random Sample<span></span></a></li>
+<li class="chapter" data-level="12.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>12.5</b> Poor Alternatives to the Simple Random Samples<span></span></a></li>
+<li class="chapter" data-level="12.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>12.6</b> An Infamous Sample Survey<span></span></a></li>
+<li class="chapter" data-level="12.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>12.7</b> Modern Polling<span></span></a></li>
+<li class="chapter" data-level="12.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-3"><i class="fa fa-check"></i><b>12.8</b> Summary<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>13</b> Confidence Intervals<span></span></a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>13.1</b> Review<span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>13.2</b> The Motivating Question<span></span></a></li>
+<li class="chapter" data-level="13.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>13.3</b> Reversing the Logic<span></span></a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>13.3.1</b> Replace NTM Terms with Sample Survey Terms<span></span></a></li>
+<li class="chapter" data-level="13.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>13.3.2</b> The Symmetry of Distance<span></span></a></li>
+<li class="chapter" data-level="13.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>13.3.3</b> Tense<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>13.4</b> Using the Logic<span></span></a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>13.4.1</b> A Big Problem<span></span></a></li>
+<li class="chapter" data-level="13.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>13.4.2</b> A Solution<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>13.5</b> Confidence Intervals<span></span></a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>13.5.1</b> Understanding a Confidence Interval<span></span></a></li>
+<li class="chapter" data-level="13.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>13.5.2</b> Interpreting a Confidence Interval<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>13.6</b> Miscellaneous<span></span></a></li>
+<li class="chapter" data-level="13.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-4"><i class="fa fa-check"></i><b>13.7</b> Summary<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>14</b> Hypothesis Testing<span></span></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>14.1</b> The Null Hypothesis<span></span></a></li>
+<li class="chapter" data-level="14.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>14.2</b> <em>p</em>-Values<span></span></a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>14.2.1</b> Focusing the Null Hypothesis<span></span></a></li>
+<li class="chapter" data-level="14.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>14.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>14.3</b> A Summary of the Hypothesis Testing Framework<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>15</b> Extensions<span></span></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>15.1</b> Review<span></span></a></li>
+<li class="chapter" data-level="15.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>15.2</b> Sources of Randomness<span></span></a></li>
+<li class="chapter" data-level="15.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>15.3</b> Confidence Intervals in General<span></span></a></li>
+<li class="chapter" data-level="15.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>15.4</b> Hypothesis Tests in General<span></span></a></li>
+<li class="chapter" data-level="15.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>15.5</b> Statistical Significance<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="econometric-notation.html"><a href="econometric-notation.html"><i class="fa fa-check"></i><b>16</b> Econometric Notation<span></span></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="econometric-notation.html"><a href="econometric-notation.html#simple-regression-model"><i class="fa fa-check"></i><b>16.1</b> Simple Regression Model<span></span></a></li>
+<li class="chapter" data-level="16.2" data-path="econometric-notation.html"><a href="econometric-notation.html#multiple-regression-model"><i class="fa fa-check"></i><b>16.2</b> Multiple Regression Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="fitting-a-linear-regression-model-in-r.html"><a href="fitting-a-linear-regression-model-in-r.html"><i class="fa fa-check"></i><b>17</b> Fitting a Linear Regression Model in R<span></span></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="fitting-a-linear-regression-model-in-r.html"><a href="fitting-a-linear-regression-model-in-r.html#model-coefficients"><i class="fa fa-check"></i><b>17.1</b> Model Coefficients<span></span></a></li>
+<li class="chapter" data-level="17.2" data-path="fitting-a-linear-regression-model-in-r.html"><a href="fitting-a-linear-regression-model-in-r.html#r.m.s.-error"><i class="fa fa-check"></i><b>17.2</b> R.M.S. Error<span></span></a></li>
+<li class="chapter" data-level="17.3" data-path="fitting-a-linear-regression-model-in-r.html"><a href="fitting-a-linear-regression-model-in-r.html#adding-the-regression-line-in-ggplot"><i class="fa fa-check"></i><b>17.3</b> Adding the Regression Line in ggplot<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="econometric-notation-1.html"><a href="econometric-notation-1.html"><i class="fa fa-check"></i><b>18</b> Econometric Notation<span></span></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="econometric-notation-1.html"><a href="econometric-notation-1.html#simple-regression-model-1"><i class="fa fa-check"></i><b>18.1</b> Simple Regression Model<span></span></a></li>
+<li class="chapter" data-level="18.2" data-path="econometric-notation-1.html"><a href="econometric-notation-1.html#multiple-regression-model-1"><i class="fa fa-check"></i><b>18.2</b> Multiple Regression Model<span></span></a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix<span></span></b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-a-normal-table.html"><a href="appendix-a-normal-table.html"><i class="fa fa-check"></i><b>A</b> Appendix: A Normal Table<span></span></a></li>
+<li><a href="references.html#references">References<span></span></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Concepts and Computation: An Introduction to Political Methodology</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-scatterplot" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> The Scatterplot<a href="the-scatterplot.html#the-scatterplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The scatterplot is the most powerful tool in statistics. The following comes as close to any rote procedure that I would recommend following:</p>
+<p><strong>Always plot your data using a scatterplot.</strong></p>
+<p>For some combinations of unordered, qualitative variables with a large number of categories, the scatterplot might not offer useful information. However, the plot itself will not mislead the researcher. Therefore, <em>the scatterplot offers a safe, likely useful starting point for almost all data analysis</em>.</p>
+<div id="geom_point" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> <code>geom_point()</code><a href="the-scatterplot.html#geom_point" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To create scatterplots, we simply use <code>geom_point()</code> as the geometry combined with our same approach to data and aesthetics.</p>
+<p>Here’s a simple example with hypothetical data.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="the-scatterplot.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a fictional dataset with tribble()</span></span>
+<span id="cb82-2"><a href="the-scatterplot.html#cb82-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb82-3"><a href="the-scatterplot.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x,  <span class="sc">~</span> y,</span>
+<span id="cb82-4"><a href="the-scatterplot.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,   <span class="dv">1</span>,</span>
+<span id="cb82-5"><a href="the-scatterplot.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,   <span class="dv">2</span>, </span>
+<span id="cb82-6"><a href="the-scatterplot.html#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>,   <span class="dv">6</span>, </span>
+<span id="cb82-7"><a href="the-scatterplot.html#cb82-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,   <span class="dv">3</span>,</span>
+<span id="cb82-8"><a href="the-scatterplot.html#cb82-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.5</span>, <span class="dv">5</span>)</span>
+<span id="cb82-9"><a href="the-scatterplot.html#cb82-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-10"><a href="the-scatterplot.html#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="co"># quick look at this fictional data frame</span></span>
+<span id="cb82-11"><a href="the-scatterplot.html#cb82-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code></pre></div>
+<pre><code>Rows: 5
+Columns: 2
+$ x &lt;dbl&gt; 1.0, 2.0, 3.0, 1.0, 2.5
+$ y &lt;dbl&gt; 1, 2, 6, 3, 5</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="the-scatterplot.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create scatterplot</span></span>
+<span id="cb84-2"><a href="the-scatterplot.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> </span>
+<span id="cb84-3"><a href="the-scatterplot.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="notes_files/figure-html/unnamed-chunk-134-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+<div id="example-gamsons-law" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Example: Gamson’s Law<a href="the-scatterplot.html#example-gamsons-law" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here’s a more realistic example.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="the-scatterplot.html#cb85-1" aria-hidden="true" tabindex="-1"></a>gamson_df <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;gamson.rds&quot;</span>)</span>
+<span id="cb85-2"><a href="the-scatterplot.html#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="the-scatterplot.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gamson_df)</span></code></pre></div>
+<pre><code>Rows: 826
+Columns: 2
+$ seat_share      &lt;dbl&gt; 0.02424242, 0.46060607, 0.51515150, 0.47204968, 0.5279…
+$ portfolio_share &lt;dbl&gt; 0.09090909, 0.36363637, 0.54545456, 0.45454547, 0.5454…</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="the-scatterplot.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gamson_df, <span class="fu">aes</span>(<span class="at">x =</span> seat_share, <span class="at">y =</span> portfolio_share)) <span class="sc">+</span> </span>
+<span id="cb87-2"><a href="the-scatterplot.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="notes_files/figure-html/unnamed-chunk-135-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p>Because the data are so dense, especially in the lower-left corner of the plot, we might use alpha transparency to make the density easier to see.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="the-scatterplot.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gamson_df, <span class="fu">aes</span>(<span class="at">x =</span> seat_share, <span class="at">y =</span> portfolio_share)) <span class="sc">+</span> </span>
+<span id="cb88-2"><a href="the-scatterplot.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="notes_files/figure-html/unnamed-chunk-136-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+<div id="example-gapminder" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Example: Gapminder<a href="the-scatterplot.html#example-gapminder" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For a dataset with more variables, we can represent a few other variables using aesthetics other than location in space.</p>
+<p>For this example, we use country-level data from the gapminder package. We haven’t discussed this yet, but many R packages contain datasets that are useful as examples. In this case, we can load the <code>gapminder</code> dataset from the gapminder package using <code>data(gapminder, package = "gapminder")</code>. This is an alternative to downloading the dataset to your computer, uploading it to the project in RStudio Cloud, and reading it into R with, say, <code>read_csv()</code>.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="the-scatterplot.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load gapminder dataset from gapminder package</span></span>
+<span id="cb89-2"><a href="the-scatterplot.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gapminder, <span class="at">package =</span> <span class="st">&quot;gapminder&quot;</span>)</span>
+<span id="cb89-3"><a href="the-scatterplot.html#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="the-scatterplot.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gapminder)</span></code></pre></div>
+<pre><code>Rows: 1,704
+Columns: 6
+$ country   &lt;fct&gt; &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, &quot;Afghanistan&quot;, …
+$ continent &lt;fct&gt; Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, …
+$ year      &lt;int&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+$ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+$ pop       &lt;int&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+$ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="the-scatterplot.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, </span>
+<span id="cb91-2"><a href="the-scatterplot.html#cb91-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> lifeExp,</span>
+<span id="cb91-3"><a href="the-scatterplot.html#cb91-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> pop, </span>
+<span id="cb91-4"><a href="the-scatterplot.html#cb91-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> continent)) <span class="sc">+</span> </span>
+<span id="cb91-5"><a href="the-scatterplot.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="notes_files/figure-html/unnamed-chunk-137-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Because GDP per capita is skewed so heavily to the right, we might transform the x-axis from a linear scale (the default) to a log (base-10) scale.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="the-scatterplot.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gapminder, <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, </span>
+<span id="cb92-2"><a href="the-scatterplot.html#cb92-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> lifeExp,</span>
+<span id="cb92-3"><a href="the-scatterplot.html#cb92-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> pop, </span>
+<span id="cb92-4"><a href="the-scatterplot.html#cb92-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> continent)) <span class="sc">+</span> </span>
+<span id="cb92-5"><a href="the-scatterplot.html#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb92-6"><a href="the-scatterplot.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>()</span></code></pre></div>
+<p><img src="notes_files/figure-html/unnamed-chunk-138-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-139" class="exercise"><strong>Exercise 8.1  </strong></span>Get the health dataset from the <a href="https://pos3713.github.io/data.html">data page</a> and load it into R. Plot the variable <code>percent_uninsured</code> (the percent of each state’s population without health insurance) along the horizontal axis and the variable <code>percent_favorable_aca</code> (the percent of each state with a favorable attitude toward Obamacare) along the vertical axis. Interpret and speculate about any pattern. I encourage you to represent other variables with other aesthetics.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-140" class="exercise"><strong>Exercise 8.2  </strong></span>Continuing the exercise above, label each point with the state’s two-letter abbreviation. Experiment with the following strategies.</p>
+<ol style="list-style-type: decimal">
+<li><code>geom_text()</code> <em>instead of</em> <code>geom_point()</code></li>
+<li><code>geom_label()</code> <em>instead of</em> <code>geom_point()</code></li>
+<li><code>geom_text_repel()</code> in the ggrepel package <em>in addition to</em> <code>geom_point()</code></li>
+<li><code>geom_label_repel()</code> in the ggrepel package <em>in addition to</em> <code>geom_point()</code></li>
+</ol>
+<p>Hint: Review the help files (e.g., <code>?geom_text()</code>) and the contained examples to understand how to use each geom. The variable <code>state_abbr</code> contains the two-letter abbreviation, so you’ll need to include the aesthetic <code>label = state_abbr</code> in the <code>aes()</code> function.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-x-y-space.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="correlation-coefficient.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["notes.pdf", "notes.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

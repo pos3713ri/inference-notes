@@ -7,7 +7,6 @@
 
 # Bookdown build artifacts
 _bookdown_files/
-docs/
 *_cache/
 *_files/
 
