@@ -10,3 +10,6 @@ link-citations: yes
 description: "These are my notes for giving undergraduate students the intuition of inference."
 ---
 
+# The Goal
+
+A useful, careful, and intuitive introduction to inference.

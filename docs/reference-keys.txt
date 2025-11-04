@@ -57,6 +57,7 @@ exr:trump-p
 exr:unnamed-chunk-73
 exr:unnamed-chunk-75
 exr:unnamed-chunk-77
+the-goal
 the-basics-of-probability
 review
 proportions

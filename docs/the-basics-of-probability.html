@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Gentle Introduction to Inference</title>
+  <title>Chapter 2 The Basics of Probability | A Gentle Introduction to Inference</title>
   <meta name="description" content="These are my notes for giving undergraduate students the intuition of inference." />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Gentle Introduction to Inference" />
+  <meta property="og:title" content="Chapter 2 The Basics of Probability | A Gentle Introduction to Inference" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These are my notes for giving undergraduate students the intuition of inference." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Gentle Introduction to Inference" />
+  <meta name="twitter:title" content="Chapter 2 The Basics of Probability | A Gentle Introduction to Inference" />
   
   <meta name="twitter:description" content="These are my notes for giving undergraduate students the intuition of inference." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="index.html"/>
 <link rel="next" href="NTM.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -166,105 +166,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Gentle Introduction to Inference</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>1</b> The Basics of Probability</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Goal</a></li>
+<li class="chapter" data-level="2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html"><i class="fa fa-check"></i><b>2</b> The Basics of Probability</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>1.1</b> Review</a>
+<li class="chapter" data-level="2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#review"><i class="fa fa-check"></i><b>2.1</b> Review</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>1.1.1</b> Proportions</a></li>
-<li class="chapter" data-level="1.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>1.1.2</b> The Indicator Trick</a></li>
-<li class="chapter" data-level="1.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>1.1.3</b> Percents</a></li>
+<li class="chapter" data-level="2.1.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#proportions"><i class="fa fa-check"></i><b>2.1.1</b> Proportions</a></li>
+<li class="chapter" data-level="2.1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-indicator-trick"><i class="fa fa-check"></i><b>2.1.2</b> The Indicator Trick</a></li>
+<li class="chapter" data-level="2.1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#percents"><i class="fa fa-check"></i><b>2.1.3</b> Percents</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>1.2</b> Chance Processes</a>
+<li class="chapter" data-level="2.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#chance-processes"><i class="fa fa-check"></i><b>2.2</b> Chance Processes</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>1.2.1</b> The Numbered-Ticket Model</a></li>
+<li class="chapter" data-level="2.2.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-numbered-ticket-model"><i class="fa fa-check"></i><b>2.2.1</b> The Numbered-Ticket Model</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>1.3</b> Defining Probability</a></li>
-<li class="chapter" data-level="1.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>1.4</b> Computing Probabilities</a>
+<li class="chapter" data-level="2.3" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#defining-probability"><i class="fa fa-check"></i><b>2.3</b> Defining Probability</a></li>
+<li class="chapter" data-level="2.4" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#computing-probabilities"><i class="fa fa-check"></i><b>2.4</b> Computing Probabilities</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>1.4.1</b> Counting the Equally-Likely Outcomes</a></li>
-<li class="chapter" data-level="1.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>1.4.2</b> The Probability of the Opposite</a></li>
+<li class="chapter" data-level="2.4.1" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes"><i class="fa fa-check"></i><b>2.4.1</b> Counting the Equally-Likely Outcomes</a></li>
+<li class="chapter" data-level="2.4.2" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#the-probability-of-the-opposite"><i class="fa fa-check"></i><b>2.4.2</b> The Probability of the Opposite</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>1.5</b> Conditional Probabilities</a></li>
-<li class="chapter" data-level="1.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>1.6</b> Multiplication Rule</a></li>
-<li class="chapter" data-level="1.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>1.7</b> Independence</a></li>
-<li class="chapter" data-level="1.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary"><i class="fa fa-check"></i><b>1.8</b> Summary</a></li>
-<li class="chapter" data-level="1.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>1.9</b> Additional Exercises</a></li>
+<li class="chapter" data-level="2.5" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>2.5</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="2.6" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#multiplication-rule"><i class="fa fa-check"></i><b>2.6</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="2.7" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#independence"><i class="fa fa-check"></i><b>2.7</b> Independence</a></li>
+<li class="chapter" data-level="2.8" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#summary"><i class="fa fa-check"></i><b>2.8</b> Summary</a></li>
+<li class="chapter" data-level="2.9" data-path="the-basics-of-probability.html"><a href="the-basics-of-probability.html#additional-exercises"><i class="fa fa-check"></i><b>2.9</b> Additional Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>2</b> The Numbered-Ticket Model</a>
+<li class="chapter" data-level="3" data-path="NTM.html"><a href="NTM.html"><i class="fa fa-check"></i><b>3</b> The Numbered-Ticket Model</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>2.1</b> The Generic Form</a></li>
-<li class="chapter" data-level="2.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>2.2</b> “Is Like”</a>
+<li class="chapter" data-level="3.1" data-path="NTM.html"><a href="NTM.html#the-generic-form"><i class="fa fa-check"></i><b>3.1</b> The Generic Form</a></li>
+<li class="chapter" data-level="3.2" data-path="NTM.html"><a href="NTM.html#is-like"><i class="fa fa-check"></i><b>3.2</b> “Is Like”</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>2.2.1</b> Key Example 1</a></li>
-<li class="chapter" data-level="2.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>2.2.2</b> Key Example 2</a></li>
+<li class="chapter" data-level="3.2.1" data-path="NTM.html"><a href="NTM.html#key-example-1"><i class="fa fa-check"></i><b>3.2.1</b> Key Example 1</a></li>
+<li class="chapter" data-level="3.2.2" data-path="NTM.html"><a href="NTM.html#key-example-2"><i class="fa fa-check"></i><b>3.2.2</b> Key Example 2</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>2.3</b> Summarizing the NTM Process</a>
+<li class="chapter" data-level="3.3" data-path="NTM.html"><a href="NTM.html#summarizing-the-ntm-process"><i class="fa fa-check"></i><b>3.3</b> Summarizing the NTM Process</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>2.3.1</b> Letting a Computer Do Some Work</a></li>
+<li class="chapter" data-level="3.3.1" data-path="NTM.html"><a href="NTM.html#letting-a-computer-do-some-work"><i class="fa fa-check"></i><b>3.3.1</b> Letting a Computer Do Some Work</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>2.4</b> Expected Value and Standard Error</a>
+<li class="chapter" data-level="3.4" data-path="NTM.html"><a href="NTM.html#expected-value-and-standard-error"><i class="fa fa-check"></i><b>3.4</b> Expected Value and Standard Error</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>2.4.1</b> Tricks for 0-1 Boxes</a></li>
+<li class="chapter" data-level="3.4.1" data-path="NTM.html"><a href="NTM.html#tricks-for-0-1-boxes"><i class="fa fa-check"></i><b>3.4.1</b> Tricks for 0-1 Boxes</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>2.5</b> The Long-Run Histogram</a></li>
-<li class="chapter" data-level="2.6" data-path="NTM.html"><a href="NTM.html#summary-1"><i class="fa fa-check"></i><b>2.6</b> Summary</a></li>
-<li class="chapter" data-level="2.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>2.7</b> Additional Exercises</a></li>
+<li class="chapter" data-level="3.5" data-path="NTM.html"><a href="NTM.html#the-long-run-histogram"><i class="fa fa-check"></i><b>3.5</b> The Long-Run Histogram</a></li>
+<li class="chapter" data-level="3.6" data-path="NTM.html"><a href="NTM.html#summary-1"><i class="fa fa-check"></i><b>3.6</b> Summary</a></li>
+<li class="chapter" data-level="3.7" data-path="NTM.html"><a href="NTM.html#additional-exercises-1"><i class="fa fa-check"></i><b>3.7</b> Additional Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>3</b> Sample Surveys</a>
+<li class="chapter" data-level="4" data-path="sample-surveys.html"><a href="sample-surveys.html"><i class="fa fa-check"></i><b>4</b> Sample Surveys</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>3.1</b> A Conceptual Framework</a></li>
-<li class="chapter" data-level="3.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>3.2</b> The Simple Random Sample</a>
+<li class="chapter" data-level="4.1" data-path="sample-surveys.html"><a href="sample-surveys.html#a-conceptual-framework"><i class="fa fa-check"></i><b>4.1</b> A Conceptual Framework</a></li>
+<li class="chapter" data-level="4.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-simple-random-sample"><i class="fa fa-check"></i><b>4.2</b> The Simple Random Sample</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.1</b> The Accuracy of the Simple Random Sample</a></li>
-<li class="chapter" data-level="3.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>3.2.2</b> The Importance of the Simple Random Sample</a></li>
+<li class="chapter" data-level="4.2.1" data-path="sample-surveys.html"><a href="sample-surveys.html#the-accuracy-of-the-simple-random-sample"><i class="fa fa-check"></i><b>4.2.1</b> The Accuracy of the Simple Random Sample</a></li>
+<li class="chapter" data-level="4.2.2" data-path="sample-surveys.html"><a href="sample-surveys.html#the-importance-of-the-simple-random-sample"><i class="fa fa-check"></i><b>4.2.2</b> The Importance of the Simple Random Sample</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>3.3</b> The Three Hurdles</a></li>
-<li class="chapter" data-level="3.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>3.4</b> Good Alternatives to the Simple Random Sample</a></li>
-<li class="chapter" data-level="3.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>3.5</b> Poor Alternatives to the Simple Random Samples</a></li>
-<li class="chapter" data-level="3.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>3.6</b> An Infamous Sample Survey</a></li>
-<li class="chapter" data-level="3.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>3.7</b> Modern Polling</a></li>
-<li class="chapter" data-level="3.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-2"><i class="fa fa-check"></i><b>3.8</b> Summary</a></li>
+<li class="chapter" data-level="4.3" data-path="sample-surveys.html"><a href="sample-surveys.html#the-three-hurdles"><i class="fa fa-check"></i><b>4.3</b> The Three Hurdles</a></li>
+<li class="chapter" data-level="4.4" data-path="sample-surveys.html"><a href="sample-surveys.html#good-alternatives-to-the-simple-random-sample"><i class="fa fa-check"></i><b>4.4</b> Good Alternatives to the Simple Random Sample</a></li>
+<li class="chapter" data-level="4.5" data-path="sample-surveys.html"><a href="sample-surveys.html#poor-alternatives-to-the-simple-random-samples"><i class="fa fa-check"></i><b>4.5</b> Poor Alternatives to the Simple Random Samples</a></li>
+<li class="chapter" data-level="4.6" data-path="sample-surveys.html"><a href="sample-surveys.html#an-infamous-sample-survey"><i class="fa fa-check"></i><b>4.6</b> An Infamous Sample Survey</a></li>
+<li class="chapter" data-level="4.7" data-path="sample-surveys.html"><a href="sample-surveys.html#modern-polling"><i class="fa fa-check"></i><b>4.7</b> Modern Polling</a></li>
+<li class="chapter" data-level="4.8" data-path="sample-surveys.html"><a href="sample-surveys.html#summary-2"><i class="fa fa-check"></i><b>4.8</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<li class="chapter" data-level="5" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>5</b> Confidence Intervals</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>4.1</b> Review</a></li>
-<li class="chapter" data-level="4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>4.2</b> The Motivating Question</a></li>
-<li class="chapter" data-level="4.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>4.3</b> Reversing the Logic</a>
+<li class="chapter" data-level="5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#review-1"><i class="fa fa-check"></i><b>5.1</b> Review</a></li>
+<li class="chapter" data-level="5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-motivating-question"><i class="fa fa-check"></i><b>5.2</b> The Motivating Question</a></li>
+<li class="chapter" data-level="5.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#reversing-the-logic"><i class="fa fa-check"></i><b>5.3</b> Reversing the Logic</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>4.3.1</b> Replace NTM Terms with Sample Survey Terms</a></li>
-<li class="chapter" data-level="4.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>4.3.2</b> The Symmetry of Distance</a></li>
-<li class="chapter" data-level="4.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>4.3.3</b> Tense</a></li>
+<li class="chapter" data-level="5.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#replace-ntm-terms-with-sample-survey-terms"><i class="fa fa-check"></i><b>5.3.1</b> Replace NTM Terms with Sample Survey Terms</a></li>
+<li class="chapter" data-level="5.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-symmetry-of-distance"><i class="fa fa-check"></i><b>5.3.2</b> The Symmetry of Distance</a></li>
+<li class="chapter" data-level="5.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#tense"><i class="fa fa-check"></i><b>5.3.3</b> Tense</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>4.4</b> Using the Logic</a>
+<li class="chapter" data-level="5.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#using-the-logic"><i class="fa fa-check"></i><b>5.4</b> Using the Logic</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>4.4.1</b> A Big Problem</a></li>
-<li class="chapter" data-level="4.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>4.4.2</b> A Solution</a></li>
+<li class="chapter" data-level="5.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-big-problem"><i class="fa fa-check"></i><b>5.4.1</b> A Big Problem</a></li>
+<li class="chapter" data-level="5.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#a-solution"><i class="fa fa-check"></i><b>5.4.2</b> A Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>4.5</b> Confidence Intervals</a>
+<li class="chapter" data-level="5.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-1"><i class="fa fa-check"></i><b>5.5</b> Confidence Intervals</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.1</b> Understanding a Confidence Interval</a></li>
-<li class="chapter" data-level="4.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>4.5.2</b> Interpreting a Confidence Interval</a></li>
+<li class="chapter" data-level="5.5.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#understanding-a-confidence-interval"><i class="fa fa-check"></i><b>5.5.1</b> Understanding a Confidence Interval</a></li>
+<li class="chapter" data-level="5.5.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#interpreting-a-confidence-interval"><i class="fa fa-check"></i><b>5.5.2</b> Interpreting a Confidence Interval</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>4.6</b> Miscellaneous</a></li>
-<li class="chapter" data-level="4.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-3"><i class="fa fa-check"></i><b>4.7</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#miscellaneous"><i class="fa fa-check"></i><b>5.6</b> Miscellaneous</a></li>
+<li class="chapter" data-level="5.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#summary-3"><i class="fa fa-check"></i><b>5.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>5</b> Hypothesis Testing</a>
+<li class="chapter" data-level="6" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>6</b> Hypothesis Testing</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>5.1</b> The Null Hypothesis</a></li>
-<li class="chapter" data-level="5.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>5.2</b> <em>p</em>-Values</a>
+<li class="chapter" data-level="6.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#the-null-hypothesis"><i class="fa fa-check"></i><b>6.1</b> The Null Hypothesis</a></li>
+<li class="chapter" data-level="6.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-values"><i class="fa fa-check"></i><b>6.2</b> <em>p</em>-Values</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>5.2.1</b> Focusing the Null Hypothesis</a></li>
-<li class="chapter" data-level="5.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis</a></li>
+<li class="chapter" data-level="6.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#focusing-the-null-hypothesis"><i class="fa fa-check"></i><b>6.2.1</b> Focusing the Null Hypothesis</a></li>
+<li class="chapter" data-level="6.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#computing-the-p-value-for-the-focused-null-hypothesis"><i class="fa fa-check"></i><b>6.2.2</b> Computing the <em>p</em>-value for the Focused Null Hypothesis</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>5.3</b> A Summary of the Hypothesis Testing Framework</a></li>
+<li class="chapter" data-level="6.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#a-summary-of-the-hypothesis-testing-framework"><i class="fa fa-check"></i><b>6.3</b> A Summary of the Hypothesis Testing Framework</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>6</b> Extensions</a>
+<li class="chapter" data-level="7" data-path="extensions.html"><a href="extensions.html"><i class="fa fa-check"></i><b>7</b> Extensions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>6.1</b> Review</a></li>
-<li class="chapter" data-level="6.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>6.2</b> Sources of Randomness</a></li>
-<li class="chapter" data-level="6.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>6.3</b> Confidence Intervals in General</a></li>
-<li class="chapter" data-level="6.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>6.4</b> Hypothesis Tests in General</a></li>
-<li class="chapter" data-level="6.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>6.5</b> Statistical Significance</a></li>
+<li class="chapter" data-level="7.1" data-path="extensions.html"><a href="extensions.html#review-2"><i class="fa fa-check"></i><b>7.1</b> Review</a></li>
+<li class="chapter" data-level="7.2" data-path="extensions.html"><a href="extensions.html#sources-of-randomness"><i class="fa fa-check"></i><b>7.2</b> Sources of Randomness</a></li>
+<li class="chapter" data-level="7.3" data-path="extensions.html"><a href="extensions.html#confidence-intervals-in-general"><i class="fa fa-check"></i><b>7.3</b> Confidence Intervals in General</a></li>
+<li class="chapter" data-level="7.4" data-path="extensions.html"><a href="extensions.html#hypothesis-tests-in-general"><i class="fa fa-check"></i><b>7.4</b> Hypothesis Tests in General</a></li>
+<li class="chapter" data-level="7.5" data-path="extensions.html"><a href="extensions.html#statistical-significance"><i class="fa fa-check"></i><b>7.5</b> Statistical Significance</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendix-a-normal-table.html"><a href="appendix-a-normal-table.html"><i class="fa fa-check"></i><b>A</b> Appendix: A Normal Table</a></li>
@@ -289,31 +290,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Gentle Introduction to Inference</h1>
-<p class="author"><em>Carlisle Rainey</em></p>
-<p class="date"><em>2025-11-04</em></p>
-</div>
-<div id="the-basics-of-probability" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> The Basics of Probability<a href="the-basics-of-probability.html#the-basics-of-probability" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="review" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Review<a href="the-basics-of-probability.html#review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-basics-of-probability" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> The Basics of Probability<a href="the-basics-of-probability.html#the-basics-of-probability" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="review" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Review<a href="the-basics-of-probability.html#review" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before we can develop a theory of probability, we need a good understanding of proportions and percents.</p>
-<div id="proportions" class="section level3 hasAnchor" number="1.1.1">
-<h3><span class="header-section-number">1.1.1</span> Proportions<a href="the-basics-of-probability.html#proportions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="proportions" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Proportions<a href="the-basics-of-probability.html#proportions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To compute a proportion, we simply count the number of items that fall into a particular category and divide that by the total number of items.</p>
 <p>For example, if I toss a coin 10 times and got heads-tails-heads-heads-heads-tails-heads-tail-tails-heads, what proportion were heads? In this case, the proportion of heads is <span class="math inline">\(\dfrac{\text{number tosses that are heads}}{\text{total tosses}} = \dfrac{6}{10} = 0.6\)</span>.</p>
 <p>For another example, suppose I gave 10 As, 13 Bs, 16 Cs, 5 Ds, and 2 Fs in a class. What proportion of student did I give a B? In this example, the proportion of Bs is <span class="math inline">\(\dfrac{\text{number Bs}}{\text{total students}} = \dfrac{13}{10 + 13 + 16 + 5 + 2} = 0.28\)</span> (rounded to the two decimal-places).</p>
 <p>In most cases, it makes sense to round proportion to the nearest two decimal-places.</p>
 </div>
-<div id="the-indicator-trick" class="section level3 hasAnchor" number="1.1.2">
-<h3><span class="header-section-number">1.1.2</span> The Indicator Trick<a href="the-basics-of-probability.html#the-indicator-trick" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-indicator-trick" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> The Indicator Trick<a href="the-basics-of-probability.html#the-indicator-trick" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It turns out that we can easily connect a proportion to an average using the indicator trick. If we flag all outcomes in a category using the number 1 and all other events using the number 0, then the average of those indicators equals the proportion.</p>
 <p>In an example above, I tossed a coin 10 times and got heads-tails-heads-heads-heads-tails-heads-tail-tails-heads. We computed the proportion of heads as <span class="math inline">\(\dfrac{\text{number tosses that are heads}}{\text{total tosses}} = \dfrac{6}{10} = 0.6\)</span>. However, we could alternatively flag (or “indicate”) all heads with 1 and all not-heads with 0, giving us the indicators 1, 0, 1, 1, 1, 0, 1, 0, 0, 1. If we just find the average of this list, we get <span class="math inline">\(\dfrac{\text{sum of list}}{\text{number of entries in list}} = \dfrac{6}{10} = 0.6\)</span>.</p>
 <p>Notice that the indicator trick allows us to “count” by “summing” (or “adding”).</p>
 <p>The indicator variable is helpful, because we can think of a proportion as an average. Anything that we say about an average must then also be true for a proportion.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-2" class="exercise"><strong>Exercise 1.1  </strong></span>Suppose I asked 10 people whether they were Republican, Democrat, or Independent. I obtained the follwing: D, R, I, D, D, I, D, I, I, R.</p>
+<p><span id="exr:unnamed-chunk-2" class="exercise"><strong>Exercise 2.1  </strong></span>Suppose I asked 10 people whether they were Republican, Democrat, or Independent. I obtained the follwing: D, R, I, D, D, I, D, I, I, R.</p>
 <ol style="list-style-type: decimal">
 <li>Using the indicator trick, what proportion are Republican?</li>
 <li>Democrat?</li>
@@ -333,7 +329,7 @@ Solution
 Yes, because noting that an item falls into a category and counting it is the same as assigning it the value 1 and summing it. Similarly, noting that an item does not fall into a category and not counting it is the same as assigning it the value 0 and summing it. Therefore, the indicator trick is the identical to computing the proportion using counting.
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 1.2  </strong></span>Suppose I roll a die 10 times and recorded the results. I got 4-2-2-2-1-6-5-6-4-2. Use the indicator trick to compute the proportion of the 10 rolls that showed 6 dots.</p>
+<p><span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 2.2  </strong></span>Suppose I roll a die 10 times and recorded the results. I got 4-2-2-2-1-6-5-6-4-2. Use the indicator trick to compute the proportion of the 10 rolls that showed 6 dots.</p>
 <p>What if I got 6-3-6-6-6-4-6-6-2-3?</p>
 </div>
 <details>
@@ -345,8 +341,8 @@ Solution
 <p>1-0-1-1-1-0-1-1-0-0; avg = 6/10 = 0.6</p>
 </details>
 </div>
-<div id="percents" class="section level3 hasAnchor" number="1.1.3">
-<h3><span class="header-section-number">1.1.3</span> Percents<a href="the-basics-of-probability.html#percents" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="percents" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Percents<a href="the-basics-of-probability.html#percents" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To convert a proportion to a percent, simply multiply the proportion (or the fraction) times 100%.</p>
 <p>If we convert 0.2 to a percent, we get <span class="math inline">\(0.6 \times 100\% = 60\%\)</span>. If we convert 0.28 to a percent, we get <span class="math inline">\(0.28 \times 100\% = 28\%\)</span>.</p>
 <p>Fractions, proportions, and percents are different way’s of talking about the same quantities. They have different strengths:</p>
@@ -357,7 +353,7 @@ Solution
 </ol>
 <p>Make a special note, though, that “%” means “per 100” or “/100.” Because of this, you cannot mindlessly multiply percents. Notice that <span class="math inline">\(10\% \times 20\%\)</span> does NOT equal <span class="math inline">\(200%\)</span>. Instead it equals <span class="math inline">\(10\% \times 20\% = 10/100 \times 20/100 = 200/10,000 = 2/100 = 2\%\)</span>. While you can safely <em>add</em> percents, a good rule is to do calculations until your final answer with fractions or proportions, and only convert to a percent once you have your final answer.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-4" class="exercise"><strong>Exercise 1.3  </strong></span>Compute the following proportions and percents:</p>
+<p><span id="exr:unnamed-chunk-4" class="exercise"><strong>Exercise 2.3  </strong></span>Compute the following proportions and percents:</p>
 <ol style="list-style-type: decimal">
 <li>Suppose I asked 10 people whether they were Republican, Democrat, or Independent. I obtained the follwing: D, R, I, D, D, I, D, I, I, R. What proportion are Republican? Democrat? Independent? What are the percents for each?</li>
 <li>Suppose I sample 400 adults living in the US. 180 respondents report they approve of the job Donald Trump is doing as president, 200 report they disapprove, 20 aren’t sure. What proportion approve? Disapprove? Aren’t sure? What are the percents for each?</li>
@@ -373,7 +369,7 @@ Solution
 </ol>
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-5" class="exercise"><strong>Exercise 1.4  </strong></span>An urn has 5 red marbles, 3 white marbles, and 2 blue marbles.</p>
+<p><span id="exr:unnamed-chunk-5" class="exercise"><strong>Exercise 2.4  </strong></span>An urn has 5 red marbles, 3 white marbles, and 2 blue marbles.</p>
 <p>What proportion of the marbles in the urn are red? What fraction? What percent?</p>
 <p>Suppose I draw 5 marbles from the urn with replacement and recorded the results: R, B, R, W, R. Use the indicator trick to compute fraction, proportion, and percentage of the draws that are red.</p>
 </div>
@@ -390,8 +386,8 @@ Solution
 </details>
 </div>
 </div>
-<div id="chance-processes" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Chance Processes<a href="the-basics-of-probability.html#chance-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="chance-processes" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Chance Processes<a href="the-basics-of-probability.html#chance-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Define a <strong>chance process</strong> as a process that one can repeat (independently and under the same conditions) to produce a result from defined set of possible outcomes.</p>
 <p>We could imagine rolling a die or tossing a coin. We could imagine drawing cards with or without replacement.</p>
 <p>When we draw <strong>with replacement</strong>, we draw multiple times, but replace the draws before continuing. This means that same cards can be drawn multiple times.</p>
@@ -408,7 +404,7 @@ Solution
 <p>I’ll use the 52-card deck in a lot of my examples. It allows some variety, and many students are already familiar with it. If you are not, then you should learn about the cards that make up a <a href="https://en.wikipedia.org/wiki/Standard_52-card_deck">52-card deck</a>. I find the image below (from Wikipedia) especially helpful. Perhaps print this image and keep it handy.</p>
 <p><img src="img/deck.png" /></p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 1.5  </strong></span>Come up with your own chance process. What is the process? What are the possible outcomes?</p>
+<p><span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 2.5  </strong></span>Come up with your own chance process. What is the process? What are the possible outcomes?</p>
 </div>
 <details>
 <summary>
@@ -421,13 +417,13 @@ Solution
 <li>Draw five cards from a well-shuffled deck without replacement. Record the number of red cards drawn. The possible outcomes are 0, 1, 2, 3, 4, and 5.</li>
 </ol>
 </details>
-<div id="the-numbered-ticket-model" class="section level3 hasAnchor" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> The Numbered-Ticket Model<a href="the-basics-of-probability.html#the-numbered-ticket-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-numbered-ticket-model" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> The Numbered-Ticket Model<a href="the-basics-of-probability.html#the-numbered-ticket-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>And here’s a really important change process.</p>
 <p><strong>The numbered-ticket model</strong>: Fill a box with <span class="math inline">\(k\)</span> tickets numbered <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>. Draw <span class="math inline">\(N\)</span> times with replacement from the box. Record the average of the draws.</p>
 <p>For any particular numbered-ticket model, you choose (1) how many tickets go into the box, (3) what numbers go on those tickets, and (3) how many times to draw from the box. We always draw with replacement, and we always average the draws.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-7" class="exercise"><strong>Exercise 1.6  </strong></span>Write down a particular version of the numbered-ticket model. Do to this, choose how many tickets will go in the box (that’s <span class="math inline">\(k\)</span>), the numbers those tickets will have (that’s <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>; repeats allowed), and the number of times you will draw with replacement (that’s <span class="math inline">\(N\)</span>).</p>
+<p><span id="exr:unnamed-chunk-7" class="exercise"><strong>Exercise 2.6  </strong></span>Write down a particular version of the numbered-ticket model. Do to this, choose how many tickets will go in the box (that’s <span class="math inline">\(k\)</span>), the numbers those tickets will have (that’s <span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>, …, <span class="math inline">\(t_k\)</span>; repeats allowed), and the number of times you will draw with replacement (that’s <span class="math inline">\(N\)</span>).</p>
 </div>
 <details>
 <summary>
@@ -438,12 +434,12 @@ Solution
 Notice that we always draw with replacement and we always average the draws.
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 1.7  </strong></span>In your own words, explain the numbered-ticket model in a way that someone who hasn’t taken the class could understand. What can change across different versions? What stays the same?</p>
+<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 2.7  </strong></span>In your own words, explain the numbered-ticket model in a way that someone who hasn’t taken the class could understand. What can change across different versions? What stays the same?</p>
 </div>
 </div>
 </div>
-<div id="defining-probability" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Defining Probability<a href="the-basics-of-probability.html#defining-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="defining-probability" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Defining Probability<a href="the-basics-of-probability.html#defining-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now we analyze chance processes using <strong>frequentist theory</strong>. Under frequentist theory, we’re interested in the probability that a chance process produces some event. For compactness, we sometimes write “the probability that <span class="math inline">\(A\)</span> happens” as <span class="math inline">\(\Pr(A)\)</span>.</p>
 <p>For example, if we’re tossing a coin, we might care about the probability of a head. We could write this as <span class="math inline">\(\Pr(\text{head})\)</span>.</p>
 <p>For another example, suppose we deal five cards from a 52-card deck. We might care about the probability of five hearts. We could write this as <span class="math inline">\(\Pr(\text{five hearts})\)</span>.</p>
@@ -451,10 +447,10 @@ Notice that we always draw with replacement and we always average the draws.
 <p>But if we did, we could simply compute the proportion of times an event occurred in those infinite repetitions–that’s the probability of that event.</p>
 <p>Define the <strong>probability</strong> of an event as the proportion of times the event occurs in the long-run.</p>
 </div>
-<div id="computing-probabilities" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Computing Probabilities<a href="the-basics-of-probability.html#computing-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="counting-the-equally-likely-outcomes" class="section level3 hasAnchor" number="1.4.1">
-<h3><span class="header-section-number">1.4.1</span> Counting the Equally-Likely Outcomes<a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="computing-probabilities" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Computing Probabilities<a href="the-basics-of-probability.html#computing-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="counting-the-equally-likely-outcomes" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Counting the Equally-Likely Outcomes<a href="the-basics-of-probability.html#counting-the-equally-likely-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In order to compute the probability of an event, you first need to list all the equally-likely outcomes of the experiment. If you cannot list the equally-likely outcomes, then you cannot compute the probabilities.</p>
 <p>For example, if you roll a six-sided die, then the equally-likely outcomes are 1, 2, 3, 4, 5, and 6. If you toss a coin, then the equally-likely outcomes are heads and tails. If you draw from an urn of with 10 marbles, then each marble is equally likely. If you draw from a box of numbered tickets, the each ticket is equally likely.</p>
 <p>Once we list all the equally-likely outcomes, we simply compute the proportion of outcomes that fall into the category of interest.</p>
@@ -595,7 +591,7 @@ Notice that we always draw with replacement and we always average the draws.
 </table>
 <p>These are the 36 equally likely outcomes of the chance process. Only (1, 1) has a sum of 2, so the probability that the sum equals 2 is <span class="math inline">\(\frac{1}{36} = 0.03\)</span>. On the other hand, 6 outcomes have a sum of 7 (can you find them?), so the probability that the sum equals 7 is <span class="math inline">\(\frac{6}{36} = 0.17\)</span>.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 1.8  </strong></span>Compute the probabilities below:</p>
+<p><span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 2.8  </strong></span>Compute the probabilities below:</p>
 <ol style="list-style-type: decimal">
 <li>Suppose I draw one ticket at random from a box with four tickets numbered 1, 2, 3, and 3. What is the probability that I draw a 1? A 3?</li>
 <li>Suppose I draw a card from a 52-card deck. What is the probability that I draw a heart? A red card? A 4? The ace of spades?</li>
@@ -615,8 +611,8 @@ Solution
 </ol>
 </details>
 </div>
-<div id="the-probability-of-the-opposite" class="section level3 hasAnchor" number="1.4.2">
-<h3><span class="header-section-number">1.4.2</span> The Probability of the Opposite<a href="the-basics-of-probability.html#the-probability-of-the-opposite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-probability-of-the-opposite" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> The Probability of the Opposite<a href="the-basics-of-probability.html#the-probability-of-the-opposite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Remember that we can compute probabilities by “counting”:</p>
 <ol style="list-style-type: decimal">
 <li>List all the equally-likely outcomes.</li>
@@ -626,7 +622,7 @@ Solution
 <p>Suppose an event <span class="math inline">\(A\)</span>. Then <span class="math inline">\(\Pr(\text{not }A) = 1 - \Pr(A)\)</span> and <span class="math inline">\(\Pr(A) = 1 - \Pr(\text{not }A)\)</span>.</p>
 <p>This is a handy rule. It turns out that it’s sometimes really tedious to compute the probability of <span class="math inline">\(A\)</span>, but easy to compute the probability of <span class="math inline">\(\text{not } A\)</span>.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-10" class="exercise"><strong>Exercise 1.9  </strong></span>Compute the probabilities below using the probability of the opposite:</p>
+<p><span id="exr:unnamed-chunk-10" class="exercise"><strong>Exercise 2.9  </strong></span>Compute the probabilities below using the probability of the opposite:</p>
 <ol style="list-style-type: decimal">
 <li>Suppose I draw one ticket at random from a box with four tickets numbered 1, 2, 3, and 3. What’s the probability that the draw is not 1?</li>
 <li>Suppose I draw a card from a 52-card deck. What is the probability that the draw is not the ace of spades?</li>
@@ -644,8 +640,8 @@ Solution
 </details>
 </div>
 </div>
-<div id="conditional-probabilities" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Conditional Probabilities<a href="the-basics-of-probability.html#conditional-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="conditional-probabilities" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Conditional Probabilities<a href="the-basics-of-probability.html#conditional-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For some chance processes, probabilities can change depending on what’s happened before.</p>
 <p>Suppose that I draw two cards from a 52-card deck without replacement. The probability of an ace on the first draw is <span class="math inline">\(\frac{4}{52} = 0.08\)</span>. However, if I get an ace on the first draw, then chance of getting an ace on the second draw changes–it’s now lower. I do not get an ace on the first draw, then chance of getting an ace on the second draw still changes–it’s now higher.</p>
 <p>Here’s the key point: For some chances processes, probabilities can change depending on what’s happened before. If you suspect that the probabilities might have changed, you need to recount the outcomes. This is especially true when sampling without replacement.</p>
@@ -655,7 +651,7 @@ Solution
 <p>Note that conditional probabilities are not difficult. They simply require you to recognize that things might have changed and recount everything. When we sample without replacement, things usually change.</p>
 <p>For clarity, I sometimes emphasize that a probability is <em>not</em> conditional by calling it an <strong>unconditional probability</strong>.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-11" class="exercise"><strong>Exercise 1.10  </strong></span>Compute the probabilities below:</p>
+<p><span id="exr:unnamed-chunk-11" class="exercise"><strong>Exercise 2.10  </strong></span>Compute the probabilities below:</p>
 <ol style="list-style-type: decimal">
 <li>Suppose I draw two tickets at random without replacement from a box with four tickets numbered 1, 2, 3, and 3. What is the probability that I draw a 1 on my second draw, given that I draw a 2 on the first draw? What if I draw a 1 on the first draw? What if you draw the two tickets with replacement?</li>
 <li>Suppose I draw two cards from a 52-card deck without replacement. If I draw a heart on my first draw, what is the probability that I draw a black card on my second draw?</li>
@@ -675,7 +671,7 @@ Solution
 </ol>
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-12" class="exercise"><strong>Exercise 1.11  </strong></span>Suppose I draw five times without replacement from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles.</p>
+<p><span id="exr:unnamed-chunk-12" class="exercise"><strong>Exercise 2.11  </strong></span>Suppose I draw five times without replacement from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles.</p>
 <ol style="list-style-type: decimal">
 <li>What’s the probability that the first draw is green? If the first four draws are red-red-green-green, what’s the probability that the fifth draw is green? How much did the probability change?</li>
 <li>What if, instead, you used an urn with 1,000 red marbles, 700 blue marbles, and 300 green marbles?</li>
@@ -697,8 +693,8 @@ Solution
 </ol>
 </details>
 </div>
-<div id="multiplication-rule" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Multiplication Rule<a href="the-basics-of-probability.html#multiplication-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="multiplication-rule" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Multiplication Rule<a href="the-basics-of-probability.html#multiplication-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Suppose I’m interested in the probability that two things both happen.</p>
 <ol style="list-style-type: decimal">
 <li>I draw a card that is red <strong>and</strong> a king.</li>
@@ -714,7 +710,7 @@ Solution
 </ol>
 <p>The second point is key: any time you use the multiplication rule, you need to recount everything to make sure they probabilities have not changed. (Again, they most likely will change when sampling without replacement.)</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-13" class="exercise"><strong>Exercise 1.12  </strong></span></p>
+<p><span id="exr:unnamed-chunk-13" class="exercise"><strong>Exercise 2.12  </strong></span></p>
 <ol style="list-style-type: decimal">
 <li>Suppose I draw twice without replacement from an urn with 10 red marbles, 7 blue marbles, and 3 green marbles. What’s the probability of getting a red mable and then getting a agreen marble?</li>
 <li>Suppose I draw twice from a 52-card deck. What’s the probability of getting two aces? (Round this answer to four decimal-places.)</li>
@@ -738,7 +734,7 @@ Solution
 <p>More compactly, we can say that for three events <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span>, <span class="math inline">\(\Pr(A \text{ and } B \text{ and } C) = \Pr(A) \times \Pr(B \mid A) \times \Pr(C \mid A \text{ and } B)\)</span>.</p>
 <p>You can see the pattern.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 1.13  </strong></span>Suppose I deal a series of cards off the top of a well-shuffled deck without replacement. Some of these probabilies get quite small, so keep around two non-zero digits.</p>
+<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 2.13  </strong></span>Suppose I deal a series of cards off the top of a well-shuffled deck without replacement. Some of these probabilies get quite small, so keep around two non-zero digits.</p>
 <ol style="list-style-type: decimal">
 <li>If I deal one card, what’s the probability that it’s a heart?</li>
 <li>If I deal two cards, what’s the probability that both are hearts?</li>
@@ -760,8 +756,8 @@ Solution
 </ol>
 </details>
 </div>
-<div id="independence" class="section level2 hasAnchor" number="1.7">
-<h2><span class="header-section-number">1.7</span> Independence<a href="the-basics-of-probability.html#independence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="independence" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Independence<a href="the-basics-of-probability.html#independence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We say that two events are <strong>independent</strong> if the probability of the second is the same, regardless of how the first turns out. Else, the two events are <strong>dependent</strong>.</p>
 <p>More compactly, we can say that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent if <span class="math inline">\(\Pr(A) = \Pr(A | B)\)</span>.</p>
 <p>Importantly for our purposes, we can say the following:</p>
@@ -771,10 +767,10 @@ Solution
 </ul>
 <p>We assume that coin tosses are independent. Same for die rolls.</p>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 1.14  </strong></span>In your own words, explain why without-replacement creates dependent draws, but with-replacement creates independent draws. Use an example with cards, marbles, or numbered tickets to illustrate.</p>
+<p><span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 2.14  </strong></span>In your own words, explain why without-replacement creates dependent draws, but with-replacement creates independent draws. Use an example with cards, marbles, or numbered tickets to illustrate.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 1.15  </strong></span>Suppose the following numbered-ticket model:</p>
+<p><span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 2.15  </strong></span>Suppose the following numbered-ticket model:</p>
 <blockquote>
 <p>Fill a box with 4 tickets numbered -5, -5, 10, and 10. Draw 3 times with replacement from the box. Record the average of the draws.</p>
 </blockquote>
@@ -801,7 +797,7 @@ Solution
 </ol>
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 1.16  </strong></span>Suppose I toss a fair coin three times.</p>
+<p><span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 2.16  </strong></span>Suppose I toss a fair coin three times.</p>
 <ol style="list-style-type: decimal">
 <li>What’s the probability that I get H-H-H (heads, then heads, then heads)?</li>
 <li>What’s the probability that I get T-T-T?</li>
@@ -823,7 +819,7 @@ Solution
 </ol>
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 1.17  </strong></span>Suppose I toss a fair coin ten times.</p>
+<p><span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 2.17  </strong></span>Suppose I toss a fair coin ten times.</p>
 <ol style="list-style-type: decimal">
 <li>What’s the probability that I get all heads?</li>
 <li>What’s the probability that I get all tails?</li>
@@ -841,8 +837,8 @@ Solution
 </ol>
 </details>
 </div>
-<div id="summary" class="section level2 hasAnchor" number="1.8">
-<h2><span class="header-section-number">1.8</span> Summary<a href="the-basics-of-probability.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="summary" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Summary<a href="the-basics-of-probability.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>A <strong>chance process</strong> is a process that one can repeat (independently and under the same conditions) to produce a result from defined set of possible outcomes.</li>
 <li>We use the <strong>frequentist theory</strong> of probability to analyse change processes. The <strong>probability</strong> of an event is the proportion of time it occurs in the long-run.</li>
@@ -854,10 +850,10 @@ Solution
 <li>When you sample <em>with replacement</em>, the draws are <em>independent</em>. When you sample <em>without replacement</em>, the draws are <em>dependent.</em></li>
 </ul>
 </div>
-<div id="additional-exercises" class="section level2 hasAnchor" number="1.9">
-<h2><span class="header-section-number">1.9</span> Additional Exercises<a href="the-basics-of-probability.html#additional-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="additional-exercises" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Additional Exercises<a href="the-basics-of-probability.html#additional-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-19" class="exercise"><strong>Exercise 1.18  </strong></span>I roll a die 10 times. Find the probability of…</p>
+<p><span id="exr:unnamed-chunk-19" class="exercise"><strong>Exercise 2.18  </strong></span>I roll a die 10 times. Find the probability of…</p>
 <ol style="list-style-type: decimal">
 <li>getting 10 sixes.</li>
 <li>not getting 10 sixes.</li>
@@ -889,8 +885,8 @@ Solution
           </div>
         </div>
       </div>
-
-<a href="NTM.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="NTM.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
