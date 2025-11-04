@@ -1,0 +1,18 @@
+# RStudio and R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+
+# Bookdown build artifacts
+_bookdown_files/
+docs/
+*_cache/
+*_files/
+
+# OS-specific files
+.DS_Store
+
+# Specific folders to not track
+-other-chapters/

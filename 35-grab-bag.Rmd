@@ -1,0 +1,324 @@
+
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(comment=NA, fig.width=3, fig.height=2, fig.align = "center",
+                      message=FALSE, warning=FALSE)
+
+library(tidyverse)
+library(kableExtra)
+```
+
+# Hypothesis Testing
+
+As an alternative (or supplement) to confidence intervals, political scientists sometimes use *p*-values to test specific hypotheses.
+
+## The Null Hypothesis
+
+In the hypothesis testing framework, the researcher establishes two hypotheses:
+
+- A **null hypothesis** describes the scenarios that the researcher hopes to *reject*. If the researcher wants to argue in favor of a particular model or theory, then the null hypothesis describes scenarios *inconsistent* with the theory. 
+- An **alternative hypothesis** describes the scenarios that the researcher hopes to *accept*. If the researcher wants to argue in favor of a particular model or theory, then the alternative hypothesis describes scenarios *consistent* with the theory. I like to call the alternative hypothesis the "research hypothesis."
+
+The researcher then examines the data and determines whether the data are consistent with the null hypothesis. If the data are inconsistent with the null hypothesis, then the researcher rejects the null hypothesis and concludes that the research hypothesis must be correct.
+
+Here's an example. A pollster working for the Trump campaign reports a new poll to the president in which 520 of 1000 respondents reported that they approve of the job Donald Trump was doing as president. He exclaims: "Wonderful! More than half of Americans approve." The pollster cautions: "No---more than half of the *sample* approves! That might be due to chance. The actual number might be 50% or less."
+
+So then the president wants to test (and hopefully reject) the null hypothesis that the proportion of Americans that approve is less than or equal to 0.5. 
+
+## *p*-Values
+
+To test a hypothesis, we compute a p-value. A *p*-value is the probability that we would observe data at least *as extreme* as the observed data if the null hypothesis is true. By "as extreme," we mean data that are less consistent with the null hypothesis.
+
+Here's what we have so far: 
+
+- Null Hypothesis: population proportion is less than or equal to 0.5.
+- Research Hypothesis: population proportion is greater than 0.5.
+- Observed Data: sample proportion is 0.52.
+
+To compute the *p*-value, we just need to compute the probability that we would get a sample of 0.52 or higher (i.e., less consistent with the null hypothesis), if the population proportion were 0.5 or lower.
+
+The "or lower" piece at the end is required because those values are part of the null hypothesis, but that makes the computation hard. To get around this, it helps to focus on one particular parameter.
+
+### Focusing the Null Hypothesis
+
+When the null hypothesis contains a range of possibilities (e.g., 0.5 *or lower*), we can simplify this by focusing on the most difficult value. In this case, the hardest to reject (the one most consistent with the sample proportion) is 0.5. This sounds tricky, but it's not. Here are two guidelines for focusing the null hypothesis:
+
+- If the sample statistic (e.g., sample proportion) equals a population parameter from the null hypothesis, then the *p*-value equals one. No further computation is needed. Skip right to the end.
+- If the sample statistic (e.g., sample proportion) does not equal any population parameter from the null hypothesis, then find the parameter from the null hypothesis that's closest to the sample statistic. That's the only value you need to worry about, so I call it the "focused null hypothesis." Once we have that value, there's more work to be done.
+
+In our case, the sample statistic falls outside the null hypothesis, so let's choose the parameter from the null hypothesis that's closest to the sample proportion of 0.52. The closest parameter from the null hypothesis to 0.52 is 0.50. That's the "focused null hypothesis."
+
+### Computing the *p*-value for the Focused Null Hypothesis
+
+To compute the *p*-value now, we just need to compute the probability that we would get a sample of 0.52 or higher (i.e., less consistent with the null hypothesis) if the population proportion were 0.5. (By focusing the null hypothesis, we've eliminated the "or lower" piece.)
+
+We know from the numbered-ticket model that if the population proportion were 0.5 (i.e., the focused null hypothesis were true), then...
+
+- the expected value of sample proportion would be 0.5 and 
+- the SE of the sample proportion would be $\frac{\sqrt{0.5 \times 0.5}}{\sqrt{1000}} = \frac{0.5}{31.623} = 0.016$.
+
+I don't use the sample proportion 0.52 in the formula for the SE as I did with confidence intervals. Instead, I use the population proportion of 0.50, which I can do because I am assuming that the (focused) null hypothesis is true. (Notice the "if the population proportion were 0.5" part of the statement above.) It doesn't matter much, but if I'm assuming that the population proportion is 0.5 to compute the *p*-value, I can improve the accuracy slightly by assuming it when computing the SE as well.
+
+Our *observed* sample proportion falls $\frac{0.520 - 0.500}{0.016} = 1.250$ SEs above the expected value. We know that the sample proportion follows the normal curve. Using the rules of the normal curve, we can figure out the probability that we will get a sample proportion greater than or equal to 0.52. It's 0.105. That's the *p*-value.
+
+```{r echo=FALSE, fig.height=4.5, fig.width=8}
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#1b9e77", xlim = c(1.25, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#d95f02", xlim = c(-1.25, 1.25)) +
+  labs(x = "", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-1.25, 0, 1.25), labels = c("\n(-1.25)", "0.50\n(0.00)", "0.52\n(1.25)"), minor_breaks = NULL) + 
+  annotate("label", x = 0, y = .1, label = "79% in the middle", color = "#d95f02") + 
+    annotate("label", x = (1.2 + 3)/2.3, y = .02, label = "10.5% in this tail", color = "#1b9e77") + 
+  theme_minimal()
+```
+
+But what do we do with this *p*-value? If the *p*-value is small enough, then we reject the null hypothesis in favor of the alternative. If the *p*-value is *not* small enough, then we cannot reject or accept either hypothesis. In the latter scenario, the data are consistent with *both* hypotheses, we cannot be confident that either is correct.
+
+By convention, political scientists have settled on 0.05 as the critical value. If the *p*-value is less than or equal to 0.05, then reject the null hypothesis in favor of the alternative. If the *p*-value is greater than 0.05, then acknowledge that either hypothesis might be correct.
+
+Much like a 95% confidence will fail to capture the population parameter 5% of the time, this test will incorrectly reject 5% of the time *if the null hypothesis is true*. In the long-run, you'll incorrectly reject the null hypothesis *at most* 5% of the time if you use this method. 
+
+## A Summary of the Hypothesis Testing Framework
+
+1. Write down a null hypothesis. This should be the hypothesis you want to reject.
+1. If the null hypothesis includes a range of population parameters, then you need to focus on one particular value using the rules discussed above.
+1. Compute the *p*-value, which is the probability that we observe data at least *as extreme* as the observed data if the null hypothesis is true. By "extreme," I mean data that are less consistent with the null hypothesis.
+1. If the *p*-value is less than or equal to 0.05, then reject the null hypothesis in favor of the alternative. If the *p*-value is greater than 0.05, then acknowledge that either hypothesis might be correct.
+
+```{exercise, label = "trump-p"}
+A pollster working for the Trump campaign reports a new poll to the president in which 510 of 1,000 respondents reported that they approve of the job Donald Trump was doing as president. He exclaims: "Wonderful! More than half of Americans approve." The pollster cautions: "No---more than half of the *sample* approves! That might be due to chance. The actual number might be 50% or less."
+
+Compute the *p*-value for the null hypothesis that the proportion of Americans that approve is 0.5 or lower. Do you reject the null hypothesis?
+```
+
+<details><summary>Solution</summary>
+First, identify the null hypothesis. **The population proportion is 0.5 or lower**.
+
+Second, focus the null hypothesis. Because the sample proportion 0.51 is not part of the null hypothesis (from 0.00 to 0.50), we just choose the parameter from the null hypothesis that's closest to 0.51. Our focused null hypothesis is 0.5.
+
+Third, compute the *p*-value, which is the probability that we observe data at least *as extreme* as the observed data if the null hypothesis is true. For this problem, we consider proportions above 0.51 as "more extreme" than 0.51, since those are more different from 0.50 than 0.51.
+
+If the (focused) null hypothesis is true, then...
+
+- the expected value of sample proportion would be 0.5 and 
+- the SE of the sample proportion would be $\frac{\sqrt{0.5 \times 0.5}}{\sqrt{1000}} = \frac{0.5}{31.623} = 0.016$.
+
+The *observed* sample proportion falls $\frac{0.510 - 0.500}{0.016} = 0.625$ SEs above the expected value. We know that the sample proportion follows the normal curve. Using the rules of the normal curve (and letting z = 0.65), we can figure out the probability that we will get a sample proportion greater than or equal to 0.51. It's 0.26. That's the *p*-value.
+
+Because the *p*-value is greater than 0.05, you cannot reject the null. You conclude that the data are consistent with both the null hypothesis and the alternative hypothesis.
+
+```{r echo=FALSE, fig.height=4.5, fig.width=8}
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#1b9e77", xlim = c(0.65, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#d95f02", xlim = c(-0.65, 0.65)) +
+  labs(x = "", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-0.65, 0, 0.65), labels = c("\n(-0.65)", "0.50\n(0.00)", "0.51\n(0.65)"), minor_breaks = NULL) + 
+  annotate("label", x = 0, y = .1, label = "48% in the middle", color = "#d95f02") + 
+    annotate("label", x = (1.2 + 3)/2.3, y = .02, label = "26% in this tail", color = "#1b9e77") + 
+  theme_minimal()
+```
+
+</details>
+
+```{exercise}
+*Continuing \@ref(exr:trump-p).* What if the poll was 530 of 1,000? 
+```
+
+
+<details><summary>Solution</summary>
+First, identify the null hypothesis. **The population proportion is 0.5 or lower**.
+
+Second, focus the null hypothesis. Because the sample proportion 0.53 is not part of the null hypothesis (from 0.00 to 0.50), we just choose the parameter from the null hypothesis that's closest to 0.53. Our focused null hypothesis is 0.5.
+
+Third, compute the *p*-value, which is the probability that we observe data at least *as extreme* as the observed data if the null hypothesis is true. For this problem, we consider proportions above 0.53 as "more extreme" than 0.53, since those are more different from 0.50 than 0.53.
+
+If the (focused) null hypothesis is true, then...
+
+- the expected value of sample proportion would be 0.5 and 
+- the SE of the sample proportion would be $\frac{\sqrt{0.5 \times 0.5}}{\sqrt{1000}} = \frac{0.5}{31.623} = 0.016$.
+
+The *observed* sample proportion falls $\frac{0.530 - 0.500}{0.016} = 1.875$ SEs above the expected value. We know that the sample proportion follows the normal curve. Using the rules of the normal curve (and letting z = 1.90), we can figure out the probability that we will get a sample proportion greater than or equal to 0.53. It's 0.03. That's the *p*-value.
+
+Because the *p*-value is less than 0.05, you reject the null. You conclude that the data are not consistent with the null hypothesis and therefore conclude that the alternative hypothesis is correct.
+
+```{r echo=FALSE, fig.height=4.5, fig.width=8}
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#1b9e77", xlim = c(1.9, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#d95f02", xlim = c(-1.9, 1.9)) +
+  labs(x = "", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-1.9, 0, 1.9), labels = c("\n(-1.90)", "0.50\n(0.00)", "0.53\n(1.90)"), minor_breaks = NULL) + 
+  annotate("label", x = 0, y = .1, label = "94% in the middle", color = "#d95f02") + 
+    annotate("label", x = (1.9 + 3)/2.3, y = .02, label = "3% in this tail", color = "#1b9e77") + 
+  theme_minimal()
+```
+
+</details>
+
+```{exercise}
+*Continuing \@ref(exr:trump-p).* What if the poll was 5,100 of 10,000? 
+```
+
+
+<details><summary>Solution</summary>
+First, identify the null hypothesis. **The population proportion is 0.5 or lower**.
+
+Second, focus the null hypothesis. Because the sample proportion 0.51 is not part of the null hypothesis (from 0.00 to 0.50), we just choose the parameter from the null hypothesis that's closest to 0.51. Our focused null hypothesis is 0.5.
+
+Third, compute the *p*-value, which is the probability that we observe data at least *as extreme* as the observed data if the null hypothesis is true. For this problem, we consider proportions above 0.51 as "more extreme" than 0.51, since those are more different from 0.50 than 0.51.
+
+If the (focused) null hypothesis is true, then...
+
+- the expected value of sample proportion would be 0.5 and 
+- the SE of the sample proportion would be $\frac{\sqrt{0.5 \times 0.5}}{\sqrt{10000}} = \frac{0.5}{100} = 0.005$.
+
+The *observed* sample proportion falls $\frac{0.510 - 0.500}{0.005} = 2$ SEs above the expected value. We know that the sample proportion follows the normal curve. Using the rules of the normal curve, we can figure out the probability that we will get a sample proportion greater than or equal to 0.51 *if the null hypothesis is true*. It's 0.025. That's the *p*-value.
+
+Because the *p*-value is less than 0.05, you reject the null. You conclude that the data are not consistent with the null hypothesis and therefore conclude that the alternative hypothesis is correct.
+
+```{r echo=FALSE, fig.height=4.5, fig.width=8}
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#1b9e77", xlim = c(2, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#d95f02", xlim = c(-2, 2)) +
+  labs(x = "", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-2, 0, 2), labels = c("\n(-2.00)", "0.50\n(0.00)", "0.53\n(12.00)"), minor_breaks = NULL) + 
+  annotate("label", x = 0, y = .1, label = "95% in the middle", color = "#d95f02") + 
+    annotate("label", x = (2 + 3)/2.3, y = .02, label = "2.5% in this tail", color = "#1b9e77") + 
+  theme_minimal()
+```
+
+</details>
+
+```{exercise}
+A pollster working for the Biden campaign reports a new poll to the candidate in which 490 of 1,000 respondents reported that they approve of the job Donald Trump was doing as president. He exclaims: "Wonderful! Less than half of Americans approve." The pollster cautions: "No---less than half of the *sample* approves! That might be due to chance. The actual number might be 50% or more."
+
+Compute the *p*-value for the null hypothesis that the proportion of Americans that approve is 0.5 or higher. Do you reject the null?
+```
+
+<details><summary>Solution</summary>
+First, identify the null hypothesis. **The population proportion is 0.5 or higher**.
+
+Second, focus the null hypothesis. Because the sample proportion 0.49 is not part of the null hypothesis (from 0.50 to 1.00), we just choose the parameter from the null hypothesis that's closest to 0.49. Our focused null hypothesis is 0.5.
+
+Third, compute the *p*-value, which is the probability that we observe data at least *as extreme* as the observed data if the null hypothesis is true. For this problem, we consider proportions below 0.49 as "more extreme" than 0.49, since those are more different from 0.50 than 0.49.
+
+If the (focused) null hypothesis is true, then...
+
+- the expected value of sample proportion would be 0.5 and 
+- the SE of the sample proportion would be $\frac{\sqrt{0.5 \times 0.5}}{\sqrt{1000}} = \frac{0.5}{31.623} = 0.016$.
+
+The *observed* sample proportion falls 0.625 SEs below the expected value, because $\frac{0.049 - 0.500}{0.016} = -0.625$. We know that the sample proportion follows the normal curve. Using the rules of the normal curve (and letting z = -0.65), we can figure out the probability that we will get a sample proportion less than or equal to 0.49 *if the focused null hypothesis is true*. It's 0.26. That's the *p*-value.
+
+Because the *p*-value is greater than 0.05, you cannot reject the null. You conclude that the data are consistent with both the null hypothesis and the alternative hypothesis.
+
+```{r echo=FALSE, fig.height=4.5, fig.width=8}
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-3, 3)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#1b9e77", xlim = c(-3, -0.65)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#d95f02", xlim = c(-0.65, 0.65)) +
+  labs(x = "", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-0.65, 0, 0.65), labels = c("0.49\n(-0.65)", "0.50\n(0.00)", "\n(0.65)"), minor_breaks = NULL) + 
+  annotate("label", x = 0, y = .1, label = "48% in the middle", color = "#d95f02") + 
+    annotate("label", x = -(1.2 + 3)/2.3, y = .02, label = "26% in this tail", color = "#1b9e77") + 
+  theme_minimal()
+```
+
+</details>
+
+# Extensions
+
+## Review
+
+In this class, we've talked about how we can use concepts, models, measurements, and comparisons to carefully observe the political world.
+
+We spent a little time talking about concepts, models, and measurements. 
+
+We spend most of the time talking about comparisons.
+
+We talked about percentages, proportions, averages, and standard deviations. We noted that we might compare these across groups. For example, we compared the average ideology score for Republicans across Congresses (they've been shifting to the right.) We compared the turnout rate among those who received the "self mailer" to the rate for those that received the "neighbors mailer" (threatening to expose non-voters to their neighbors causes them to vote).
+
+We talked about using correlation and regression to make comparisons directly. We examined Gamson's Law (seat shares vary almost one-to-one with portfolio shares) and we examined the relationship between district magnitude and the effective number of parties (as magnitude goes up, so does the number of parties).
+
+We noted that there are four ways to get a relationship between two variables:
+
+1. Causation
+1. Spuriousness
+1. Reverse Causation
+1. Chance
+
+We talked about how we can use randomization (i.e., experiments) to eliminate the possibility that a correlation is due to spuriousness or reverse causation. 
+
+I mentioned that we would deal with chance later in the semester.
+
+## Sources of Randomness
+
+At this point, we've used sample surveys to better understand how to deal with chance using confidence intervals and/or *p*-values.
+
+In our application, chance always entered the data through random sampling.
+
+In general, randomness enters our comparisons when we have any of the following:
+
+1. random sampling: the result differs from study to study because we get a different sample in each study.
+1. randomization: the result differs from study to study because we put different subjects in the treatment and control groups across the studies.
+1. imagining a stochastic world: if we rewound time and let the world play forward again, then idiosyncratic or "random" events would lead to different outcomes. The world we observe is just one of many possibilities. The observed world is like a random sample from the possible worlds.
+
+The last---a stochastic world---seems a bit weird. In almost all cases, political scientists assume that the data the real world gives us (e.g., the nominate data, the parties dataset) have a random component. They imagine, at least in practice, that we can think of some parts of the outcome as "systematic" or "explainable" and other parts as "idiosyncratic", "random," or "unexplainable." For example, suppose that you get a flat tire on Election Day and can't make it to the polling place. We might think of that as a random event (like a coin toss) that stopped you from voting. Thus, whether or not you voted is partly systematic (your education, political interest, etc.) and partly random (e.g., flat tire, medical emergency, etc.). Unlike random sampling or randomization, this source of randomness is totally imaginary. But if we imagine it, we can model it.
+
+## Confidence Intervals in General
+
+We focused our detailed applications narrowly on simple random samples and proportions.
+
+But instead of proportions, we could have focused on averages, SDs, correlations, or regression slopes. Instead of simple random samples, we could have focused on randomization or imagined randomness.
+
+The math would have been harder, but the logic is the same.
+
+Because of the randomness, the dataset you have helps you estimate the quantity you really care about, but with some error. We can use confidence intervals to determine how close the estimate is to the quantity we care about.
+
+Statisticians have developed many quantities to summarize a dataset and methods to estimate the SE for those quantities. Regardless of the quantity, the logic is always:
+
+95% confidence interval = estimate +/- 2 SEs
+
+(There are other ways to create a confidence interval, but this approach is common.)
+
+The quantity we're talking about might change from proportion to an average to a correlation to a slope to something you haven't learned yet. The formula for the SE will change across these quantities. But the interpretation of the SE is always the same--the SE is the long run SD of the estimate if you repeat the study again-and-again.
+
+## Hypothesis Tests in General
+
+As with confidence intervals, our discussion of hypothesis tests focused narrowly on simple random samples and proportions. Also like confidence intervals, that logic generalizes.
+
+For a given null hypothesis about a particular quantity, statisticians have developed a method to compute the *p*-value. Regardless of the null hypothesis and regardless of the quantity of interest, the *p*-value is the probability that we would observe data at least *as extreme* as the observed data if the null hypothesis is true. If the *p*-value is less than or equal to 0.05, we reject the null hypothesis and accept the alternative. If the *p*-value is greater than 0.05, we acknowledge that the data are consistent with both the null and alternative hypotheses.
+
+## Statistical Significance
+
+When we're comparing averages or examining a regression slope, it's common for political scientists to use "no difference" or "no relationship" as the null hypothesis. It's so common, in fact, that political scientists rarely explicitly state the null hypothesis. When it's not stated, you can assume that the researcher is using the hypotheses below.
+
+- When comparing groups with a proportion, percent, or average: 
+    - null hypothesis: no difference
+    - alternative hypothesis: any difference (positive or negative)
+- When comparing variables with a correlation or a variable: 
+    - null hypothesis: no relationship
+    - alternative hypothesis: any relationship (positive or negative)
+    
+When we reject the null hypothesis of no difference or relationship, we refer to the estimate as "statistically significant." I don't care for the term at all because "significant" seems to imply "important." However, "statistically significant" is neither necessary nor sufficient for a statistical result to be important.
+
+Say that an estimate of a difference or a relationship is **statistically significant** if you can reject the null hypothesis of no difference or no relationship. 
+
+In other words, when an estimate of a difference or relationship is statistically significant, you can confidently claim that the observed difference or relationship is not due to chance. It's quite common to flag statistically significant estimates with stars. When you see an estimate flagged with a star, you know that it's statistically significant. 
+
+As an example, see Table 3 below from Gerber, Green, and Larimer (2008). The numbers are estimates of the treatment effect of each mailer (compared to the control group that received no mailer). Each estimate is statistically significant, which means we're confident the observed differences are not due to chance.
+
+![](img/ggl-2008-table-3.png)
+
+
+    
+    
+
