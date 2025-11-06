@@ -23,7 +23,7 @@
 <meta name="author" content="Carlisle Rainey" />
 
 
-<meta name="date" content="2025-11-04" />
+<meta name="date" content="2025-11-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -715,7 +715,7 @@ Solution
 The SE is always equal to the SD of the box divided by the square root of the number of draws. In my example, that’s 0.37.
 </details>
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-42" class="exercise"><strong>Exercise 3.13  </strong></span>Use the <a href="https://carlislerainey.shinyapps.io/box-model/">NTM app</a> to explore your own NTM. Vary the number of draws. Vary the tickets in the box. Be creative. Confirm that the app correctly computes the expected value and the SE.</p>
+<p><span id="exr:unnamed-chunk-42" class="exercise"><strong>Exercise 3.13  </strong></span>Use the <a href="https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/">NTM app</a> to explore your own NTM. Vary the number of draws. Vary the tickets in the box. Be creative. Confirm that the app correctly computes the expected value and the SE.</p>
 <p>Notice that the app does two things. First, it computes the exact expected value and the SE. Second, it shows you the average-of-the-draws for five repetitions and the histogram of the average of the draws for 10,000 repetitions.</p>
 </div>
 <div class="exercise">
@@ -749,7 +749,7 @@ The proportion of people that approve will be about 0.4 give or take 0.024 or so
 <p>This is an amazing, magical result.</p>
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-43" class="exercise"><strong>Exercise 3.15  </strong></span>We’re not going to prove this result (called the “central limit theorem”) mathematically. But you can explore a variety of NTMs to confirm that it works.</p>
-<p>Use the <a href="https://carlislerainey.shinyapps.io/box-model/">NTM app</a> to explore several NTMs. Try the following boxes. Start with 10 draws and increase the number of draws until the 10,000 averages-of-the-draws seems roughly normal. (The app can be a little slow when the number of draws gets bigger than about 50, so be patient–it’s repeating the process 10,000 times.)</p>
+<p>Use the <a href="https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/">NTM app</a> to explore several NTMs. Try the following boxes. Start with 10 draws and increase the number of draws until the 10,000 averages-of-the-draws seems roughly normal. (The app can be a little slow when the number of draws gets bigger than about 50, so be patient–it’s repeating the process 10,000 times.)</p>
 <ol style="list-style-type: decimal">
 <li>1, 2, 3, 4, 5, 6</li>
 <li>0, 1</li>
@@ -887,10 +887,10 @@ Solution
 <li>SD of the box = sqrt(.25*.75) = 0.43</li>
 <li>SE = 0.43/sqrt(5) = 0.19</li>
 </ul>
-<p>We’re familiar enough with the normal table to know that 95% of the normal curve is between -2 and 2, so we just hop two SEs to the left and two SEs to the right. That’s 0.25 - 2<em>0.19 and 0.25 + 2</em>0.19, or -0.13 and 0.63. Something seems to have gone wrong, because the proportion of hearts cannot be negative.</p>
-<p>This is not as big a problem as it seems, but it stems partly from the fact that we need the number of draws to be “large enough.” Five draws might not be large enough. To better understand, I plugged this NTM into <a href="https://carlislerainey.shinyapps.io/box-model/">the app</a>, and got the results below.</p>
-<p><img src="img/5-hearts.png" />
-but this isn’t as bad as it initially seems. On my computer, I simulatied this NTM 10,000 times and the average-of-the-draws fell between -0.13 and 0.63 98% of the time. That’s not too far off 95%, especially since we would usually consider 5 a “large” number of draws.</p>
+<p>We’re familiar enough with the normal table to know that 95% of the normal curve is between -2 and 2, so we just hop two SEs to the left and two SEs to the right. That’s 0.25 - 2*0.19 and 0.25 + 2*0.19, or -0.13 and 0.63. Something seems to have gone wrong, because the proportion of hearts cannot be negative.</p>
+<p>This is not as big a problem as it seems, but it stems partly from the fact that we need the number of draws to be “large enough.” Five draws might not be large enough. To better understand, I plugged this NTM into <a href="https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/">the app</a>, and got the results below.</p>
+<p><img src="img/5-hearts.png" /></p>
+<p>but this isn’t as bad as it initially seems. On my computer, I simulated this NTM 10,000 times and the average-of-the-draws fell between -0.13 and 0.63 98% of the time. That’s not too far off 95%, especially since we would usually consider 5 a “large” number of draws.</p>
 </details>
 </div>
 <div id="summary-1" class="section level2 hasAnchor" number="3.6">

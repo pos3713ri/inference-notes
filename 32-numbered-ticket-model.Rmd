@@ -447,7 +447,7 @@ The SE is always equal to the SD of the box divided by the square root of the nu
 </details>
 
 ```{exercise}
-Use the [NTM app](https://carlislerainey.shinyapps.io/box-model/) to explore your own NTM. Vary the number of draws. Vary the tickets in the box. Be creative. Confirm that the app correctly computes the expected value and the SE. 
+Use the [NTM app](https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/) to explore your own NTM. Vary the number of draws. Vary the tickets in the box. Be creative. Confirm that the app correctly computes the expected value and the SE. 
 
 Notice that the app does two things. First, it computes the exact expected value and the SE. Second, it shows you the average-of-the-draws for five repetitions and the histogram of the average of the draws for 10,000 repetitions.
 ```
@@ -488,7 +488,7 @@ This is an amazing, magical result.
 ```{exercise}
 We're not going to prove this result (called the "central limit theorem") mathematically. But you can explore a variety of NTMs to confirm that it works.
 
-Use the [NTM app](https://carlislerainey.shinyapps.io/box-model/) to explore several NTMs. Try the following boxes. Start with 10 draws and increase the number of draws until the 10,000 averages-of-the-draws seems roughly normal. (The app can be a little slow when the number of draws gets bigger than about 50, so be patient--it's repeating the process 10,000 times.)
+Use the [NTM app](https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/) to explore several NTMs. Try the following boxes. Start with 10 draws and increase the number of draws until the 10,000 averages-of-the-draws seems roughly normal. (The app can be a little slow when the number of draws gets bigger than about 50, so be patient--it's repeating the process 10,000 times.)
 
 1. 1, 2, 3, 4, 5, 6
 1. 0, 1
@@ -641,12 +641,13 @@ We need to use an NTM with 5 draws and a box with 3 0s and a single 1.
 - SD of the box =  sqrt(.25*.75) = 0.43
 - SE = 0.43/sqrt(5) = 0.19
 
-We're familiar enough with the normal table to know that 95% of the normal curve is between -2 and 2, so we just hop two SEs to the left and two SEs to the right. That's 0.25 - 2*0.19 and 0.25 + 2*0.19, or -0.13 and 0.63. Something seems to have gone wrong, because the proportion of hearts cannot be negative. 
+We're familiar enough with the normal table to know that 95% of the normal curve is between -2 and 2, so we just hop two SEs to the left and two SEs to the right. That's 0.25 - 2\*0.19 and 0.25 + 2\*0.19, or -0.13 and 0.63. Something seems to have gone wrong, because the proportion of hearts cannot be negative. 
 
-This is not as big a problem as it seems, but it stems partly from the fact that we need the number of draws to be "large enough." Five draws might not be large enough. To better understand, I plugged this NTM into [the app](https://carlislerainey.shinyapps.io/box-model/), and got the results below.
+This is not as big a problem as it seems, but it stems partly from the fact that we need the number of draws to be "large enough." Five draws might not be large enough. To better understand, I plugged this NTM into [the app](https://019a5969-e9b2-196d-6299-e67d844f7f51.share.connect.posit.cloud/), and got the results below.
 
 ![](img/5-hearts.png)
-but this isn't as bad as it initially seems. On my computer, I simulatied this NTM 10,000 times and the average-of-the-draws fell between -0.13 and 0.63 98% of the time. That's not too far off 95%, especially since we would usually consider 5 a "large" number of draws.
+
+but this isn't as bad as it initially seems. On my computer, I simulated this NTM 10,000 times and the average-of-the-draws fell between -0.13 and 0.63 98% of the time. That's not too far off 95%, especially since we would usually consider 5 a "large" number of draws.
 
 </details>
 
