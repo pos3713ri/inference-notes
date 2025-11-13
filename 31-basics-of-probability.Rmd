@@ -368,7 +368,7 @@ Suppose I draw five times without replacement from an urn with 10 red marbles, 7
 1. What if, instead, you used an urn with 1,000 red marbles, 700 blue marbles, and 300 green marbles?
 1. What if, instead, you sampled with replacement from the orginal, small urn with 20 marbles?
 1. What if, instead, you sampled with replacement from the alternative, large urn with 2,000 marbles?
-1. Fill in the blanks with "large" and "small": When the number of marbles in the urn is small relative to the number of draws, there is a ______ difference between sampling with and without replacement. But when the number of marbles in the urn is small relative to the number of draws, there is a ______ difference between sampling with and without replacement.
+1. Fill in the blanks with "large" and "small": When the number of marbles in the urn is small relative to the number of draws, there is a ______ difference between sampling with and without replacement. But when the number of marbles in the urn is large relative to the number of draws, there is a ______ difference between sampling with and without replacement.
 ```
 
 <details><summary>Solution</summary>
@@ -377,7 +377,7 @@ Suppose I draw five times without replacement from an urn with 10 red marbles, 7
 1. 0.15, 0.15. (These are exactly equal because of rounding error, but they are still really close.)
 1. 0.15, 0.15. (These are exactly equal.)
 1. 0.15, 0.15. (These are exactly equal.)
-1. "When the number of marbles in the urn is small relative to the number of draws, there is a **large** difference between sampling with and without replacement. But when the number of marbles in the urn is small relative to the number of draws, there is a **small** difference between sampling with and without replacement."
+1. "When the number of marbles in the urn is small relative to the number of draws, there is a **large** difference between sampling with and without replacement. But when the number of marbles in the urn is large relative to the number of draws, there is a **small** difference between sampling with and without replacement."
 </details>
 
 ## Multiplication Rule
